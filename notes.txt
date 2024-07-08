@@ -1,0 +1,26 @@
+Hall Effect Sensors:
+
+Criteria to consider: 
+- mT sensing range :
+    - A larger number means a more sensitive sensor measured in mV/mT or mV/Guass, where 1 Guass is 0.1mT
+    - reccomend this one for now (https://www.digikey.ca/en/products/detail/texas-instruments/DRV5053VAQDBZR/5015738) -90mV/mT
+
+
+- Analog sensor:
+    - Benefit of being fast in response 
+    - only seems to be for one axis
+    - Best candidate if multiple axises isnt needed 
+
+- I2C device:
+    - Slower than other options
+    - programmable 
+    - can read multiple axises
+
+- Wheatstone Bridge:
+    - Fast as analog 
+    - single axis 
+    - Few options to choose from
+
+
+PID control through code: 
+- https://www.youtube.com/watch?v=zOByx3Izf5U&t=371s
