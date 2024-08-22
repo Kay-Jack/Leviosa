@@ -23,7 +23,7 @@ def magnetFieldApprox(ptPosition:np.array, myMagnet:magnet):
     B = u0 / (4*math.pi) * (3*np.dot(myMagnet.dipole, r)*r/r_mag**3 - myMagnet.dipole/r_mag**3)
     return B
 
-def totalMagneticFieldApprox(ptPosition:np.array(), myMagnets:list):
+def totalMagneticFieldApprox(ptPosition:np.array, myMagnets:list):
     if len(myMagnets) == 0:
         print('no magnets defined, returning 0')
         return 0
@@ -35,11 +35,12 @@ def totalMagneticFieldApprox(ptPosition:np.array(), myMagnets:list):
 def main():
     # define magnets
     myMagnets = list()
-    for pos in [np.array([1,1]), np.array(1,-1), np.array(-1,1), np.array(-1,-1)]:
+    for pos in [np.array([1,1,0]), np.array([1,-1,0]), 
+                np.array([-1,1,0]), np.array([-1,-1,0])]:
         myMagnets.append(magnet(pos, np.array([0,0,1])))
     
     # define field to calculate over
-    fieldMap = np.zeros((21, 21, 21, 3)) # x_idx, y_idx, z_idx, (x,y,z,Bx,By,Bz)
+    fieldMap = np.zeros((21, 21, 21, 6)) # x_idx, y_idx, z_idx, np.array(x,y,z,Bx,By,Bz)
     #not efficient given repeated position info but oh well
     x_min = -2
     y_min = -2
@@ -54,7 +55,15 @@ def main():
     for i, x_pos in enumerate(np.arange(x_min, x_max + x_step, x_step)):
         for j, y_pos in enumerate(np.arange(y_min, y_max + y_step, y_step)):
             for k, z_pos in enumerate(np.arange(z_min, z_max + z_step, z_step)):
-                fieldMap[i, j, k]
+                ptPosition = np.array([x_pos, y_pos, z_pos])
+                print(ptPosition)
+                print(totalMagneticFieldApprox(ptPosition, myMagnets))
+                fieldMap[i, j, k] = np.concatenate(
+                    (ptPosition, 
+                     totalMagneticFieldApprox(ptPosition, myMagnets))
+                    )
+    print(fieldMap)
+    return
     
 #%%
 if __name__ == '__main__':
