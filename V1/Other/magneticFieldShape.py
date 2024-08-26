@@ -19,8 +19,10 @@ def magnetFieldApprox(ptPosition:np.array, myMagnet:magnet):
     # Here as a technicallity (doesn't matter tbh as is constant)
     r = ptPosition - myMagnet.position
     r_mag = np.sqrt(np.dot(r, r)) # magnitude of r; dist. be/en position & magnet
-    
-    B = u0 / (4*math.pi) * (3*np.dot(myMagnet.dipole, r)*r/r_mag**3 - myMagnet.dipole/r_mag**3)
+    try:
+        B = u0 / (4*math.pi) * (3*np.dot(myMagnet.dipole, r)*r/r_mag**3 - myMagnet.dipole/r_mag**3)
+    except ZeroDivisionError:
+        B = 0 # set to 0 since don't care about this point
     return B
 
 def totalMagneticFieldApprox(ptPosition:np.array, myMagnets:list):
@@ -63,6 +65,7 @@ def main():
                      totalMagneticFieldApprox(ptPosition, myMagnets))
                     )
     print(fieldMap)
+    print(fieldMap.shape)
     return
     
 #%%
