@@ -1,26 +1,20 @@
-Hall Effect Sensors:
-
-Criteria to consider: 
-- mT sensing range :
-    - A larger number means a more sensitive sensor measured in mV/mT or mV/Guass, where 1 Guass is 0.1mT
-    - reccomend this one for now (https://www.digikey.ca/en/products/detail/texas-instruments/DRV5053VAQDBZR/5015738) -90mV/mT
-
-
-- Analog sensor:
-    - Benefit of being fast in response 
-    - only seems to be for one axis
-    - Best candidate if multiple axises isnt needed 
-
-- I2C device:
-    - Slower than other options
-    - programmable 
-    - can read multiple axises
-
-- Wheatstone Bridge:
-    - Fast as analog 
-    - single axis 
-    - Few options to choose from
 
 
 PID control through code: 
 - https://www.youtube.com/watch?v=zOByx3Izf5U&t=371s
+
+Stepper driver improvements:
+- a4988 stepper drivers for better control using arduino https://www.youtube.com/watch?v=7spK_BkMJys&t=332s
+thinking we would need 2. One for each coil, and we connect the opposite coils to the driver. 
+	- More efficient so less heat problems and smaller package, a small fan would be enough 
+
+PCB:
+- Will use a D1 Mini; It has wifi and bluetooth and I have a bunch at home so we can solder to board easily. \
+- need to figure out how to schematic the resistors for the potentiometers. 
+<<<<<<< Updated upstream
+- Using through hole LM324N 
+- Need to finalize PCB shape 
+
+=======
+- Using through hole LM324N
+>>>>>>> Stashed changes
