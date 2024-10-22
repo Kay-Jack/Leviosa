@@ -1,97 +1,122 @@
 #include <Arduino.h>
 
-#define IN1 4  // X-axis coil pins
-#define IN2 3
-#define ENA 6  // X-axis enable pin
+#define IN1 6 //6
+#define IN2 5 //5
+#define IN3 4 //4
+#define IN4 3 //3
+#define ENA 10
+#define ENB 9
 
-#define IN3 7  // Y-axis coil pins
-#define IN4 8
-#define ENB 5  // Y-axis enable pin
+volatile float sensorX = 0;  // Shared variable for X-axis Hall sensor reading
+volatile float sensorY = 0;  // Shared variable for Y-axis Hall sensor reading
 
-#define BL 2   // Optional for other control (e.g., LED)
-
-// PID Constants
-float Kp = 1.0;  // Ballpark values, to be tuned
-float Ki = 0.1;
-float Kd = 0.05;
-
-// Variables for PID
-float errorX, errorY;
-float lastErrorX = 0, lastErrorY = 0;
+// PID constants for both axes
+float Kp = 1, Ki = 0.0, Kd = 0.01; // 00.001, 0.0005
+float previousErrorX = 0, previousErrorY = 0;
 float integralX = 0, integralY = 0;
-float derivativeX, derivativeY;
 
-int targetX = 565;  // Target values (center position)
-int targetY = 565;
-
-const int numSamples = 5; // Number of samples for averaging
-const int tolerance = 10; // Sensor sensitivity tolerance
+// Setpoint values for the sensor readings
+float setpointX; // Midpoint of analog range (0-1023)
+float setpointY;
 
 // Timing variables
-unsigned long lastUpdateTime = 0;  // Last time PID was updated
-unsigned long updateInterval = 20;  // Update frequency in milliseconds (50Hz)
+unsigned long lastUpdateTimeX = 0;  // Last time PID was updated for X-axis
+unsigned long lastUpdateTimeY = 0;  // Last time PID was updated for Y-axis
+unsigned long updateInterval = 1; // Update frequency in milliseconds (1000 Hz) /max 0.01
 
-void setup() {
-  Serial.begin(9600);
+// Calibration parameters
+const int calibrationSamples = 200; // Number of samples to average during calibration
+
+// Function prototypes
+void calibrateSensors();
+float readSensorAverage(int pin, int numSamples);
+
+void setup() { 
+  // Pin setup for electromagnets
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
-  pinMode(ENA, OUTPUT);
-  
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
-  
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
+  // Run calibration at startup
+  calibrateSensors();
 }
 
-float readSensor(int pin) {
+float readSensorAverage(int pin, int numSamples) {
   float total = 0;
+
   for (int i = 0; i < numSamples; i++) {
-    total += analogRead(pin);
+    total += analogRead(pin);  // Read sensor
   }
-  return total / numSamples;
+  return total / numSamples;  // Return average
 }
 
-void controlAxis(float error, float& integral, float& lastError, float& output, int INa, int INb, int EN) {
-  integral += error;  // Sum of errors (Integral)
-  float derivative = error - lastError;  // Change in error (Derivative)
-  output = Kp * error + Ki * integral + Kd * derivative;  // PID output
-  lastError = error;  // Store last error
-  
-  // Control coils based on PID output
+// Function for PID control on one axis (X or Y)
+float calculatePID(float setpoint, float measurement, float &previousError, float &integral, unsigned long &lastTime) {
+  float error = setpoint - measurement;
+  unsigned long currentTime = millis();
+  float deltaTime = (currentTime - lastTime) / 1000.0;  // Time in seconds
+
+  // Calculate integral and derivative
+  integral += error * deltaTime;
+  float derivative = (error - previousError) / deltaTime;
+  float output = Kp * error + Ki * integral + Kd * derivative;
+
+  // Update error and time for the next iteration
+  previousError = error;
+  lastTime = currentTime;
+
+  return output;
+}
+
+void controlElectromagnetX(float output) {
   if (output > 0) {
-    digitalWrite(INa, HIGH);  // Set the correct polarity
-    digitalWrite(INb, LOW);
+    analogWrite(ENA, min(output, 255));  // Cap PWM signal to 50
+    digitalWrite(IN1, HIGH); //low
+    digitalWrite(IN2, LOW);
   } else {
-    digitalWrite(INa, LOW);
-    digitalWrite(INb, HIGH);
+    analogWrite(ENA, min(abs(output), 255));
+    digitalWrite(IN1, LOW); //high
+    digitalWrite(IN2, HIGH);
   }
-  analogWrite(EN, constrain(abs(output), 0, 255));  // Control the power (PWM)
+}
+
+void controlElectromagnetY(float output) {
+  if (output > 0) {
+    analogWrite(ENB, min(output, 255));  // Cap PWM signal to 50
+    digitalWrite(IN3, HIGH); //low
+    digitalWrite(IN4, LOW);
+  } else {
+    analogWrite(ENB, min(abs(output), 255));
+    digitalWrite(IN3, LOW); //high
+    digitalWrite(IN4, HIGH);
+  }
+}
+
+// Calibration function to average sensor readings and set setpoints
+void calibrateSensors() {
+  setpointX = readSensorAverage(A1, calibrationSamples);  // X-axis
+  setpointY = readSensorAverage(A0, calibrationSamples);  // Y-axis
 }
 
 void loop() {
   unsigned long currentMillis = millis();
-  
-  // Check if it's time to update PID and control outputs
-  if (currentMillis - lastUpdateTime >= updateInterval) {
-    // Read sensor values for both axes
-    float sensorX = readSensor(A1);
-    float sensorY = readSensor(A0);
 
-    // Calculate error for both axes
-    errorX = targetX - sensorX;
-    errorY = targetY - sensorY;
+  // Read live sensor values for X and Y axes
+  sensorX = readSensorAverage(A1, 10); // Read X-axis sensor
 
-    // PID control for X and Y axis
-    float outputX, outputY;
-    controlAxis(errorX, integralX, lastErrorX, outputX, IN1, IN2, ENA);
-    controlAxis(errorY, integralY, lastErrorY, outputY, IN3, IN4, ENB);
-    
-    lastUpdateTime = currentMillis;  // Update the last update time
+  // Update X-axis PID and control
+  if (currentMillis - lastUpdateTimeX >= updateInterval) {
+    float outputX = calculatePID(setpointX, sensorX, previousErrorX, integralX, lastUpdateTimeX);
+    controlElectromagnetX(outputX);
   }
 
-  // Other non-blocking code can go here
+  sensorY = readSensorAverage(A0, 10); // Read Y-axis sensor
+
+  // Update Y-axis PID and control
+  if (currentMillis - lastUpdateTimeY >= updateInterval) {
+    float outputY = calculatePID(setpointY, sensorY, previousErrorY, integralY, lastUpdateTimeY);
+    controlElectromagnetY(outputY);
+  }
 }

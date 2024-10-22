@@ -1,11 +1,11 @@
 #include <Arduino.h>
 
-#define IN1 4
-#define IN2 3
-#define IN3 7
-#define IN4 8
-#define ENA 6
-#define ENB 5
+#define IN1 6
+#define IN2 5
+#define IN3 4
+#define IN4 3
+#define ENA 10
+#define ENB 9
 
 volatile float sensorX = 0;  // Shared variable for X-axis Hall sensor reading
 volatile float sensorY = 0;  // Shared variable for Y-axis Hall sensor reading
@@ -20,8 +20,17 @@ float setpointX = 565; // Midpoint of analog range (0-1023)
 float setpointY = 565;
 
 // Timing variables
-unsigned long lastUpdateTime = 0;  // Last time PID was updated
+unsigned long lastUpdateTimeX = 0;  // Last time PID was updated for X-axis
+unsigned long lastUpdateTimeY = 0;  // Last time PID was updated for Y-axis
 unsigned long updateInterval = 20;  // Update frequency in milliseconds (50 Hz)
+
+// Calibration parameters
+const int calibrationSamples = 100; // Number of samples to average during calibration
+const int calibrationDelay = 10;    // Delay between samples (in ms)
+
+// Function prototypes
+void calibrateSensors(); // Forward declaration
+float readSensorAverage(int pin, int numSamples);
 
 // Setup function
 void setup() { 
@@ -43,6 +52,9 @@ void setup() {
   TCCR1B |= (1 << CS11);   // Prescaler 8
   TIMSK1 |= (1 << OCIE1A); // Enable Timer1 compare interrupt
   sei();  // Enable interrupts
+
+  // Run calibration at startup
+  calibrateSensors();
 }
 
 // Timer1 interrupt service routine (ISR) for sensor reading
@@ -51,17 +63,34 @@ ISR(TIMER1_COMPA_vect) {
   sensorY = analogRead(A0);  // Read Y-axis sensor
 }
 
-// Function for PID control on one axis (X or Y)
-float calculatePID(float setpoint, float measurement, float &previousError, float &integral) {
-  float error = setpoint - measurement;
-  unsigned long currentTime = millis();
-  float deltaTime = (currentTime - lastUpdateTime) / 1000.0;  // Time in seconds
+// Define tolerance value for small changes in the sensor readings
+float tolerance = 5.0;  // Adjust this value as needed
 
+// Function for PID control on one axis (X or Y) with tolerance
+float calculatePID(float setpoint, float measurement, float &previousError, float &integral, unsigned long &lastTime) {
+  float error = setpoint - measurement;
+
+  // Check if the error is within the tolerance range
+  if (abs(error) < tolerance) {
+    return 0;  // Output zero if the error is too small
+  }
+
+  unsigned long currentTime = millis();
+  float deltaTime = (currentTime - lastTime) / 1000.0;  // Time in seconds
+
+  if (deltaTime <= 0) {  // Avoid division by zero
+    deltaTime = 0.001;   // Smallest possible time difference (1ms)
+  }
+
+  // Calculate integral and derivative
   integral += error * deltaTime;
   float derivative = (error - previousError) / deltaTime;
   float output = Kp * error + Ki * integral + Kd * derivative;
 
+  // Update error and time for the next iteration
   previousError = error;
+  lastTime = currentTime;
+
   return output;
 }
 
@@ -89,20 +118,43 @@ void controlElectromagnetY(float output) {
   }
 }
 
+// Calibration function to average sensor readings and set setpoints
+void calibrateSensors() {
+  float totalX = 0, totalY = 0;
+
+  // Take multiple readings and compute average
+  for (int i = 0; i < calibrationSamples; i++) {
+    totalX += analogRead(A1);  // Read X-axis sensor
+    totalY += analogRead(A0);  // Read Y-axis sensor
+    delay(calibrationDelay);
+  }
+
+  // Calculate average values for setpoints
+  setpointX = totalX / calibrationSamples;
+  setpointY = totalY / calibrationSamples;
+
+  // Optionally, print the setpoints for debugging
+  Serial.begin(9600);
+  Serial.print("Calibrated Setpoint X: ");
+  Serial.println(setpointX);
+  Serial.print("Calibrated Setpoint Y: ");
+  Serial.println(setpointY);
+  Serial.end();
+}
+
 void loop() {
   unsigned long currentMillis = millis();
   
-  // Check if it's time to update PID and control outputs
-  if (currentMillis - lastUpdateTime >= updateInterval) {
-    // Calculate PID outputs for X and Y axes
-    float outputX = calculatePID(setpointX, sensorX, previousErrorX, integralX);
-    float outputY = calculatePID(setpointY, sensorY, previousErrorY, integralY);
-    
-    // Control electromagnets based on PID output
+  // Update X-axis PID and control
+  if (currentMillis - lastUpdateTimeX >= updateInterval) {
+    float outputX = calculatePID(setpointX, sensorX, previousErrorX, integralX, lastUpdateTimeX);
     controlElectromagnetX(outputX);
+  }
+
+  // Update Y-axis PID and control
+  if (currentMillis - lastUpdateTimeY >= updateInterval) {
+    float outputY = calculatePID(setpointY, sensorY, previousErrorY, integralY, lastUpdateTimeY);
     controlElectromagnetY(outputY);
-    
-    lastUpdateTime = currentMillis;  // Update the last update time
   }
 
   // Other non-blocking code can go here
