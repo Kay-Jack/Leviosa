@@ -2,12 +2,12 @@
 #include <TimerOne.h>
 #include <QuickPID.h>
 
-#define IN1 4
-#define IN2 3
-#define IN3 7
-#define IN4 8
-#define ENA 6
-#define ENB 5
+#define IN1 6
+#define IN2 5
+#define IN3 4
+#define IN4 3
+#define ENA 10
+#define ENB 9
 
 //PID Settings//
 float Setpointx, Setpointy, Inputx, Inputy, Outputx, Outputy;
@@ -15,8 +15,35 @@ float Kp = 1.5, Ki = 0, Kd = 0.015;
 
 QuickPID PIDy(&Inputy, &Outputy, &Setpointy);
 QuickPID PIDx(&Inputx, &Outputx, &Setpointx);
-const uint32_t sampleTimeUs = 10000; // 10ms
+const uint32_t sampleTimeUs = 1000; // 1ms
 volatile bool computeNow = false; 
+
+void runPid() {
+  computeNow = true;
+}
+
+void calibrateSensors() {
+  float totalX = 0, totalY = 0, calibrationSamples = 10;
+
+  // Take multiple readings and compute average
+  for (int i = 0; i < calibrationSamples; i++) {
+    totalX += analogRead(A1);  // Read X-axis sensor
+    totalY += analogRead(A0);  // Read Y-axis sensor
+    delay(10);
+  }
+
+  // Calculate average values for setpoints
+  Setpointx = totalX / calibrationSamples;
+  Setpointy = totalY / calibrationSamples;
+
+  // Optionally, print the setpoints for debugging
+  Serial.begin(9600);
+  Serial.print("Calibrated Setpoint X: ");
+  Serial.println(Setpointx);
+  Serial.print("Calibrated Setpoint Y: ");
+  Serial.println(Setpointy);
+  //Serial.end();
+}
 
 
 void setup()
@@ -25,8 +52,11 @@ void setup()
   Timer1.attachInterrupt(runPid);  //attaches runPid() as a timer overflow interrupt
   PIDx.SetTunings(Kp, Ki, Kd);
   PIDy.SetTunings(Kp, Ki, Kd);
+  PIDy.SetOutputLimits(-255,255);
+  PIDx.SetOutputLimits(-255,255);
   PIDx.SetMode(1);
   PIDy.SetMode(1);
+
 
   pinMode(IN1,OUTPUT);
   pinMode(IN2,OUTPUT);
@@ -40,6 +70,9 @@ void setup()
   digitalWrite(IN4,0);
   analogWrite(ENA,0);
   analogWrite(ENB,0);
+
+  calibrateSensors();
+  Serial.println(Setpointy);
 }
 
 void turn_X(int a)
@@ -63,15 +96,15 @@ void turn_Y(int a)
 {
   if(a>=0)
   {
-    digitalWrite(IN3,0);
-    digitalWrite(IN4,1);
+    digitalWrite(IN3,1);
+    digitalWrite(IN4,0);
     analogWrite(ENB,a);
   }
   else
   {
     a=-a;
-    digitalWrite(IN3,1);
-    digitalWrite(IN4,0);
+    digitalWrite(IN3,0);
+    digitalWrite(IN4,1);
     analogWrite(ENB,a);
   }
 }
@@ -89,9 +122,9 @@ void loop()
     turn_Y(Outputy);
 
     computeNow = false;
-  }
-}
+    Serial.println(Outputx);
+    Serial.println(Outputy);
 
-void runPid() {
-  computeNow = true;
+  }
+
 }
