@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
-int setPoint = 115;
+int setPoint = 350;
 int sensorPin = A2;
 int sensorValue = 0;
-int noMagnetPoint = 350;
+int noMagnetPoint = 450;
 int IN2 = 10;
 int EN = 11;
 int set_point2 = set_point - 61;
