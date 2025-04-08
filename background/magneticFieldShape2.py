@@ -1,15 +1,45 @@
 import magpylib as magpy
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
+magnetRing1 = []
+numMagnets1 = 12
+magnetRing1_r = 0.03
+for lv1 in range(numMagnets1):
+    theta = lv1*math.pi/6 # angle in radians
+    magnetRing1.append(
+        magpy.magnet.Cylinder(
+            polarization=(0,0,1), dimension=(0.01, 0.005), 
+            position = (magnetRing1_r*np.cos(theta), magnetRing1_r*np.sin(theta), 0))
+        )
+    print(magnetRing1[-1].position)
 
-magnet1 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (-0.03, 0, 0))
-magnet2 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0.03, 0, 0))
-magnet3 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (-0.03, 0, -0.02))
-magnet4 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0.03, 0, -0.02))
+magnetRing2 = []
+numMagnets2 = 12
+magnetRing2_r = 0.03
+for lv1 in range(numMagnets2):
+    theta = lv1*math.pi/6 # angle in radians
+    magnetRing2.append(
+        magpy.magnet.Cylinder(
+            polarization=(0,0,1), dimension=(0.01, 0.005), 
+            position = (magnetRing2_r*np.cos(theta), magnetRing2_r*np.sin(theta), -0.02))
+        )
+    print(magnetRing2[-1].position)
+
+# floating magnets
 magnet5 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.02))
 magnet6 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.025))
-c = magpy.Collection(magnet1, magnet2, magnet3, magnet4, magnet5, magnet6)
+
+c = magpy.Collection(*magnetRing1, *magnetRing2, magnet5, magnet6)
+
+# magnet1 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (-0.03, 0, 0))
+# magnet2 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0.03, 0, 0))
+# magnet3 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (-0.03, 0, -0.02))
+# magnet4 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0.03, 0, -0.02))
+# magnet5 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.02))
+# magnet6 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.025))
+# c = magpy.Collection(magnet1, magnet2, magnet3, magnet4, magnet5, magnet6)
 sensor = magpy.Sensor()
 
 # magpy.show(magnet1, sensor, backend='plotly')
