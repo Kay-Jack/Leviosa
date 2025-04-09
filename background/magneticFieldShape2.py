@@ -1,5 +1,6 @@
 import magpylib as magpy
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import math
 from scipy.spatial.transform import Rotation as R
@@ -30,135 +31,83 @@ class magnetRing:
 def plotSysB(
     magnetCollection:magpy.Collection, 
     ax,
-    floatingMagnet:bool = False,
+    fig,
+    floatingMagnet:bool or magpy.Collection = False,
     xs:np.array = np.linspace(-0.05, 0.05, 29),
     zs:np.array = np.linspace(-0.05, 0.05, 29),
     ) -> None:
+
+    if floatingMagnet: 
+        magnetCollection.add(floatingMagnet, override_parent = True)
     Bs = np.array([[magnetCollection.getB([x,0,z]) for x in xs] for z in zs])
     X,Z = np.meshgrid(xs,zs)
     U,V = Bs[:,:,0], Bs[:,:,2]
-
-    ax.streamplot(X, Z, U, V, color=np.log(U**2+V**2),density=2)
+    print(np.max(U**2+V**2), np.min(U**2+V**2))
+    sPlot = ax.streamplot(X, Z, U, V, color = np.log(U**2+V**2), density=1.)
+    ax.set_aspect('equal')
+    # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
 
 def main():
-    magnetRing1 = magnetRing(0.06, 0, 0, 12)
-    magnetRing2 = magnetRing(0.04, 30, -0.05, 12)
-    # floatingMagnets = 
-    c = magnetRing1.mCol + magnetRing2.mCol
 
-    fig, axs = plt.subplots()
-    plotSysB(c, axs)
+    penMagnet1 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.014))
+    penMagnet2 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.014 + 0.005))
+    penMagnetsCol = magpy.Collection(penMagnet1, penMagnet2)
+
+    ## Exp 1: Compare zPos of 2nd permanent magnet ring
+    fig, axs = plt.subplots(2,3, figsize = (10, 15))
+
+    for lv1, zPos in enumerate([-0.005, -0.02, -0.04]):
+        # determine norm by running once & then use values output in terminal
+        norm = mpl.colors.Normalize(vmin = 0, vmax = 0.7)
+
+        magnetRing1 = magnetRing(0.06, 0, 0, 12)
+        magnetRing2 = magnetRing(0.06, 0, zPos, 12)
+        c = magnetRing1.mCol + magnetRing2.mCol
+        plotSysB(c, axs[0, lv1], fig)
+        plotSysB(c, axs[1, lv1], fig, penMagnetsCol)
+        axs[0, lv1].set_title(f'Gap between rings = {-np.round(zPos+0.005, 3)} m')
+
+    fig.suptitle('Compare variable spacing of magnet rings')
+    # fig.colorbar()
     plt.show()
-    # xs = np.linspace(-0.05,0.05,29)
-    # zs = np.linspace(-0.05,0.05,29)
-    # Bs = np.array([[c.getB([x,0,z]) for x in xs] for z in zs])
-    # X,Z = np.meshgrid(xs,zs)
-    # U,V = Bs[:,:,0], Bs[:,:,2]
-    # plt.streamplot(X, Z, U, V, color=np.log(U**2+V**2),density=2)
-    # plt.show()
+
+    ## Exp 2: Compare impacts of changing angle of top magnet ring
+    fig, axs = plt.subplots(2,3, figsize = (10, 15))
+
+    for lv1, angle in enumerate([-15, 0, 15]):
+        # determine norm by running once & then use values output in terminal
+        norm = mpl.colors.Normalize(vmin = 0, vmax = 0.7)
+
+        magnetRing1 = magnetRing(0.06, angle, 0, 12)
+        magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
+        c = magnetRing1.mCol + magnetRing2.mCol
+        plotSysB(c, axs[0, lv1], fig)
+        plotSysB(c, axs[1, lv1], fig, penMagnetsCol)
+        axs[0, lv1].set_title(f'Angle of top ring = {angle} degrees')
+
+    fig.suptitle('Compare variable angle of top magnet ring')
+    # fig.colorbar()
+    plt.show()
+
+    ## Exp 3: Compare impacts of changing diameter of magnet rings
+    fig, axs = plt.subplots(2,3, figsize = (10, 15))
+
+    for lv1, ringD in enumerate([0.04, 0.06, 0.08]):
+        # determine norm by running once & then use values output in terminal
+        norm = mpl.colors.Normalize(vmin = 0, vmax = 0.7)
+
+        magnetRing1 = magnetRing(ringD, 0, 0, 12)
+        magnetRing2 = magnetRing(ringD, 0, -0.02, 12)
+        c = magnetRing1.mCol + magnetRing2.mCol
+        plotSysB(c, axs[0, lv1], fig)
+        plotSysB(c, axs[1, lv1], fig, penMagnetsCol)
+        axs[0, lv1].set_title(f'Diameter of ring = {ringD} m')
+
+    fig.suptitle('Compare variable diameter of magnet rings')
+    # fig.colorbar()
+    plt.show()
+    
 
 if __name__ == "__main__":
     main()
-
-
-# magnetRing1 = []
-# numMagnets1 = 12
-# magnetRing1_r = 0.03
-# for lv1 in range(numMagnets1):
-#     theta = lv1*math.pi/6 # angle in radians
-#     magnetRing1.append(
-#         magpy.magnet.Cylinder(
-#             polarization=(0,0,1), dimension=(0.01, 0.005), 
-#             position = (magnetRing1_r*np.cos(theta), magnetRing1_r*np.sin(theta), 0)
-#         )
-#         )
-#     print(magnetRing1[-1].position)
-
-# magnetRing2 = []
-# numMagnets2 = 12
-# magnetRing2_r = 0.03
-# for lv1 in range(numMagnets2):
-#     theta = lv1*math.pi/6 # angle in radians
-#     magnetRing2.append(
-#         magpy.magnet.Cylinder(
-#             polarization=(0,0,1), dimension=(0.01, 0.005), 
-#             position = (magnetRing2_r*np.cos(theta), magnetRing2_r*np.sin(theta), -0.02))
-#         )
-#     print(magnetRing2[-1].position)
-
-# # floating magnets
-# magnet5 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.02), orientation = R.from_rotvec((0,45,0), degrees = True))
-# # magnet6 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.025))
-
-# c = magpy.Collection(*magnetRing1)#, magnet5, magnet6)
-# print('ring1', c.children,'\n')
-# c.add(magpy.Collection(*magnetRing2)) # this creates a nested structure (it doesn't unwarap...)
-# print('ring1&2', c.children,'\n')
-# c.add(magnet5)
-# print('ring1&2&floating',c.children,'\n')
-
-
-
-# magnet2 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (-0.03, 0, 0), orientation = R.from_rotvec((0,45,0), degrees = True))
-# magnet1 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (-0.03, 0, 0), orientation = R.from_rotvec((0,45,0), degrees = True))
-# print(magnet1.position, magnet1.orientation.as_rotvec())
-# magnet1.rotate_from_angax(angle = 180, axis = 'z', anchor = (0,0,0))
-# print(magnet1.position, magnet1.orientation.as_rotvec())
-# c = magpy.Collection(magnet1, magnet2)
-# # magnet2 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0.03, 0, 0))
-# # magnet3 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (-0.03, 0, -0.02))
-# # magnet4 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0.03, 0, -0.02))
-# # magnet5 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.02))
-# # magnet6 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.025))
-# # c = magpy.Collection(magnet1, magnet2, magnet3, magnet4, magnet5, magnet6)
-# # sensor = magpy.Sensor() #unnecessary? seems like an observer but can also just calc at any point...
-
-# # magpy.show(magnet1, sensor, backend='plotly')
-
-
-# magnetRing3 = magnetRing(0.06, 30, 0, 12)
-# c = magnetRing3.mCol
-# print(magnetRing3.mCol.children)
-
-# points = [(0,0,-.01), (0,0,0), (0,0,.01)] # in SI Units (m)
-
-# xs = np.linspace(-0.05,0.05,29)
-# zs = np.linspace(-0.05,0.05,29)
-# Bs = np.array([[c.getB([x,0,z]) for x in xs] for z in zs])
-# X,Z = np.meshgrid(xs,zs)
-# U,V = Bs[:,:,0], Bs[:,:,2]
-# plt.streamplot(X, Z, U, V, color=np.log(U**2+V**2),density=2)
-# plt.show()
-
-
-# # B = magpy.getB(magnet1, points)
-
-# # H = magpy.getH(magnet1, sensor)
-
-# # print(H.round()) # -> [51017. 24210.     0.] # in SI Units (A/m)
-# # import magpylib as magpy
-# # import numpy as np
-# # import plotly.graph_objects as go
-
-# # # Magpylib field computation
-# # loop = magpy.current.Circle(current=1, diameter=0.1)
-# # sens = magpy.Sensor(position=np.linspace((0, 0, -0.1), (0, 0, 0.1), 100))
-# # B = loop.getB(sens)
-
-# # # Create Plotly figure and subplots
-# # fig = go.Figure().set_subplots(
-# #     rows=1, cols=2, specs=[[{"type": "xy"}, {"type": "scene"}]]
-# # )
-
-# # # 2D Plotly plot
-# # fig.add_scatter(y=B[:, 2], name="Bz")
-
-# # # Draw 3d model in the existing Plotly figure
-# # magpy.show(loop, sens, canvas=fig, col=2, canvas_update=True)
-
-# # # Add 3d scatter trace to main figure model
-# # fig.add_scatter3d(x=(-0.1, 0.1), y=(0, 0), z=(0, 0), col=2, row=1)
-
-# # # Render figure
-# fig.show()
