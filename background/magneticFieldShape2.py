@@ -4,6 +4,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import math
 from scipy.spatial.transform import Rotation as R
+import time
 
 class magnetRing:
     def __init__(self, diameter, angle, zPos, numMagnets):
@@ -75,11 +76,25 @@ def main():
                 )
                 coil.add(winding)
         # coil.show()
+        ### METHOD 1
+        t0 = time.time()
         xs = np.linspace(-0.05, 0.05, 29)
         zs = np.linspace(-0.05, 0.05, 29)
         Bs = np.array([[coil.getB([x,0,z]) for x in xs] for z in zs])
         X,Z = np.meshgrid(xs,zs)
         U,V = Bs[:,:,0], Bs[:,:,2]
+        print(time.time() - t0)
+        ### METHOD 2: much faster.... look to vectorize everything...
+        t0 = time.time()
+        grid = np.mgrid[-0.05:0.05:29j, 0:0:1j, -0.05:0.05:29j].T[:,0]
+        # 'j' here is imaginary number to enable setting number of steps insetad of step size
+        # note that here the slicint of [:,0] == [:,0,:,:]
+        _, Y, Z = np.moveaxis(grid, 2, 0)
+        B = magpy.getB(coil, grid)
+        _, By, Bz = np.moveaxis(B, 2, 0)
+        print(time.time() - t0)
+
+
         print(np.max(U**2+V**2), np.min(U**2+V**2))
         axs[lv1].streamplot(X, Z, U, V, color = np.log(U**2+V**2), density=1.)
         axs[lv1].set_aspect('equal')
