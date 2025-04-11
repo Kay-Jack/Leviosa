@@ -55,28 +55,35 @@ def main():
     penMagnet2 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0, 0.014 + 0.005))
     penMagnetsCol = magpy.Collection(penMagnet1, penMagnet2)
 
-    coil = magpy.Collection()
-    wireD = 0.3e-3
-    coilID = 8e-3
-    coilOD = 19.6e-3
-    coilH = 12e-3
-    coilPosTop = 6e-3
-    for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
-        for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
-            winding = magpy.current.Circle(
-                current=0.25,
-                diameter=2*r,
-                position=(0,0,z),
-            )
-            coil.add(winding)
-    # coil.show()
-    xs = np.linspace(-0.05, 0.05, 29)
-    zs = np.linspace(-0.05, 0.05, 29)
-    Bs = np.array([[coil.getB([x,0,z]) for x in xs] for z in zs])
-    X,Z = np.meshgrid(xs,zs)
-    U,V = Bs[:,:,0], Bs[:,:,2]
-    print(np.max(U**2+V**2), np.min(U**2+V**2))
-    plt.streamplot(X, Z, U, V, color = np.log(U**2+V**2), density=1.)
+    ### Coil exp.
+    
+    fig, axs = plt.subplots(1,3)
+
+    for lv1, (coilOD, coilH) in enumerate(zip([12e-3, 24e-3, 48e-3], [39.2e-3, 19.6e-3, 9.65e-3])):
+        coil = magpy.Collection()
+        wireD = 0.3e-3
+        coilID = 8e-3
+        # coilOD = 19.6e-3
+        # coilH = 24e-3
+        coilPosTop = 6e-3
+        for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
+            for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
+                winding = magpy.current.Circle(
+                    current=0.25,
+                    diameter=2*r,
+                    position=(0,0,z),
+                )
+                coil.add(winding)
+        # coil.show()
+        xs = np.linspace(-0.05, 0.05, 29)
+        zs = np.linspace(-0.05, 0.05, 29)
+        Bs = np.array([[coil.getB([x,0,z]) for x in xs] for z in zs])
+        X,Z = np.meshgrid(xs,zs)
+        U,V = Bs[:,:,0], Bs[:,:,2]
+        print(np.max(U**2+V**2), np.min(U**2+V**2))
+        axs[lv1].streamplot(X, Z, U, V, color = np.log(U**2+V**2), density=1.)
+        axs[lv1].set_aspect('equal')
+    fig.suptitle('Compare different coil shapes')
     plt.show()
 
     ## Exp 1: Compare zPos of 2nd permanent magnet ring
