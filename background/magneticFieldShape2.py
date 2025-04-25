@@ -35,17 +35,18 @@ def plotSysB(
     fig,
     norm,
     floatingMagnet:bool or magpy.Collection = False,
-    xs:np.array = np.linspace(-0.05, 0.05, 29),
-    zs:np.array = np.linspace(-0.05, 0.05, 29),
+    grid = np.mgrid[-0.05:0.05:29j, 0:0:1j, -0.05:0.05:29j].T[:,0],
+    # 'j' here is imaginary number to enable setting number of steps insetad of step size
+    # note that here the slicing of [:,0] == [:,0,:,:]
     ) -> None:
 
     if floatingMagnet: 
         magnetCollection.add(floatingMagnet, override_parent = True)
-    Bs = np.array([[magnetCollection.getB([x,0,z]) for x in xs] for z in zs]) # may be possible to vectorize this: https://magpylib.readthedocs.io/en/5.0.3/_pages/user_guide/examples/examples_app_coils.html
-    X,Z = np.meshgrid(xs,zs)
-    U,V = Bs[:,:,0], Bs[:,:,2]
-    print(np.max(U**2+V**2), np.min(U**2+V**2))
-    sPlot = ax.streamplot(X, Z, U, V, color = norm(np.log(U**2+V**2)), density=1.)
+    X, _, Z = np.moveaxis(grid, 2, 0)
+    B = magpy.getB(magnetCollection, grid)
+    Bx, _, Bz = np.moveaxis(B, 2, 0)
+    print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
+    sPlot = ax.streamplot(X, Z, Bx, Bz, color = norm(np.log(Bx**2+Bz**2)), density=1.)
     ax.set_aspect('equal')
     # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
@@ -76,28 +77,16 @@ def main():
                 )
                 coil.add(winding)
         # coil.show()
-        ### METHOD 1
-        t0 = time.time()
-        xs = np.linspace(-0.05, 0.05, 29)
-        zs = np.linspace(-0.05, 0.05, 29)
-        Bs = np.array([[coil.getB([x,0,z]) for x in xs] for z in zs])
-        X,Z = np.meshgrid(xs,zs)
-        U,V = Bs[:,:,0], Bs[:,:,2]
-        print(time.time() - t0)
-        ### METHOD 2: much faster.... look to vectorize everything...
-        t0 = time.time()
+        
         grid = np.mgrid[-0.05:0.05:29j, 0:0:1j, -0.05:0.05:29j].T[:,0]
         # 'j' here is imaginary number to enable setting number of steps insetad of step size
-        # note that here the slicint of [:,0] == [:,0,:,:]
+        # note that here the slicing of [:,0] == [:,0,:,:]
         X, _, Z = np.moveaxis(grid, 2, 0)
         B = magpy.getB(coil, grid)
         Bx, _, Bz = np.moveaxis(B, 2, 0)
-        print(time.time() - t0)
 
-
-        print(np.max(U**2+V**2), np.min(U**2+V**2))
         print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
-        axs[lv1].streamplot(X, Z, U, V, color = np.log(U**2+V**2), density=1.)
+        axs[lv1].streamplot(X, Z, Bx, Bz, color = np.log(Bx**2+Bz**2), density=1.)
         axs[lv1].set_aspect('equal')
     fig.suptitle('Compare different coil shapes')
     plt.show()
