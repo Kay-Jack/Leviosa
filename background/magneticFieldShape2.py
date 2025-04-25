@@ -89,13 +89,14 @@ def main():
         grid = np.mgrid[-0.05:0.05:29j, 0:0:1j, -0.05:0.05:29j].T[:,0]
         # 'j' here is imaginary number to enable setting number of steps insetad of step size
         # note that here the slicint of [:,0] == [:,0,:,:]
-        _, Y, Z = np.moveaxis(grid, 2, 0)
+        X, _, Z = np.moveaxis(grid, 2, 0)
         B = magpy.getB(coil, grid)
-        _, By, Bz = np.moveaxis(B, 2, 0)
+        Bx, _, Bz = np.moveaxis(B, 2, 0)
         print(time.time() - t0)
 
 
         print(np.max(U**2+V**2), np.min(U**2+V**2))
+        print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
         axs[lv1].streamplot(X, Z, U, V, color = np.log(U**2+V**2), density=1.)
         axs[lv1].set_aspect('equal')
     fig.suptitle('Compare different coil shapes')
