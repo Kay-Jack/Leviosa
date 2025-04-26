@@ -60,13 +60,13 @@ def main():
     ### Coil exp.
     
     fig, axs = plt.subplots(1,3)
+    fig2, axs2 = plt.subplots(1,3)
+    fig3, axs3 = plt.subplots(2,3)
 
     for lv1, (coilOD, coilH) in enumerate(zip([12e-3, 24e-3, 48e-3], [39.2e-3, 19.6e-3, 9.65e-3])):
         coil = magpy.Collection()
         wireD = 0.3e-3
         coilID = 8e-3
-        # coilOD = 19.6e-3
-        # coilH = 24e-3
         coilPosTop = 6e-3
         for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
             for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
@@ -78,16 +78,37 @@ def main():
                 coil.add(winding)
         # coil.show()
         
-        grid = np.mgrid[-0.05:0.05:29j, 0:0:1j, -0.05:0.05:29j].T[:,0]
+        grid = np.mgrid[-0.05:0.05:59j, 0:0:1j, -0.05:0.05:59j].T[:,0]
         # 'j' here is imaginary number to enable setting number of steps insetad of step size
         # note that here the slicing of [:,0] == [:,0,:,:]
         X, _, Z = np.moveaxis(grid, 2, 0)
         B = magpy.getB(coil, grid)
         Bx, _, Bz = np.moveaxis(B, 2, 0)
 
-        print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
+        # print(Bz.shape)
+        # print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
         axs[lv1].streamplot(X, Z, Bx, Bz, color = np.log(Bx**2+Bz**2), density=1.)
         axs[lv1].set_aspect('equal')
+
+        # care, axis 0 in grid is for Z. axis 1 in grid is for x...
+        # print(Z[:,15], Bz[:,15])
+        axs2[lv1].plot(Z[30:,30], Bz[30:,30])
+        axs2[lv1].set_title(f'Axial magZ field for coilOD {coilOD} & coilH {coilH}')
+        # axs[2, lv1].plot(X[18,:], Bz[18,:])
+        axs3[0, 0].plot(Z[30:,30], Bz[30:,30])
+        axs3[0, 0].set_title(f'magZ field for X{X[0,30]}')
+        axs3[0, 1].plot(Z[30:,32], Bz[30:,32])
+        axs3[0, 1].set_title(f'magZ field for X{X[0,32]}')
+        axs3[0, 2].plot(Z[30:,34], Bz[30:,34])
+        axs3[0, 2].set_title(f'magZ field for X{X[0,34]}')
+
+        axs3[1, 0].plot(Z[30:,30], Bx[30:,30])
+        axs3[1, 0].set_title(f'magX field for X{X[0,30]}')
+        axs3[1, 1].plot(Z[30:,32], Bx[30:,32])
+        axs3[1, 1].set_title(f'magX field for X{X[0,32]}')
+        axs3[1, 2].plot(Z[30:,34], Bx[30:,34])
+        axs3[1, 2].set_title(f'magX field for X{X[0,34]}')
+
     fig.suptitle('Compare different coil shapes')
     plt.show()
 
