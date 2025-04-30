@@ -2,6 +2,7 @@ import magpylib as magpy
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import pyvista as pv
 import math
 from scipy.spatial.transform import Rotation as R
 import time
@@ -71,11 +72,25 @@ def main():
     magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
     c = magnetRing1.mCol + magnetRing2.mCol
 
-    FT1 = getFT(c, penMagnet1) + getFT(c, penMagnet2)
-    print(FT1)
+    F1, T1 = getFT(c, penMagnet1) + getFT(c, penMagnet2)
+    print(F1, T1)
 
-    FT2 = getFT(c, penMagnet3)
-    print(FT2)
+    F2, T2 = getFT(c, penMagnet3)
+    print(F2, T2)
+
+    pl = magpy.show(c, penMagnet1, penMagnet2, backend='pyvista', return_fig=True)
+    arrowF = pv.Arrow(start=(0, 0.01, 0.014 + 0.005/2), direction=F1, scale = 0.05)
+    pl.add_mesh(arrowF, color="blue")
+    arrowT = pv.Arrow(start=(0, 0.01, 0.014 + 0.005/2), direction=T1, scale = 0.05)
+    pl.add_mesh(arrowT, color="yellow")
+    pl.show()
+
+    p2 = magpy.show(c, penMagnet3, backend='pyvista', return_fig=True)
+    arrowF = pv.Arrow(start=(0, 0.01, 0.014 + 0.005/2), direction=F1, scale = 0.05)
+    p2.add_mesh(arrowF, color="blue")
+    arrowT = pv.Arrow(start=(0, 0.01, 0.014 + 0.005/2), direction=T1, scale = 0.05)
+    p2.add_mesh(arrowT, color="yellow")
+    p2.show()
 
     
 
