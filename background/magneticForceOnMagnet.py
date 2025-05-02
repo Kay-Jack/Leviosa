@@ -52,31 +52,31 @@ def plotSysB(
     ax.set_aspect('equal')
     # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
-
-def main():
+def checkSuperposition(showPlots = True):
     # cannot apply getFT onto magpy collection. Will need to see if principle of superposition applies (try 2 magnets stacked & 1 magnet of double size)
         # YES THIS GENERALLY SEEMS TRUE
     # penMagnetsCol = magpy.Collection(penMagnet1, penMagnet2)
     penMagnet1 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.01, 0.014))
     penMagnet1.meshing = 15
-    # penMagnet1.show()
     penMagnet2 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.01, 0.014 + 0.005))
     penMagnet2.meshing = 15
-    # penMagnet2.show()
     penMagnet3 = magpy.magnet.Cylinder(polarization=(0,0,1), dimension=(0.01, 0.01), position = (0, 0.01, 0.014 + 0.005/2))
     penMagnet3.meshing = 15
-    # penMagnet3.show()
-
 
     magnetRing1 = magnetRing(0.06, 0, 0, 12)
     magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
     c = magnetRing1.mCol + magnetRing2.mCol
 
     F1, T1 = getFT(c, penMagnet1) + getFT(c, penMagnet2)
-    print(F1, T1)
+    print('Force and Torque for 2 smaller floating magnets\n', F1, T1)
 
     F2, T2 = getFT(c, penMagnet3)
-    print(F2, T2)
+    print('Force and Torque for 1 larger floating magnet\n', F2, T2)
+
+    print('Results show that principle of superposition applies to forces and torques experienced by the floating magnet')
+
+    if not showPlots:
+        return
 
     pl = magpy.show(c, penMagnet1, penMagnet2, backend='pyvista', return_fig=True)
     arrowF = pv.Arrow(start=(0, 0.01, 0.014 + 0.005/2), direction=F1, scale = 0.05)
@@ -91,7 +91,43 @@ def main():
     arrowT = pv.Arrow(start=(0, 0.01, 0.014 + 0.005/2), direction=T1, scale = 0.05)
     p2.add_mesh(arrowT, color="yellow")
     p2.show()
+    
+    return
 
+
+
+def main():
+    # checkSuperposition()
+
+    penMagnet1 = magpy.magnet.Cylinder(
+        polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, 0.014),
+        orientation = R.from_rotvec((0, 15, 0), degrees = True))
+    penMagnet1.meshing = 15
+
+    magnetRing1 = magnetRing(0.06, 0, 0, 12)
+    magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
+    c = magnetRing1.mCol + magnetRing2.mCol
+
+    F1, T1 = getFT(c, penMagnet1)
+
+    for lv1 in range(10):
+        penMagnet2 = magpy.magnet.Cylinder(
+            polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, 0.014 + 0.005 + 0.001*lv1), # need to fix position, translate..
+            orientation = R.from_rotvec((0, 15, 0), degrees = True))
+        penMagnet2.meshing = 15
+        F2, T2 = getFT(c, penMagnet2)
+        Ft = F1 + F2
+        Tt = T1 + T2
+        # print('Force', Ft)
+        print('Torque', Tt)
+        
+
+    pl = magpy.show(c, penMagnet1, penMagnet2, backend='pyvista', return_fig=True)
+    arrowF = pv.Arrow(start=(0, 0, 0), direction=Ft, scale = 0.05)
+    pl.add_mesh(arrowF, color="blue")
+    arrowT = pv.Arrow(start=(0, 0, 0), direction=Tt, scale = 0.05)
+    pl.add_mesh(arrowT, color="yellow")
+    pl.show()
     
 
 if __name__ == "__main__":
