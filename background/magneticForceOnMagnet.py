@@ -8,6 +8,8 @@ from scipy.spatial.transform import Rotation as R
 import time
 from magpylib_force import getFT
 
+np.set_printoptions(precision = 4)
+
 class magnetRing:
     def __init__(self, diameter, angle, zPos, numMagnets):
         # diameter = diameter of 
@@ -52,7 +54,7 @@ def plotSysB(
     ax.set_aspect('equal')
     # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
-def checkSuperposition(showPlots = True):
+def validateSuperposition(showPlots = True):
     # cannot apply getFT onto magpy collection. Will need to see if principle of superposition applies (try 2 magnets stacked & 1 magnet of double size)
         # YES THIS GENERALLY SEEMS TRUE
     # penMagnetsCol = magpy.Collection(penMagnet1, penMagnet2)
@@ -94,11 +96,7 @@ def checkSuperposition(showPlots = True):
     
     return
 
-
-
-def main():
-    # checkSuperposition()
-
+def experiment1(showPlot = True):
     penMagnet1 = magpy.magnet.Cylinder(
         polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, 0.014),
         orientation = R.from_rotvec((0, 15, 0), degrees = True))
@@ -110,24 +108,56 @@ def main():
 
     F1, T1 = getFT(c, penMagnet1)
 
-    for lv1 in range(10):
+    expVals = {
+        'gap': [],
+        'torque': [],
+        'forceZ': [],
+        'forceX': [],
+    }
+
+    for lv1 in range(20):
+        gap = 0.001*lv1
         penMagnet2 = magpy.magnet.Cylinder(
-            polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, 0.014 + 0.005 + 0.001*lv1), # need to fix position, translate..
-            orientation = R.from_rotvec((0, 15, 0), degrees = True))
+            polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, 0.014 + 0.005 + gap), # need to fix position, translate..
+            # orientation = R.from_rotvec((0, 15, 0), degrees = True)
+            )
+        penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, 0.014), degrees = True)
         penMagnet2.meshing = 15
         F2, T2 = getFT(c, penMagnet2)
         Ft = F1 + F2
         Tt = T1 + T2
         # print('Force', Ft)
         print('Torque', Tt)
-        
+        expVals['gap'].append(gap)
+        expVals['torque'].append(abs(Tt[1]))
+        expVals['forceZ'].append(Ft[2])
+        expVals['forceX'].append(Ft[0])
+    # print(expVals['gap'], expVals['torque'])
+    fig, axs = plt.subplots(1,3)
+    axs[0].plot(expVals['gap'], expVals['torque'])
+    axs[0].set_ylabel('absolute value of torque [N*m]')
+    axs[0].grid()
+    axs[1].plot(expVals['gap'], expVals['forceZ'])
+    axs[1].set_ylabel('forceZ [N]')
+    axs[1].grid()
+    axs[2].plot(expVals['gap'], expVals['forceX'])
+    axs[2].set_ylabel('forceX [N]')
+    axs[2].grid()
+    fig.supxlabel('gap between floating magnets [m]')
+    fig.suptitle('impact of magnet gap separation on floating pen characteristics')
+    plt.show()
+    # pl = magpy.show(c, penMagnet1, penMagnet2, backend='pyvista', return_fig=True)
+    # arrowF = pv.Arrow(start=(0, 0, 0), direction=Ft, scale = 0.05)
+    # pl.add_mesh(arrowF, color="blue")
+    # arrowT = pv.Arrow(start=(0, 0, 0), direction=Tt, scale = 0.05)
+    # pl.add_mesh(arrowT, color="yellow")
+    # pl.show()
 
-    pl = magpy.show(c, penMagnet1, penMagnet2, backend='pyvista', return_fig=True)
-    arrowF = pv.Arrow(start=(0, 0, 0), direction=Ft, scale = 0.05)
-    pl.add_mesh(arrowF, color="blue")
-    arrowT = pv.Arrow(start=(0, 0, 0), direction=Tt, scale = 0.05)
-    pl.add_mesh(arrowT, color="yellow")
-    pl.show()
+def main():
+    # validateSuperposition()
+
+    experiment1()
+    
     
 
 if __name__ == "__main__":
