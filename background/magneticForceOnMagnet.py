@@ -54,7 +54,7 @@ def plotSysB(
     ax.set_aspect('equal')
     # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
-def validateSuperposition(showPlots = True):
+def experiment1(showPlots = True):
     # cannot apply getFT onto magpy collection. Will need to see if principle of superposition applies (try 2 magnets stacked & 1 magnet of double size)
         # YES THIS GENERALLY SEEMS TRUE
     # penMagnetsCol = magpy.Collection(penMagnet1, penMagnet2)
@@ -96,15 +96,17 @@ def validateSuperposition(showPlots = True):
     
     return
 
-def experiment1(showPlot = True):
+def experiment2(showPlot = True):
+    hoverHeight = 0.0025 + +0.005 + 0.0105
     penMagnet1 = magpy.magnet.Cylinder(
-        polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, 0.014),
+        polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, hoverHeight),
         orientation = R.from_rotvec((0, 15, 0), degrees = True))
     penMagnet1.meshing = 15
 
     magnetRing1 = magnetRing(0.06, 0, 0, 12)
     magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
     c = magnetRing1.mCol + magnetRing2.mCol
+    # c.show()
 
     F1, T1 = getFT(c, penMagnet1)
 
@@ -118,7 +120,7 @@ def experiment1(showPlot = True):
     for lv1 in range(20):
         gap = 0.001*lv1
         penMagnet2 = magpy.magnet.Cylinder(
-            polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, 0.014 + 0.005 + gap), # need to fix position, translate..
+            polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, hoverHeight + 0.005 + gap),
             # orientation = R.from_rotvec((0, 15, 0), degrees = True)
             )
         penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, 0.014), degrees = True)
@@ -153,11 +155,53 @@ def experiment1(showPlot = True):
     # pl.add_mesh(arrowT, color="yellow")
     # pl.show()
 
-def main():
-    # validateSuperposition()
+def experiment3():
+    hoverHeight = 0.0025 + 0.005 + 0.0105 + 0.0025# half magnet (datum is mid of 1st magnet ring) + thickness of plastic + hover height measured from plastic + half magnet
+    penMagnet1 = magpy.magnet.Cylinder(
+        polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, hoverHeight),
+        orientation = R.from_rotvec((0, 15, 0), degrees = True)
+        )
+    penMagnet2 = magpy.magnet.Cylinder(
+        polarization=(0,0,1), dimension=(0.01, 0.005), position = (0, 0.00, hoverHeight + 0.005),
+        )
+    penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, 0.014), degrees = True)
+    penMagnet1.meshing = 15
+    penMagnet2.meshing = 15
 
-    experiment1()
+    magnetRing1 = magnetRing(0.06, 0, 0, 12)
+    magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
+    c1 = magnetRing1.mCol + magnetRing2.mCol
+    # c1.show()
+
+    magnetRing3 = magnetRing(0.06, 0, 0, 12)
+    c2 = magnetRing3.mCol
+    # c2.show()
+
+    F2, T2 = getFT(c2, penMagnet1) + getFT(c2, penMagnet2) 
+    F1, T1 = getFT(c1, penMagnet1) + getFT(c1, penMagnet2) 
+    print('forces', '2 rings', F1, '1 ring', F2)
+    print('torques', '2 rings', T1, '1 ring', T2)
+    print('OUTCOME 1: extra ring actually weakens field strength in z but massively increases strength of field')
     
+    sensorZPos = hoverHeight - 0.0025 - 0.0028 - 0.0063 # hoverheight - 1/2 thickness of magnet - hover height from top of secureEM - sensorPos from top of secureEM
+    B1 = magpy.getB(c1, [0, 0, sensorZPos])
+    B2 = magpy.getB(c2, [0, 0, sensorZPos])
+    print('2 rings', B1)
+    print('1 ring', B2)
+    print('OUTCOME 2: does not correspond to expected outcome. Expected 2 coil system to have stronger field. Ferrite core (lower down) must be magnetizing in permanent field, thus changing sensor readings')
+
+
+def main():
+    # validateSuperposition
+    # experiment1()
+
+    # validate stability of floating pen based on separation of floating magnets
+    # experiment2()
+
+    # what does the 2nd ring do?
+    experiment3()
+    
+    # compare 2 rings vs 1 stronger ring assuming approx same vertical force on magnet
     
 
 if __name__ == "__main__":
