@@ -13,7 +13,7 @@ MAGNET_H = 0.01
 MAGNET_D = 0.005
 
 class magnetRing:
-    def __init__(self, diameter, angle, zPos, numMagnets):
+    def __init__(self, diameter, angle, zPos, numMagnets, magnetization = 1.6e6): # for default use the old silver magnets
         # diameter = diameter of 
         # angle = angle of magnets in ring. Positive means outwards (assuming vector going 'up'). In radians
         # zPos = z displacement of the ring
@@ -26,9 +26,10 @@ class magnetRing:
         self.mCol = magpy.Collection()
         for lv1 in range(numMagnets):
             theta = lv1*2*math.pi/numMagnets
+            
             self.mCol.add(
                 magpy.magnet.Cylinder(
-                    polarization = (0,0,1),
+                    magnetization = (0,0,magnetization),
                     dimension = (MAGNET_H, MAGNET_D),
                     position = (self.diameter/2, 0, self.zPos),
                     orientation = R.from_rotvec((0, self.angle, 0), degrees = True)
@@ -128,14 +129,17 @@ def experiment1(showPlots = True):
     return
 
 def experiment2(showPlot = True):
-    hoverHeight = 0.0025 + +MAGNET_D + 0.0105
+    magnetization = 1.6e6 #use this for floating pen for now?
+    # hoverHeight = 0.0025 + MAGNET_D + 0.0105
+    hoverHeight = MAGNET_H/2 + 0.005 + 0.0105 + MAGNET_H/2
+    # hover height as a MASSIVE impact on stability... if lower, then best to have gap. If higher no good to have gap
     penMagnet1 = magpy.magnet.Cylinder(
-        polarization=(0,0,1), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight),
+        magnetization=(0,0,magnetization), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight),
         orientation = R.from_rotvec((0, 15, 0), degrees = True))
     penMagnet1.meshing = 15
 
-    magnetRing1 = magnetRing(0.06, 0, 0, 12)
-    magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
+    magnetRing1 = magnetRing(0.06, 0, 0, 14)
+    magnetRing2 = magnetRing(0.06, 0, -0.02, 14)
     c = magnetRing1.mCol + magnetRing2.mCol
     # c.show()
 
@@ -151,10 +155,10 @@ def experiment2(showPlot = True):
     for lv1 in range(20):
         gap = 0.001*lv1
         penMagnet2 = magpy.magnet.Cylinder(
-            polarization=(0,0,1), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight + MAGNET_D + gap),
+            magnetization=(0,0,magnetization), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight + MAGNET_D + gap),
             # orientation = R.from_rotvec((0, 15, 0), degrees = True)
             )
-        penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, 0.014), degrees = True)
+        penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, hoverHeight), degrees = True)
         penMagnet2.meshing = 15
         F2, T2 = getFT(c, penMagnet2)
         Ft = F1 + F2
@@ -187,24 +191,26 @@ def experiment2(showPlot = True):
     # pl.show()
 
 def experiment3(showPlot = True):
+    magnetization = 1.6e6 #use this for floating pen for now?
+
     hoverHeight = MAGNET_H/2 + 0.005 + 0.0105 + MAGNET_H/2# half magnet (datum is mid of 1st magnet ring) + thickness of plastic + hover height measured from plastic + half magnet
     penMagnet1 = magpy.magnet.Cylinder(
-        polarization=(0,0,1), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight),
+        magnetization=(0,0,magnetization), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight),
         orientation = R.from_rotvec((0, 15, 0), degrees = True)
         )
     penMagnet2 = magpy.magnet.Cylinder(
-        polarization=(0,0,1), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight + MAGNET_D),
+        magnetization=(0,0,magnetization), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight + MAGNET_D),
         )
-    penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, 0.014), degrees = True)
+    penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, hoverHeight), degrees = True)
     penMagnet1.meshing = 15
     penMagnet2.meshing = 15
 
-    magnetRing1 = magnetRing(0.06, 0, 0, 12)
-    magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
+    magnetRing1 = magnetRing(0.06, 0, 0, 14)
+    magnetRing2 = magnetRing(0.06, 0, -0.02, 14)
     c1 = magnetRing1.mCol + magnetRing2.mCol
     # c1.show()
 
-    magnetRing3 = magnetRing(0.06, 0, 0, 12)
+    magnetRing3 = magnetRing(0.06, 0, 0, 14)
     c2 = magnetRing3.mCol
     # c2.show()
 
@@ -226,23 +232,29 @@ def experiment3(showPlot = True):
         'gap': [],
         'torque': [],
         'forceZ': [],
+        'sensorZ': [],
     }
     # first base case of just 1 magnet ring
     F3, T3 = getFT(c2, penMagnet1) + getFT(c2, penMagnet2)
+    _,_,Bz = magpy.getB(c2, [0,0,sensorZPos])
     expVals['gap'].append(0)
     expVals['torque'].append(abs(T3[1]))
     expVals['forceZ'].append(F3[2])
+    expVals['sensorZ'].append(Bz)
     for lv1 in range(20):
         zPos = MAGNET_D + 0.0025*lv1
-        magnetRing4 = magnetRing(0.06, 0, -zPos, 12)
+        magnetRing4 = magnetRing(0.06, 0, -zPos, 14)
         c3 = magnetRing4.mCol # may need override_parent = True    
         c3.add(magnetRing1.mCol, override_parent = True)
         F3, T3 = getFT(c3, penMagnet1) + getFT(c3, penMagnet2) 
         expVals['gap'].append(zPos - MAGNET_D)
         expVals['torque'].append(abs(T3[1]))
         expVals['forceZ'].append(F3[2])
+        _,_,Bz = magpy.getB(c3, [0,0,sensorZPos])
+        expVals['sensorZ'].append(Bz)
+
     # print(expVals['gap'], expVals['torque'])
-    fig, axs = plt.subplots(1,2)
+    fig, axs = plt.subplots(1,3)
     # print(expVals['gap'])
     # print(expVals['torque'])
     axs[0].plot(expVals['gap'], expVals['torque'])
@@ -251,23 +263,56 @@ def experiment3(showPlot = True):
     axs[1].plot(expVals['gap'], expVals['forceZ'])
     axs[1].set_ylabel('forceZ [N]')
     axs[1].grid()
+    axs[2].plot(expVals['gap'], expVals['sensorZ'])
+    axs[2].set_ylabel('sensor B [T]')
+    axs[2].grid()
+
     fig.supxlabel('gap between permanent magnet rings[m]')
     fig.suptitle('impact of magnet gap separation on floating pen characteristics')
     plt.show()
 
+def experiment5(showPlot = True):
+    
+    magnetization = 1.6e6 #use this for floating pen for now?
+
+    hoverHeight = MAGNET_H/2 + 0.005 + 0.0105 + MAGNET_H/2# half magnet (datum is mid of 1st magnet ring) + thickness of plastic + hover height measured from plastic + half magnet
+    penMagnet1 = magpy.magnet.Cylinder(
+        magnetization=(0,0,magnetization), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight),
+        orientation = R.from_rotvec((0, 15, 0), degrees = True)
+        )
+    penMagnet2 = magpy.magnet.Cylinder(
+        magnetization=(0,0,magnetization), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight + MAGNET_D),
+        )
+    penMagnet2.rotate_from_angax(angle = 15, axis = 'y', anchor = (0, 0, 0.014), degrees = True)
+    penMagnet1.meshing = 15
+    penMagnet2.meshing = 15
+
+    magnetRing1 = magnetRing(0.06, 0, 0, 12)
+    magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
+    c1 = magnetRing1.mCol + magnetRing2.mCol
+    # c1.show()
+
+    magnetRing3 = magnetRing(0.06, 0, 0, 12)
+    c2 = magnetRing3.mCol
+    # c2.show()
+
+    F2, T2 = getFT(c2, penMagnet1) + getFT(c2, penMagnet2) 
+    F1, T1 = getFT(c1, penMagnet1) + getFT(c1, penMagnet2) 
+    print('forces', '2 rings', F1, '1 ring', F2)
+    print('torques', '2 rings', T1, '1 ring', T2)
 
 def main():
     # validateSuperposition
     # experiment1()
 
     # test for strength of permanent magnets
-    experiment4()
+    # experiment4()
 
     # validate stability of floating pen based on separation of floating magnets
-    # experiment2()
+    experiment2()
 
     # what does the 2nd ring do?
-    # experiment3()
+    experiment3()
     
     # compare 2 rings vs 1 stronger ring assuming approx same vertical force on magnet
     
