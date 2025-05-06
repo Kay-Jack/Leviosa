@@ -56,6 +56,35 @@ def plotSysB(
     ax.set_aspect('equal')
     # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
+def experiment4(showPlots = True):
+    # measures force on magnet. Useful for validating magnetic strength...
+    mag1 = magpy.magnet.Cylinder(magnetization=(0,0,1), dimension=(MAGNET_H, MAGNET_D), position = (0, 0, 0))
+    mag1.meshing = 15
+    # for magnetization in [1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10]:
+        # coarse pass. Seems like 1e6 is pretty close. Slightly too small
+    # for magnetization in [1e6, 2e6, 3e6, 4e6, 5e6]:
+        # old silver magnets seems to be [1e6, 2e6]
+        # new silver magnets seem very close to 2e6. Something very slightly smaller
+    # for magnetization in [1.1e6, 1.2e6, 1.3e6, 1.4e6, 1.5e6, 1.6e6, 1.7e6, 1.8e6, 1.9e6, 2.0e6]:
+        # old silver magnets seems to be [1.6e6, 1.7e6]
+        # new silver magnets seems to be [1.9e6, 2.0e6]
+    # for magnetization in np.linspace(1.6e6, 1.7e6, 11): # for some reason somtimes has issues with pyvista
+    # for magnetization in [1.5e6, 1.52e6, 1.54e6, 1.56e6, 1.58e6, 1.6e6]:
+        # 1.6e6 seems pretty close for old silver magnets? Unsure if issue with test process. Far values are less than IRL. CLoose are bigger than IRL
+    for magnetization in [1.8e6, 1.82e6, 1.84e6, 1.86e6, 1.88e6, 1.9e6]:
+        # 1.88e6 seems pretty close for new silver magnets. Unsure if issue with test process but Far values are less than IRL. Close values are bigger than IRL
+        mag1.magnetization = (0, 0, magnetization)
+        print(f'---magnetization: {magnetization}---')
+        for separation in [0.0019, 0.0054, 0.0089]:
+            mag2 = mag1.copy() # note that .meshing also translates correctly (I guess discretization is calculated in getFT())
+            mag2.position = (0, 0, MAGNET_H + separation)
+            F, _ = getFT(mag1, mag2)
+            print(separation, F)
+    return
+    # penMagnet2 = magpy.magnet.Cylinder(magnetization=(0,0,1), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.01, 0.014))
+    # penMagnet2.meshing = 15
+    
+
 def experiment1(showPlots = True):
     # cannot apply getFT onto magpy collection. Will need to see if principle of superposition applies (try 2 magnets stacked & 1 magnet of double size)
         # YES THIS GENERALLY SEEMS TRUE
@@ -231,11 +260,14 @@ def main():
     # validateSuperposition
     # experiment1()
 
+    # test for strength of permanent magnets
+    experiment4()
+
     # validate stability of floating pen based on separation of floating magnets
     # experiment2()
 
     # what does the 2nd ring do?
-    experiment3()
+    # experiment3()
     
     # compare 2 rings vs 1 stronger ring assuming approx same vertical force on magnet
     
