@@ -273,9 +273,10 @@ def experiment3(showPlot = True):
 
 def experiment5(showPlot = True):
     
-    magnetization = 1.6e6 #use this for floating pen for now?
-
+    magnetization = 1.6e6 #use this for floating pen for now?    
     hoverHeight = MAGNET_H/2 + 0.005 + 0.0105 + MAGNET_H/2# half magnet (datum is mid of 1st magnet ring) + thickness of plastic + hover height measured from plastic + half magnet
+    sensorZPos = hoverHeight - 0.0025 - 0.0028 - 0.0063 # hoverheight - 1/2 thickness of magnet - hover height from top of secureEM - sensorPos from top of secureEM
+
     penMagnet1 = magpy.magnet.Cylinder(
         magnetization=(0,0,magnetization), dimension=(MAGNET_H, MAGNET_D), position = (0, 0.00, hoverHeight),
         orientation = R.from_rotvec((0, 15, 0), degrees = True)
@@ -287,19 +288,46 @@ def experiment5(showPlot = True):
     penMagnet1.meshing = 15
     penMagnet2.meshing = 15
 
+    # PART 1 COMPARE EXISTING SYSTEMS
+    print('PART 1 COMPARE EXISTING SYSTEMS')
+    magnetRing1 = magnetRing(0.06, 0, 0, 14)
+    magnetRing2 = magnetRing(0.06, 0, -0.02, 14)
+    c2 = magnetRing1.mCol + magnetRing2.mCol
+    
+    magnetRing3 = magnetRing(0.06, 0, 0, 12, 1.88e6)
+    c1 = magnetRing3.mCol
+    
+    F2, T2 = getFT(c2, penMagnet1) + getFT(c2, penMagnet2) 
+    _,_,B2 = magpy.getB(c2, [0,0,sensorZPos])
+    F1, T1 = getFT(c1, penMagnet1) + getFT(c1, penMagnet2) 
+    _,_,B1 = magpy.getB(c1, [0,0,sensorZPos])
+    print('forces', '2 rings', F2, '1 ring', F1)
+    print('torques', '2 rings', T2, '1 ring', T1)
+    print('hall sensor', '2 rings', B2, '1 ring', B1)
+    print('OUTCOME: clearly does not match with IRL. Expect approx same force but significantly weaker torque & ~ same hall sensor reading. Expect ferrite core to be the diff')
+
+    # PART 2 TEST DIFF SYSTEMS
+    print('PART 2 TEST DIFF SYSTEMS')
     magnetRing1 = magnetRing(0.06, 0, 0, 12)
     magnetRing2 = magnetRing(0.06, 0, -0.02, 12)
     c1 = magnetRing1.mCol + magnetRing2.mCol
-    # c1.show()
-
-    magnetRing3 = magnetRing(0.06, 0, 0, 12)
-    c2 = magnetRing3.mCol
-    # c2.show()
-
-    F2, T2 = getFT(c2, penMagnet1) + getFT(c2, penMagnet2) 
+    
+    magnetRing3 = magnetRing(0.06, 0, 0, 10)
+    magnetRing4 = magnetRing(0.06, 0, -0.02, 16)
+    c2 = magnetRing3.mCol + magnetRing4.mCol
+    
     F1, T1 = getFT(c1, penMagnet1) + getFT(c1, penMagnet2) 
-    print('forces', '2 rings', F1, '1 ring', F2)
-    print('torques', '2 rings', T1, '1 ring', T2)
+    _,_,B1 = magpy.getB(c1, [0,0,sensorZPos])
+    
+    F2, T2 = getFT(c2, penMagnet1) + getFT(c2, penMagnet2) 
+    _,_,B2 = magpy.getB(c2, [0,0,sensorZPos])
+    
+    print('forces:', 'current', F1[2], 'more magnets in lower ring', F2[2])
+    print('torques:', 'current', T1[1], 'more magnets in lower ring', T2[1])
+    print('hall sensor:', 'current', B1, 'more magnets in lower ring', B2)
+    print('OUTCOME: more magnets in low ring reduces force and increases torque')
+
+
 
 def main():
     # validateSuperposition
@@ -309,13 +337,15 @@ def main():
     # experiment4()
 
     # validate stability of floating pen based on separation of floating magnets
-    experiment2()
+    # experiment2()
 
     # what does the 2nd ring do?
-    experiment3()
+    # experiment3()
     
+    # try and calc our existing system & initial test of new magnets
+    experiment5()
+
     # compare 2 rings vs 1 stronger ring assuming approx same vertical force on magnet
-    
 
 if __name__ == "__main__":
     main()
