@@ -431,14 +431,35 @@ def experiment6(plot = True):
         _, _, B2 = magpy.getB(oldSilver, [0, 0, zPos])
         print('newSilver, ', B1, ', oldSilver, ',B2)
     
+def magneticFieldToSensorReading(magField):
+    return(511.5 - 3765.2*magField)
+
+def sensorReadingToMagneticField(sensorReading):
+    return((-sensorReading + 511.5) / 3765.2)
 
 def experiment7(plot = True):
-    print('Est. model for ferrite core in permanent magnet field. Top of upper magnet ring as datum')
+    print('Est. model for ferrite core in permanent magnet field. Top [of secure EM] as datum')
+    
+    MAGNET_TO_RING_FACE = 5e-3
+    POST_TO_SENSOR = -3e-3 - 0.6e-3 # post to top face of sensor cutout + sensing position relative to sensor cutout
+    POST_TO_TOP = 2.4e-3
+    HOVER_HEIGHT = 3e-3
+    MAG_RING_TO_POST = 2e-3
+    MAGNET_RING_SEPARATION = 18.5e-3
+
+    magnetRing1ZPos = - MAG_RING_TO_POST - MAGNET_TO_RING_FACE - MAGNET_H/2
+    magnetRing2ZPos = magnetRing1ZPos - MAGNET_H - MAGNET_RING_SEPARATION
+    sensorZPos = - POST_TO_TOP + POST_TO_SENSOR
+
     magnetRing1 = magnetRing(0.06, 0, - MAGNET_H/2, 9, 1.88e6)
     magnetRing2 = magnetRing(0.06, 0, - MAGNET_H - 0.0185 - MAGNET_H/2, 12, 1.88e6)
     c = magnetRing1.mCol + magnetRing2.mCol
+
+    if plot:
+        c.plot()
     
-    _,_,B = magpy.getB(c, [0, 0, ])
+    _,_,B = magpy.getB(c, [0, 0, 1])
+    print(B)
 
 def main():
     # validateSuperposition
@@ -459,7 +480,9 @@ def main():
     # compare 2 rings vs 1 stronger ring assuming approx same vertical force on magnet
 
     # correlate hall sensor to B
-    experiment6(False)
+    # experiment6(False)
+
+    experiment7()
 
 
 if __name__ == "__main__":
