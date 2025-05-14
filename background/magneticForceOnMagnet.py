@@ -393,8 +393,52 @@ def experiment5(showPlot = True):
     print('hall sensor:', 'proposed', B)
     
     # c.show()
+def experiment6(plot = True):
+    print('Get magmetic field strength at measured positions')
+    newSilver = magpy.magnet.Cylinder(
+        magnetization=(0, 0, 1.88e6), dimension=(MAGNET_D, MAGNET_H), position = (0, 0, -0.0025)
+        )
+    oldSilver = magpy.magnet.Cylinder(
+        magnetization=(0, 0, 1.6e6), dimension=(MAGNET_D, MAGNET_H), position = (0, 0, -0.0025)
+        )
+    for zPos in [6e-3, 7e-3, 8e-3, 11e-3]:
+        zPos += 0.9e-3 # add half the sensor. Assume symmetry for now. TODO: WILL CALCULATE OFFSET IN SECOND PASS
+        #print at each zPos
+        _, _, B1 = magpy.getB(newSilver, [0, 0, zPos])
+        _, _, B2 = magpy.getB(oldSilver, [0, 0, zPos])
+        print('newSilver, ', B1, ', oldSilver, ',B2)
+    
+    # to calculate sensor offset inside casing
+    sensorOffset = -0.3e-3 #-0.1e-3# 0 # negative number = sensor is closer to small (sensing) face
+    zPos1 = 15e-3 + 0.9e-3 + sensorOffset
+    zPos2 = 15e-3 + 0.9e-3 - sensorOffset
+    newSilver2 = newSilver.copy(deep = True)
+    newSilver2.position = (0, 0, -0.0075)
+    c = magpy.Collection(newSilver, newSilver2)
+    if plot == True:
+        c.show()
+    _, _, B1 = magpy.getB(c, [0, 0, zPos1])
+    _, _, B2 = magpy.getB(c, [0, 0, zPos2])
+    print(B1, B2)
+    print('likely reading variation if this does not match perfectly, datasheet shows 0.3mm offset towards small face. Note also bias away from prongs')
 
+    #SECOND PASS, assume 0.3e-3 sensor offset
+    print('second pass with 0.3e-3 sensor offset')
+    for zPos in [6e-3, 7e-3, 8e-3, 11e-3]:
+        zPos += 0.6e-3 # account for sensor position (sensor location + 0.1mm for fitment in 3DP part)
+        #print at each zPos
+        _, _, B1 = magpy.getB(newSilver, [0, 0, zPos])
+        _, _, B2 = magpy.getB(oldSilver, [0, 0, zPos])
+        print('newSilver, ', B1, ', oldSilver, ',B2)
+    
 
+def experiment7(plot = True):
+    print('Est. model for ferrite core in permanent magnet field. Top of upper magnet ring as datum')
+    magnetRing1 = magnetRing(0.06, 0, - MAGNET_H/2, 9, 1.88e6)
+    magnetRing2 = magnetRing(0.06, 0, - MAGNET_H - 0.0185 - MAGNET_H/2, 12, 1.88e6)
+    c = magnetRing1.mCol + magnetRing2.mCol
+    
+    _,_,B = magpy.getB(c, [0, 0, ])
 
 def main():
     # validateSuperposition
@@ -410,9 +454,13 @@ def main():
     # experiment3()
     
     # try and calc our existing system & initial test of new magnets
-    experiment5()
+    # experiment5()
 
     # compare 2 rings vs 1 stronger ring assuming approx same vertical force on magnet
+
+    # correlate hall sensor to B
+    experiment6(False)
+
 
 if __name__ == "__main__":
     main()
