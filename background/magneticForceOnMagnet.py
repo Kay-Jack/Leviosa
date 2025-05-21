@@ -40,7 +40,7 @@ def plotSysB(
     magnetCollection:magpy.Collection, 
     ax,
     fig,
-    norm,
+    norm = False,
     floatingMagnet:bool or magpy.Collection = False,
     grid = np.mgrid[-0.05:0.05:29j, 0:0:1j, -0.05:0.05:29j].T[:,0],
     # 'j' here is imaginary number to enable setting number of steps insetad of step size
@@ -53,7 +53,10 @@ def plotSysB(
     B = magpy.getB(magnetCollection, grid)
     Bx, _, Bz = np.moveaxis(B, 2, 0)
     print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
-    sPlot = ax.streamplot(X, Z, Bx, Bz, color = norm(np.log(Bx**2+Bz**2)), density=1.)
+    if norm:
+        sPlot = ax.streamplot(X, Z, Bx, Bz, color = norm(np.log(Bx**2+Bz**2)), density=3.)
+    else: 
+        sPlot = ax.streamplot(X, Z, Bx, Bz, color = np.log(Bx**2+Bz**2), density=3.)
     ax.set_aspect('equal')
     # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
@@ -393,6 +396,7 @@ def experiment5(showPlot = True):
     print('hall sensor:', 'proposed', B)
     
     # c.show()
+
 def experiment6(plot = True):
     print('Get magmetic field strength at measured positions')
     newSilver = magpy.magnet.Cylinder(
@@ -445,21 +449,161 @@ def experiment7(plot = True):
     POST_TO_TOP = 2.4e-3
     HOVER_HEIGHT = 3e-3
     MAG_RING_TO_POST = 2e-3
-    MAGNET_RING_SEPARATION = 18.5e-3
+    MAGNET_RING_GAP = 18.5e-3
+    FERRITE_H = 12e-3
+    FERRITE_D = 8e-3
+    TOP_TO_FERRITE = 12.4e-3 + FERRITE_H/2# second value is coilH/2
 
-    magnetRing1ZPos = - MAG_RING_TO_POST - MAGNET_TO_RING_FACE - MAGNET_H/2
-    magnetRing2ZPos = magnetRing1ZPos - MAGNET_H - MAGNET_RING_SEPARATION
+    MAGNETIZATION = 1.51e6
+
+    magnetRing1ZPos = - POST_TO_TOP - MAG_RING_TO_POST - MAGNET_TO_RING_FACE - MAGNET_H/2
+    magnetRing2ZPos = magnetRing1ZPos - MAGNET_H - MAGNET_RING_GAP
     sensorZPos = - POST_TO_TOP + POST_TO_SENSOR
 
-    magnetRing1 = magnetRing(0.06, 0, - MAGNET_H/2, 9, 1.88e6)
-    magnetRing2 = magnetRing(0.06, 0, - MAGNET_H - 0.0185 - MAGNET_H/2, 12, 1.88e6)
+    magnetRing1 = magnetRing(0.06, 0, magnetRing1ZPos, 9, MAGNETIZATION)
+    magnetRing2 = magnetRing(0.06, 0, magnetRing2ZPos, 12, MAGNETIZATION)
     c = magnetRing1.mCol + magnetRing2.mCol
 
     if plot:
-        c.plot()
+        c.show()
     
-    _,_,B = magpy.getB(c, [0, 0, 1])
-    print(B)
+    _, _, B = magpy.getB(c, [0, 0, sensorZPos])
+    print(B, magneticFieldToSensorReading(B), 'expect ~557.5')
+    # MAGNETIZATION = 1.88e6    -->     568.7
+    # MAGNETIZATION = 1.7e6     -->     563.2
+    # MAGNETIZATION = 1.51e6    -->     557.5
+    print('likely relationship between B and hall sensor reading is off, but given relationship looks linear, probably OK for modelling? IRL is off by 20%; unsure if accounted for in magnet variation + polarity variance')
+
+    # for ferriteMagnetization in [1e1, 1e2, 1e3, 1e4, 1e5, 1e6]: # will be between 1e5 and 1e6. Closer to 1e5
+    # for ferriteMagnetization in [1e5, 2e5, 3e5, 4e5, 5e5]: # between 1e5 and 2e5
+    # for ferriteMagnetization in [1e5, 1.2e5, 1.4e5, 1.6e5, 1.8e5]: # between 1.4e5 and 1.6e5
+    # for ferriteMagnetization in [1.4e5, 1.5e5, 1.6e5]: # slightly more than 1.5e5
+    for ferriteMagnetization in [1.5e5, 1.51e5, 1.52e5, 1.53e5]: # slightly more than 1.5e5
+        cf = c.copy(deep = True)
+        cf = cf + magpy.magnet.Cylinder(
+            dimension = (FERRITE_D, FERRITE_H),
+            position = (0, 0, - TOP_TO_FERRITE),
+            magnetization = (0, 0, -ferriteMagnetization)
+        )
+        _, _, B = magpy.getB(cf, [0, 0, sensorZPos])
+        print(ferriteMagnetization, magneticFieldToSensorReading(B), 'expect 603.7')
+        del cf
+    print('ferrite magnetization is 1.51e5')
+
+def experiment8(plot = True):
+    # note: take top of secure EM as datum
+    MAGNET_TO_RING_FACE = 5e-3
+    POST_TO_SENSOR = -3e-3 - 0.6e-3 # post to top face of sensor cutout + sensing position relative to sensor cutout
+    POST_TO_TOP = 2.4e-3
+    HOVER_HEIGHT = 3e-3
+    MAG_RING_TO_POST = 2e-3
+    MAGNET_RING_GAP = 18.5e-3
+    FERRITE_H = 12e-3
+    FERRITE_D = 8e-3
+    TOP_TO_FERRITE = 12.4e-3 + FERRITE_H/2# second value is coilH/2
+
+    MAGNETIZATION = 1.51e6
+    FERRITE_MAGNETIZATION_EM_OFF = 1.51e5 # magnetization of ferrite core from permanent magnets
+
+    magnetRing1ZPos = - POST_TO_TOP - MAG_RING_TO_POST - MAGNET_TO_RING_FACE - MAGNET_H/2
+    magnetRing2ZPos = magnetRing1ZPos - MAGNET_H - MAGNET_RING_GAP
+    sensorZPos = - POST_TO_TOP + POST_TO_SENSOR
+
+    magnetRing1 = magnetRing(0.06, 0, magnetRing1ZPos, 9, MAGNETIZATION)
+    magnetRing2 = magnetRing(0.06, 0, magnetRing2ZPos, 12, MAGNETIZATION)
+    ferriteEMoff = magpy.magnet.Cylinder(
+        dimension = (FERRITE_D, FERRITE_H),
+        position = (0, 0, - TOP_TO_FERRITE),
+        magnetization = (0, 0, -FERRITE_MAGNETIZATION_EM_OFF)
+    )
+    
+    penMagnet1 = magpy.magnet.Cylinder(
+        magnetization=(0,0,MAGNETIZATION/1.175), dimension=(MAGNET_D, MAGNET_H), position = (0, 0.00, HOVER_HEIGHT + MAGNET_H/2)
+        )
+    penMagnet1.meshing = 15
+    penMagnet2 = penMagnet1.copy(deep = True)
+    penMagnet2.position = (0, 0.00, HOVER_HEIGHT + 3*MAGNET_H/2)
+    
+    c = magnetRing1.mCol + magnetRing2.mCol
+    print('passive field at ferrite without ferrite')
+    F, T = getFT(c, penMagnet1) + getFT(c, penMagnet2)
+    B = magpy.getB(c, (0,0,sensorZPos))
+    print(f'{F}')   # [-6.6375e-02 -9.1537e-14  6.8583e-01]
+    print(B, magneticFieldToSensorReading(B[2]))        # [ 1.0192e-17  1.2143e-17 -1.2206e-02] 557.4579490367918
+
+    print('passive field + pen at ferrite without ferrite')
+    c2 = c + penMagnet1 + penMagnet2
+    B = magpy.getB(c2, (0,0,sensorZPos))
+    print(B, magneticFieldToSensorReading(B[2]))        # [-4.4324e-03  1.2143e-17  6.2902e-02] 274.66025870373954
+    # it is clear ferrite plays a big role in value of set point since it pulls the value from 274.6 to ~120
+
+    print('passive field + pen at ferrite with estimate ferrite contribution')
+    ferriteEMoffWithPen = ferriteEMoff.copy(deep = True)
+    ferriteEMoffWithPen.magnetization = (0, 0, FERRITE_MAGNETIZATION_EM_OFF * 3.35)
+    c3 = c2 + ferriteEMoffWithPen
+    B = magpy.getB(c3, (0,0,sensorZPos))
+    print(B, magneticFieldToSensorReading(B[2]))
+    # when magnetizatoin = FERRITE_MAGNETIZATION_EM_OFF * 6.29 / 1.22:  [-4.4324e-03  1.2143e-17  1.2609e-01] 36.74382670510283
+    #   TOO MUCH: makes sense since non-linear (drops off) as strength increases (approaches asymptote). 6.29/1.22 = 5.16
+    # when magnetizatoin = FERRITE_MAGNETIZATION_EM_OFF * 3.35:         [-4.4324e-03  1.2143e-17  1.0396e-01] 120.07131473260625
+    del c2, c3
+
+    # rotate pen magnets for torque stabilization calculations
+    penMagnet1.rotate_from_angax(angle = 5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+    penMagnet2.rotate_from_angax(angle = 5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+
+    if plot: fig, axs = plt.subplots(1,4)
+
+    # without pen
+    c2 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoff, override_parent = True)
+    if plot:
+        plotSysB(c2, axs[0], fig)
+        hovering = mpl.patches.Rectangle((-MAGNET_D/2, HOVER_HEIGHT), MAGNET_D, 2*MAGNET_H, linewidth=1, edgecolor='r', facecolor='green', alpha=0.3)
+        axs[0].add_patch(hovering)
+        c2_ = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoffWithPen, override_parent = True)
+        plotSysB(c2_, axs[1], fig)
+        hovering = mpl.patches.Rectangle((-MAGNET_D/2, HOVER_HEIGHT), MAGNET_D, 2*MAGNET_H, linewidth=1, edgecolor='r', facecolor='green', alpha=0.3)
+        axs[1].add_patch(hovering)
+
+    # with pen
+    c3 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoffWithPen, penMagnet1, penMagnet2, override_parent = True)
+    F3, T3 = getFT(c3, penMagnet1) + getFT(c3, penMagnet2)
+    print(f'with  pen: F{F3}, T{T3}')
+    if plot: plotSysB(c3, axs[2], fig)
+    
+    # with EM ON:
+    print('ignore impacts of EM on the ferrite for now. TODO: account for this with more linear interpolation? Expect drop of 6 in hall sensor reading')
+    # add coil
+    coil = magpy.Collection()
+
+    coilH = 24e-3
+    coilOD = 19.6e-3
+    coilID = 8e-3
+    wireD = 0.3e-3
+    coilCurrent = 0.123 # (totalPower - arduinoPower)/voltage = (2.08W-0.6W)/12V = 0.12333...
+    # this is based on average, so we are calculating steady state (not peak) 
+    # this results in net attractive force of 2.1e-1 (compared to OFF state of 2.4e-1)
+
+    #
+    
+    coilPosTop = 0.4e-3
+    for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
+        for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
+            winding = magpy.current.Circle(
+                current=coilCurrent,
+                diameter=2*r,
+                position=(0,0,z),
+            )
+            coil.add(winding)
+    
+    c4 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoffWithPen, penMagnet1, penMagnet2, coil, override_parent = True)
+    F4, T4 = getFT(c4, penMagnet1) + getFT(c4, penMagnet2)
+    print(f'with pen & coil: F{F4}, T{T4}')
+    if plot:
+        plotSysB(c4, axs[3], fig)
+        plt.show()
+
+    
 
 def main():
     # validateSuperposition
@@ -482,7 +626,11 @@ def main():
     # correlate hall sensor to B
     # experiment6(False)
 
-    experiment7()
+    # determine ferrite core stuff
+    # experiment7(False)
+
+    # try and calc our existing system (also try to see what happens when coil turns on?)
+    experiment8()
 
 
 if __name__ == "__main__":
