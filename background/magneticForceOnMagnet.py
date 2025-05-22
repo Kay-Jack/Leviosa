@@ -54,9 +54,10 @@ def plotSysB(
     Bx, _, Bz = np.moveaxis(B, 2, 0)
     print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
     if norm:
-        sPlot = ax.streamplot(X, Z, Bx, Bz, color = norm(np.log(Bx**2+Bz**2)), density=3.)
+        sPlot = ax.streamplot(X, Z, Bx, Bz, color = norm(np.log(Bx**2+Bz**2)), density=1.)
     else: 
-        sPlot = ax.streamplot(X, Z, Bx, Bz, color = np.log(Bx**2+Bz**2), density=3.)
+        sPlot = ax.streamplot(X, Z, Bx, Bz, color = np.log(Bx**2+Bz**2), density=1.)
+        ax.contour(X, Z, np.log(Bx**2+Bz**2), levels=10, cmap='viridis')
     ax.set_aspect('equal')
     # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
     
@@ -552,7 +553,8 @@ def experiment8(plot = True):
     penMagnet1.rotate_from_angax(angle = 5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
     penMagnet2.rotate_from_angax(angle = 5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
 
-    if plot: fig, axs = plt.subplots(1,4)
+    if plot:
+        fig, axs = plt.subplots(1,4)
 
     # without pen
     c2 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoff, override_parent = True)
@@ -560,16 +562,21 @@ def experiment8(plot = True):
         plotSysB(c2, axs[0], fig)
         hovering = mpl.patches.Rectangle((-MAGNET_D/2, HOVER_HEIGHT), MAGNET_D, 2*MAGNET_H, linewidth=1, edgecolor='r', facecolor='green', alpha=0.3)
         axs[0].add_patch(hovering)
+        axs[0].set_title('permanent magnets +\n ferriteEMoff')
+
         c2_ = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoffWithPen, override_parent = True)
         plotSysB(c2_, axs[1], fig)
         hovering = mpl.patches.Rectangle((-MAGNET_D/2, HOVER_HEIGHT), MAGNET_D, 2*MAGNET_H, linewidth=1, edgecolor='r', facecolor='green', alpha=0.3)
         axs[1].add_patch(hovering)
+        axs[1].set_title('permanent magnets +\n ferriteEMoffWithPen')
 
     # with pen
     c3 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoffWithPen, penMagnet1, penMagnet2, override_parent = True)
     F3, T3 = getFT(c3, penMagnet1) + getFT(c3, penMagnet2)
     print(f'with  pen: F{F3}, T{T3}')
-    if plot: plotSysB(c3, axs[2], fig)
+    if plot:
+        plotSysB(c3, axs[2], fig)
+        axs[2].set_title('permanent magnets +\n ferriteEMoffWithPen + pen')
     
     # with EM ON:
     print('ignore impacts of EM on the ferrite for now. TODO: account for this with more linear interpolation? Expect drop of 6 in hall sensor reading')
@@ -601,6 +608,7 @@ def experiment8(plot = True):
     print(f'with pen & coil: F{F4}, T{T4}')
     if plot:
         plotSysB(c4, axs[3], fig)
+        axs[3].set_title('permanent magnets + \nferriteEMoffWithPen +\n pen + coil')
         plt.show()
 
     
