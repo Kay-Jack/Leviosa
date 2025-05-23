@@ -611,6 +611,40 @@ def experiment8(plot = True):
         axs[3].set_title('permanent magnets + \nferriteEMoffWithPen +\n pen + coil')
         plt.show()
 
+        # search region around the middle & determine force on pen after moving it around
+
+        ## rotate pen magnets back to vertical
+        penMagnet1.rotate_from_angax(angle = -5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+        penMagnet2.rotate_from_angax(angle = -5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+
+        # grid...
+        xs = np.linspace(-5e-3, 5e-3, 7)
+        zs = np.linspace(1e-3, 6e-3, 5)
+        Fs = np.zeros(shape = (5, 7, 3))
+        for lv1, x in enumerate(xs):
+            for lv2, z in enumerate(zs): # hoverheight is 3e-3. z replaces hoverHeight
+                penMagnet1.position = (x, 0.00, z + MAGNET_H/2)
+                penMagnet2.postion = (x, 0.00, z + 3*MAGNET_H/2)
+                F, _ = getFT(c4, penMagnet1) + getFT(c4, penMagnet2)
+                Fs[lv2, lv1] = F # - np.array([0, 0, 9e-3*9.81])
+        
+        fig, axs = plt.subplots(1,3)
+
+        axs[0].imshow(Fs[:,:,2], extent=[xs.min(), xs.max(), zs.min(), zs.max()], origin='lower', cmap='viridis')
+        axs[0].set_title('permanent magnets + \nferriteEMoffWithPen +\n pen + coil\n Z force')
+
+        axs[1].imshow(Fs[:,:,0], extent=[xs.min(), xs.max(), zs.min(), zs.max()], origin='lower', cmap='viridis')
+        axs[1].set_title('permanent magnets + \nferriteEMoffWithPen +\n pen + coil\n X force')
+
+        axs[2].streamplot(xs, zs, Fs[:,:,0], Fs[:,:,2], color = np.log(Fs[:,:,0]**2+Fs[:,:,2]**2), density=1.)
+        axs[2].set_aspect('equal')
+        axs[2].set_title('permanent magnets + \nferriteEMoffWithPen +\n pen + coil\n Force Streamlines')
+        print('note for the force streamplot, I do not account for varying ferrite magnetization')
+        plt.show()
+
+
+
+
     
 
 def main():
