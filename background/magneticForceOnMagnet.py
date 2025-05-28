@@ -586,7 +586,7 @@ def experiment8(plot = True):
     coilH = 24e-3
     coilOD = 19.6e-3
     coilID = 8e-3
-    wireD = 0.3e-3
+    wireD = 0.35e-3
     coilCurrent = 0.123 # (totalPower - arduinoPower)/voltage = (2.08W-0.6W)/12V = 0.12333...
     # this is based on average, so we are calculating steady state (not peak) 
     # this results in net attractive force of 2.1e-1 (compared to OFF state of 2.4e-1)
@@ -620,13 +620,14 @@ def experiment8(plot = True):
         # grid...
         xs = np.linspace(-5e-3, 5e-3, 7)
         zs = np.linspace(1e-3, 6e-3, 5)
+        # zs = np.linspace(-1e-3, 12e-3, 5)
         Fs = np.zeros(shape = (5, 7, 3))
         for lv1, x in enumerate(xs):
             for lv2, z in enumerate(zs): # hoverheight is 3e-3. z replaces hoverHeight
                 penMagnet1.position = (x, 0.00, z + MAGNET_H/2)
                 penMagnet2.postion = (x, 0.00, z + 3*MAGNET_H/2)
                 F, _ = getFT(c4, penMagnet1) + getFT(c4, penMagnet2)
-                Fs[lv2, lv1] = F # - np.array([0, 0, 9e-3*9.81])
+                Fs[lv2, lv1] = F - np.array([0, 0, 9e-3*9.81])
         
         fig, axs = plt.subplots(1,3)
 
