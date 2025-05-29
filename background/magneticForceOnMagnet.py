@@ -618,10 +618,10 @@ def experiment8(plot = True):
         penMagnet2.rotate_from_angax(angle = -5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
 
         # grid...
-        xs = np.linspace(-5e-3, 5e-3, 7)
-        zs = np.linspace(1e-3, 6e-3, 5)
+        xs = np.linspace(-5e-3, 5e-3, 21)
+        zs = np.linspace(1e-3, 6e-3, 11)
         # zs = np.linspace(-1e-3, 12e-3, 5)
-        Fs = np.zeros(shape = (5, 7, 3))
+        Fs = np.zeros(shape = (11, 21, 3))
         for lv1, x in enumerate(xs):
             for lv2, z in enumerate(zs): # hoverheight is 3e-3. z replaces hoverHeight
                 penMagnet1.position = (x, 0.00, z + MAGNET_H/2)
