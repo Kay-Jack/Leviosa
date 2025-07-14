@@ -670,7 +670,7 @@ def experiment9(plot=True):
     FERRITE_MAGNETIZATION_EM_OFF = 1.51e5 # magnetization of ferrite core from permanent magnets + pens?
 
     
-    coilOffset = -7e-4 # for testing diff EM positions
+    coilOffset = -7e-4 # for testing diff EM positions. Need because need at minimum stability afforded by torque interaction with permanent magnets at the tested point (where pen hovers at 3mm above old top face)
 
     magnetRing1ZPos = - POST_TO_TOP - MAG_RING_TO_POST - MAGNET_TO_RING_FACE - MAGNET_H/2
     magnetRing2ZPos = magnetRing1ZPos - MAGNET_H - MAGNET_RING_GAP
