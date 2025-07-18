@@ -1,9 +1,27 @@
-PCB/getting-started/getting-started.csv
-PCB/getting-started/getting-started.kicad_pcb
-PCB/getting-started/getting-started.kicad_prl
-PCB/getting-started/getting-started.kicad_pro
-PCB/getting-started/getting-started.kicad_sch
-PCB/getting-started/getting-started.xml
-PCB/getting-started/getting-started-backups/getting-started-2025-06-19_081644.zip
-PCB/getting-started/getting-started-backups/getting-started-2025-06-19_082929.zip
-PCB/getting-started/getting-started-backups/getting-started-2025-06-19_201251.zip
+# For PCBs designed using KiCad: https://www.kicad.org/
+# Format documentation: https://kicad.org/help/file-formats/
+
+# Temporary files
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups
+*.kicad_prl
+*.sch-bak
+*~
+_autosave-*
+*.tmp
+*-save.pro
+*-save.kicad_pcb
+fp-info-cache
+~*.lck
+\#auto_saved_files#
+
+# Netlist files (exported from Eeschema)
+*.net
+
+# Autorouter files (exported from Pcbnew)
+*.dsn
+*.ses
