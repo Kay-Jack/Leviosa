@@ -1956,7 +1956,7 @@
       (net 38 "unconnected-(U3-VS-Pad8)") (pinfunction "VS") (pintype "power_in") (solder_mask_margin 0.102) (tstamp a5749484-be36-4ee6-8e36-23a91485e0a5))
     (pad "9" smd rect (at 0 0) (size 1.425 1.76) (layers "F.Cu" "F.Mask")
       (net 39 "unconnected-(U3-EP-Pad9)") (pinfunction "EP") (pintype "bidirectional") (solder_mask_margin 0.102) (tstamp e3584772-1e81-4970-aa12-a5e953dcd01f))
-    (model "C:/Users/Daniel/Documents/Personal Projects/Leviosa/PCB/TPS1H200AQDGNRQ1.3dshapes/TPS1H200AQDGNRQ1.step"
+    (model "${KIPRJMOD}/Libraries/TPS1H200AQDGNRQ1.3dshapes/TPS1H200AQDGNRQ1.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 0))
