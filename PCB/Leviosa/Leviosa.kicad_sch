@@ -3780,18 +3780,6 @@
 		)
 		(uuid "3a2022e5-12e4-4474-844a-cf8d5331bbc1")
 	)
-	(text "Unsure if this\ncap is necessary\n(dont think so)"
-		(exclude_from_sim no)
-		(at 63.5 48.26 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 255 0 22 1)
-			)
-			(justify left bottom)
-		)
-		(uuid "4e6dff34-2005-4712-95d1-74a40fb178ec")
-	)
 	(text "Analog Control Circuit"
 		(exclude_from_sim no)
 		(at 131.318 41.402 0)
@@ -3847,7 +3835,7 @@
 		)
 		(uuid "6ffe0076-87e6-4514-b4ae-910c34d899d6")
 	)
-	(text "voltage divider:\n~[1.65V, 1.95V]\n~[337, 399] analogRead()"
+	(text "voltage divider:\n~[1.65V, 1.96V]\n~[337, 399] analogRead()"
 		(exclude_from_sim no)
 		(at 167.64 138.43 0)
 		(effects
@@ -3868,6 +3856,12 @@
 			(justify left bottom)
 		)
 		(uuid "b0acc51d-a02a-4412-912d-0b7e299296a1")
+	)
+	(junction
+		(at 252.73 77.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0dcf9551-b654-41f3-9cfb-fe7c0802874f")
 	)
 	(junction
 		(at 219.71 115.57)
@@ -3916,6 +3910,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "733bc8e4-2049-4fe1-ab35-a3d4b6480924")
+	)
+	(junction
+		(at 252.73 115.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84fdc11f-0cef-465a-b698-88ad09a605ae")
 	)
 	(junction
 		(at 250.19 59.69)
@@ -5090,6 +5090,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-LM324NNOPB/C352847"
+			(at 208.28 96.52 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5c1ab110-e680-44f6-9d47-01c5b0371b16")
 		)
@@ -5195,6 +5204,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/738376-RCT06100KFLF/C702843"
+			(at 25.4 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "42b8eb33-bcf5-465a-b4ed-5de6d0f4a06c")
 		)
@@ -5261,6 +5279,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/1943-CL10B104KB8NNNC/C1591"
+			(at 91.44 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -5529,6 +5556,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-LM324NNOPB/C352847"
+			(at 200.66 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3b4cbd92-0089-47fd-8d10-6558e87ec7ea")
 		)
@@ -5786,6 +5822,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/1954-0603B203K500NT/C1602"
+			(at 250.19 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c6109a5c-eb03-4dd0-afb5-9a86f982396c")
 		)
@@ -5985,6 +6030,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/STMicroelectronics-L7805CVDG/C3795"
+			(at 83.82 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3d3518f7-7feb-4166-bad8-fa6399285d67")
 		)
@@ -6054,6 +6108,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/74255-CL21B334KBFNNNE/C73142"
+			(at 76.2 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -6191,6 +6254,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/STMicroelectronics-TIP122/C16283"
+			(at 257.81 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -6367,7 +6439,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "54kΩ"
+		(property "Value" "54.2kΩ"
 			(at 158.75 121.92 0)
 			(effects
 				(font
@@ -6400,6 +6472,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/YAGEO-RT0402BRD0754K2L/C852840"
+			(at 161.29 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -6467,6 +6548,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-TPS1H200AQDGNRQ1/C2653785"
+			(at 43.18 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -6747,6 +6837,71 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 252.73 115.57 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "621ff51c-c2f5-4488-8ac1-81ffce47e002")
+		(property "Reference" "TP7"
+			(at 254 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "no_magnet_point_trigger"
+			(at 251.46 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D3.0mm"
+			(at 247.65 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 247.65 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 252.73 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "deb3af82-93c5-4677-9ab6-ec2288032fab")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "TP7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 161.29 105.41 0)
 		(mirror x)
@@ -6798,6 +6953,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/738376-RCT06100KFLF/C702843"
+			(at 161.29 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -6999,6 +7163,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-LM324NNOPB/C352847"
+			(at 219.71 85.09 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a36caa3e-e04c-4630-9aa9-2abf3dc814a0")
 		)
@@ -7113,74 +7286,6 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "D4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 60.96 52.07 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp yes)
-		(uuid "73c927bd-deb2-4a41-a981-f2a55c46aaa3")
-		(property "Reference" "C5"
-			(at 63.5 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10µF"
-			(at 63.5 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 61.9252 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 60.96 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 60.96 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "75381eda-e52f-4c88-9f50-65eadb7976d0")
-		)
-		(pin "2"
-			(uuid "3e8774ea-61d2-43b2-a2eb-672acf5a23c3")
-		)
-		(instances
-			(project "Leviosa"
-				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -7521,6 +7626,71 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 252.73 77.47 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8a6a4ce8-be17-46bf-8ae4-03e13e15e149")
+		(property "Reference" "TP6"
+			(at 254 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "set_point_trigger"
+			(at 251.46 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D3.0mm"
+			(at 247.65 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 247.65 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 252.73 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8781cfd0-abf3-48b8-9aca-f596216ca25d")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "TP6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Sensor_Magnetic:A1301EUA-T")
 		(at 144.78 96.52 0)
 		(unit 1)
@@ -7573,6 +7743,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/Honeywell-SS495A/C126668"
+			(at 144.78 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -7644,6 +7823,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-LM324NNOPB/C352847"
+			(at 200.66 114.3 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -7802,70 +7990,6 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "D5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 60.96 48.26 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "94cd33a7-ddbf-43e1-b29c-3c6ddad7a63a")
-		(property "Reference" "#PWR09"
-			(at 60.96 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 57.15 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 60.96 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 60.96 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 60.96 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "7006d938-0828-41d5-b738-c1d86df6b0c0")
-		)
-		(instances
-			(project "Leviosa"
-				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -8527,6 +8651,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/738376-RCT06100KFLF/C702843"
+			(at 161.29 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "92644b55-8e95-4cbd-99e0-b2a878aef460")
 		)
@@ -8801,6 +8934,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/STMicroelectronics-TIP122/C16283"
+			(at 257.81 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -9971,6 +10113,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-LM324NNOPB/C352847"
+			(at 219.71 106.68 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
