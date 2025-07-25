@@ -5480,7 +5480,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.mccsemi.com/pdf/Products/SR202-SR2010(DO-41).pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8560078861175455744"
 			(at 243.84 55.88 0)
 			(effects
 				(font
@@ -5495,6 +5495,15 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/DiodesIncorporated-B230A_13F/C12889"
+			(at 243.84 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"

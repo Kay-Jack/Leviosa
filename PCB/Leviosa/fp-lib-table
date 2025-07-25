@@ -4,4 +4,5 @@
   (lib (name "MP-2016-1100-50-70")(type "KiCad")(uri "${KIPRJMOD}/Libraries/MP-2016-1100-50-70.pretty")(options "")(descr ""))
   (lib (name "SMAZ9V1-13-F")(type "KiCad")(uri "${KIPRJMOD}/Libraries/SMAZ9V1-13-F.pretty")(options "")(descr ""))
   (lib (name "SZMMSZ4679T1G")(type "KiCad")(uri "${KIPRJMOD}/Libraries/SZMMSZ4679T1G.pretty")(options "")(descr ""))
+  (lib (name "B230A_13_F")(type "KiCad")(uri "${KIPRJMOD}/Libraries/B230A_13_F.pretty")(options "")(descr ""))
 )
