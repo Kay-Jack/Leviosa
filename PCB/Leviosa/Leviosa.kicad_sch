@@ -4978,16 +4978,16 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "07936652-e5f4-4fcc-8ecf-ff152d692143")
-		(property "Reference" "RV2"
-			(at 156.21 111.76 0)
+		(property "Reference" "RV2_10k_Pot"
+			(at 153.162 112.014 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "10k Pot"
-			(at 156.21 114.3 0)
+		(property "Value" "3362S-1-103LF"
+			(at 151.892 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5003,7 +5003,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588886967207530496"
 			(at 161.29 113.03 0)
 			(effects
 				(font
@@ -5020,6 +5020,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/BOURNS-3362S_1103LF/C81272"
+			(at 161.29 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "144c2ffa-a12c-45a4-8bd3-d4054c56d21a")
 		)
@@ -5032,7 +5041,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "RV2")
+					(reference "RV2_10k_Pot")
 					(unit 1)
 				)
 			)
@@ -8822,23 +8831,23 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be882b7b-9158-4ca8-aa48-c8cfdb45e32e")
-		(property "Reference" "RV1"
-			(at 154.94 76.2 0)
+		(property "Reference" "RV1_10k_Pot"
+			(at 152.908 75.692 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "10k Pot"
-			(at 154.94 73.66 0)
+		(property "Value" "3362S-1-103LF"
+			(at 151.13 73.406 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Potentiometer_THT:Potentiometer_Alps_RK163_Single_Horizontal"
+		(property "Footprint" "Potentiometer_THT:Potentiometer_ACP_CA6-H2,5_Horizontal"
 			(at 161.29 74.93 0)
 			(effects
 				(font
@@ -8847,7 +8856,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588886967207530496"
 			(at 161.29 74.93 0)
 			(effects
 				(font
@@ -8864,6 +8873,15 @@
 				)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/BOURNS-3362S_1103LF/C81272"
+			(at 161.29 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "70d3deb1-b423-43e1-8c09-861ca11db7d1")
 		)
@@ -8876,7 +8894,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "RV1")
+					(reference "RV1_10k_Pot")
 					(unit 1)
 				)
 			)
