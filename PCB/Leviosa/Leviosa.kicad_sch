@@ -2439,271 +2439,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "MP-2016-1100-50-70:MP-2016-1100-50-70"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "D"
-				(at -3.0988 4.4958 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left bottom)
-				)
-			)
-			(property "Value" "MP-2016-1100-50-70"
-				(at -3.556 -3.302 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left bottom)
-				)
-			)
-			(property "Footprint" "MP-2016-1100-50-70:LED_MP-2016-1100-50-70"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "PARTREV" "16"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "STANDARD" "Manufacturer Recommendations"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "MAXIMUM_PACKAGE_HEIGHT" "0.52 mm"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "MANUFACTURER" "Luminus Devices Inc."
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(symbol "MP-2016-1100-50-70_0_0"
-				(polyline
-					(pts
-						(xy -2.54 1.524) (xy -2.54 -1.524)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.54 0) (xy -5.08 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.54 -1.524) (xy 0 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.143 3.683) (xy -0.5715 3.175) (xy -0.1905 4.191) (xy -1.143 3.683)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.3556 4.0386) (xy -2.1336 2.0066)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 1.524) (xy 0 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy -2.54 1.524)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -1.524)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.127 3.6195) (xy 0.6985 3.1115) (xy 1.0795 4.191) (xy 0.127 3.6195)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.889 3.937) (xy -0.889 1.905)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 0) (xy 0 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "A"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "C"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Regulator_Linear:L7805"
 			(pin_names
 				(offset 0.254)
@@ -4167,7 +3902,7 @@
 	)
 	(text "TPS1H200AQDGNRQ1 Config.\n\nFAULT pin: diagnostic tool? just leave floating to a touch point\nDIAG_EN pin: controls load with stuff like overcurrent, thermal protections, etc.?\nCL pin: current limit. Connect right to ground if un-used. Else, use resistor before connection to ground.\n    R_CL = (V_CL * K_CL) / I_out, V_CL = 0.8, K_CL = 2500\n    R_CL = (0.8 * 2500) / 0.25 = 8000 [Ohm]\nDELAY = set to auto-retry mode (connect w/ 100kOhm resistor to VS\nIN = controls output? Set to same as VS since we aren't controlling via microcontroller"
 		(exclude_from_sim no)
-		(at 17.78 125.73 0)
+		(at 17.78 127.508 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4251,12 +3986,6 @@
 		(uuid "4fe85133-3064-46df-9420-a0ff7bb5203b")
 	)
 	(junction
-		(at 96.52 86.36)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "59c19e27-cfad-4426-b095-90e351ad4166")
-	)
-	(junction
 		(at 250.19 31.75)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4285,6 +4014,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "889ffe2e-05ff-45ad-be57-84e557e7ab10")
+	)
+	(junction
+		(at 99.06 86.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8cf8a50b-0d4f-4b9f-a8e3-4b12af872143")
 	)
 	(junction
 		(at 25.4 55.88)
@@ -4461,16 +4196,6 @@
 			(type default)
 		)
 		(uuid "1929e20c-5ccb-4a80-9c11-a1a5ccc7040f")
-	)
-	(wire
-		(pts
-			(xy 96.52 86.36) (xy 101.6 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "199000f6-f3bb-451a-a74f-cef87e9f32b1")
 	)
 	(wire
 		(pts
@@ -4664,6 +4389,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 86.36) (xy 101.6 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "549e8735-7097-4dd2-84d1-dbf36067c030")
+	)
+	(wire
+		(pts
 			(xy 25.4 72.39) (xy 25.4 74.93)
 		)
 		(stroke
@@ -4844,7 +4579,7 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 86.36) (xy 96.52 86.36)
+			(xy 76.2 86.36) (xy 99.06 86.36)
 		)
 		(stroke
 			(width 0)
@@ -5764,6 +5499,72 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "R14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 99.06 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1c74fb14-737c-47e6-be39-3da6653f304c")
+		(property "Reference" "R9"
+			(at 102.743 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1kΩ"
+			(at 102.743 107.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 100.076 105.664 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 99.06 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ba447909-b27b-4fe2-9b6c-1ef02134ab8e")
+		)
+		(pin "2"
+			(uuid "34a9449e-f695-43a7-b56c-9da1501c691a")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -8384,116 +8185,6 @@
 		)
 	)
 	(symbol
-		(lib_id "MP-2016-1100-50-70:MP-2016-1100-50-70")
-		(at 96.52 101.6 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "93151d13-80f0-4e43-bf41-c3bfdbdfa056")
-		(property "Reference" "D5"
-			(at 101.6 99.06 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "LED"
-			(at 101.6 101.6 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MP-2016-1100-50-70:LED_MP-2016-1100-50-70"
-			(at 96.52 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 96.52 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 96.52 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "PARTREV" "16"
-			(at 96.52 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "STANDARD" "Manufacturer Recommendations"
-			(at 96.52 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" "0.52 mm"
-			(at 96.52 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Luminus Devices Inc."
-			(at 96.52 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(pin "A"
-			(uuid "74d358d4-8efd-42f0-925d-05f29fd71362")
-		)
-		(pin "C"
-			(uuid "1b592606-4a8f-4193-b1d8-4148108bed9f")
-		)
-		(instances
-			(project "Leviosa"
-				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "D5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_US")
 		(at 99.06 41.91 180)
 		(unit 1)
@@ -8760,6 +8451,82 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Zener")
+		(at 99.06 90.17 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9f5789b7-f687-403c-b04f-34b57db42813")
+		(property "Reference" "D4"
+			(at 96.52 91.44 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "BZT52C8V2 WD"
+			(at 96.52 88.9 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 99.06 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://jlcpcb.com/partdetail/2479-BZT52C8V2WD/C2122"
+			(at 99.06 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 99.06 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Vbr" "7.5V"
+			(at 91.44 91.44 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "63cb6cb4-a891-4e9a-a5ff-8f151ea45b3f")
+		)
+		(pin "2"
+			(uuid "4e034399-30a9-49d7-9d7b-f48eab57b605")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "D4")
 					(unit 1)
 				)
 			)
@@ -9964,7 +9731,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "MP-2016-1100-50-70:LED_MP-2016-1100-50-70"
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
 			(at 41.91 43.18 0)
 			(effects
 				(font
@@ -10195,7 +9962,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 96.52 106.68 0)
+		(at 99.06 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10204,7 +9971,7 @@
 		(fields_autoplaced yes)
 		(uuid "e421bc66-a117-4a5a-aca6-dfd6bd7d0190")
 		(property "Reference" "#PWR020"
-			(at 96.52 113.03 0)
+			(at 99.06 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10213,7 +9980,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 96.52 111.76 0)
+			(at 99.06 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10221,7 +9988,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 96.52 106.68 0)
+			(at 99.06 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10230,7 +9997,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 96.52 106.68 0)
+			(at 99.06 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10239,7 +10006,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 96.52 106.68 0)
+			(at 99.06 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10387,6 +10154,132 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 99.06 97.79 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "eb97c437-ae37-4712-959b-1d20bc06cb85")
+		(property "Reference" "D6"
+			(at 101.6 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LED"
+			(at 101.6 100.33 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" "16"
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "0.52 mm"
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Luminus Devices Inc."
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Vf" "2.2V"
+			(at 108.204 100.33 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 99.06 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cd129a6b-0687-4532-9a14-2e02f36a3364")
+		)
+		(pin "2"
+			(uuid "3247ca37-a548-44d8-8d03-8f8c96be4742")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "D6")
 					(unit 1)
 				)
 			)
@@ -10830,72 +10723,6 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 96.52 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "feee2a2c-e735-4297-a749-c360940e61b0")
-		(property "Reference" "R9"
-			(at 92.71 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2k4"
-			(at 92.71 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 97.536 90.424 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 96.52 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 96.52 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "426ee808-93a8-4678-9aa9-725184fd03d6")
-		)
-		(pin "2"
-			(uuid "a2f9e40b-9817-4c9f-9d11-1c3475253606")
-		)
-		(instances
-			(project "Leviosa"
-				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R9")
 					(unit 1)
 				)
 			)
