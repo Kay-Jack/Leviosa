@@ -3784,6 +3784,17 @@
 			)
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/Libraries/B230A_13_F.3dshapes/B230A_13_F.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 		(layer "F.Cu")
@@ -8400,7 +8411,7 @@
 		(descr "Potentiometer, horizontal, ACP CA6-H2,5, http://www.acptechnologies.com/wp-content/uploads/2017/06/01-ACP-CA6.pdf")
 		(tags "Potentiometer horizontal ACP CA6-H2,5")
 		(property "Reference" "Pot1"
-			(at 5.116295 0.307969 225)
+			(at 5.116295 0.307969 45)
 			(layer "F.SilkS")
 			(uuid "e6894757-78d7-47f2-9cfb-58992d122caf")
 			(effects
@@ -8614,15 +8625,15 @@
 			(uuid "5fa706bc-04f7-4eab-814c-a5a34cff22fa")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Potentiometer_THT.3dshapes/Potentiometer_ACP_CA6-H2,5_Horizontal.step"
+		(model "${KIPRJMOD}/Libraries/3362S-1-103LF.STEP"
 			(offset
-				(xyz 0 0 0)
+				(xyz 1 -2.54 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -90 -0 90)
 			)
 		)
 	)
@@ -9805,6 +9816,17 @@
 				(xyz 0 0 0)
 			)
 		)
+		(model "${KIPRJMOD}/Libraries/G-014-4.igs"
+			(offset
+				(xyz 7.4 -9.7 -3)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 -0 90)
+			)
+		)
 	)
 	(footprint "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm"
 		(layer "F.Cu")
@@ -10776,15 +10798,15 @@
 			(uuid "5826b1b6-b504-4414-8494-b7d3ff4bbd6e")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Potentiometer_THT.3dshapes/Potentiometer_ACP_CA6-H2,5_Horizontal.step"
+		(model "${KIPRJMOD}/Libraries/3362S-1-103LF.STEP"
 			(offset
-				(xyz 0 0 0)
+				(xyz 1 -2.54 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -90 -0 90)
 			)
 		)
 	)
@@ -12397,14 +12419,6 @@
 		(layer "F.Cu")
 		(net 3)
 		(uuid "fd18149f-206c-404a-9661-201e83334067")
-	)
-	(via
-		(at 139.5 131.8)
-		(size 0.8)
-		(drill 0.4)
-		(layers "F.Cu" "B.Cu")
-		(net 3)
-		(uuid "1494ef2c-413b-44e8-9bd9-68b973a72cb1")
 	)
 	(via
 		(at 129.55 117.2)
