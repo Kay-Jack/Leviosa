@@ -12217,6 +12217,19 @@
 			(justify left bottom)
 		)
 	)
+	(gr_text "Coil\n"
+		(at 191.77 133.096 0)
+		(layer "F.SilkS")
+		(uuid "090d6b74-8175-492f-83f3-8e65f647946e")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "PWM GND 5V"
 		(at 165.4 84.5 0)
 		(layer "F.SilkS")
@@ -12225,6 +12238,19 @@
 			(font
 				(size 1 1)
 				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "12V\n"
+		(at 142.24 136.144 0)
+		(layer "F.SilkS")
+		(uuid "2e76c39e-1c6f-4fc6-9510-f4e424091e86")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
 				(bold yes)
 			)
 			(justify left bottom)
@@ -12243,6 +12269,32 @@
 			(justify left bottom)
 		)
 	)
+	(gr_text "V_out\n"
+		(at 168.656 137.414 0)
+		(layer "F.SilkS")
+		(uuid "757ed7fa-8f86-4b77-83d1-a79d8a22efc3")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "5V"
+		(at 133.096 135.89 0)
+		(layer "F.SilkS")
+		(uuid "87e98034-6fc6-4d50-96c8-55c3d7c5a656")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "Base\n\nCol\n\nEmit"
 		(at 162 121.8 0)
 		(layer "F.SilkS")
@@ -12253,6 +12305,19 @@
 				(thickness 0.2)
 			)
 			(justify right)
+		)
+	)
+	(gr_text "GND\n"
+		(at 136.906 136.144 0)
+		(layer "F.SilkS")
+		(uuid "ab072b7b-f018-4415-94d6-acbcdad0388a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
 		)
 	)
 	(gr_text "5V GND SGL"
