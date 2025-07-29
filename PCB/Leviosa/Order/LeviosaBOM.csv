@@ -1,0 +1,34 @@
+Reference,Qty,Value,Footprint,Datasheet,Link
+C1,1,0.1µF,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,~,https://jlcpcb.com/partdetail/1943-CL10B104KB8NNNC/C1591
+C2,1,0.33µF,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,~,https://jlcpcb.com/partdetail/74255-CL21B334KBFNNNE/C73142
+C3,1,20nF,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,~,https://jlcpcb.com/partdetail/1954-0603B203K500NT/C1602
+C4,1,10µF,Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,~,
+Coil1,1,3.7mH,Inductor_THT:L_Axial_L5.0mm_D3.6mm_P10.00mm_Horizontal_Murata_BL01RN1A2A2,https://www.aliexpress.com/item/32897928370.html?spm=a2g0o.order_list.order_list_main.90.52321802MqYVVY,
+"D1,D4",2,BZT52C8V2 WD,Diode_SMD:D_SOD-123,https://jlcpcb.com/partdetail/2479-BZT52C8V2WD/C2122,
+"D2,D3,D6",3,LED,LED_SMD:LED_0805_2012Metric,~,
+"J1,J2",2,2.54mm 1x03 Servo 1,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal,~,
+J3,1,2.54mm 1x03 Spare,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal,~,
+J4,1,Barrel_Jack,Connector_BarrelJack:BarrelJack_Kycon_KLDX-0202-xC_Horizontal,https://jlcpcb.com/partdetail/16896-DC_005_20/C16214,
+"JP1,JP2,JP3,JP4,JP5,JP6",6,SolderJumper_2_Open,Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm,~,
+"Pot1,Pot2",2,3362S-1-103LF,"Potentiometer_THT:Potentiometer_ACP_CA6-H2,5_Horizontal",https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588886967207530496,https://jlcpcb.com/partdetail/BOURNS-3362S_1103LF/C81272
+"Q3,Q4",2,TIP122,Package_TO_SOT_THT:TO-220-3_Vertical,https://www.onsemi.com/pub/Collateral/TIP120-D.PDF,https://jlcpcb.com/partdetail/STMicroelectronics-TIP122/C16283
+"R1,R6,R7,R9",4,1kΩ,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,~,
+"R2,R4,R14",3,100kΩ,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,~,https://jlcpcb.com/partdetail/738376-RCT06100KFLF/C702843
+R3,1,7.8kΩ,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,~,
+R5,1,54.2kΩ,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,~,https://jlcpcb.com/partdetail/YAGEO-RT0402BRD0754K2L/C852840
+R8,1,400,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,~,
+R13,1,8kΩ,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,~,
+Schottky1,1,Schottky Diode SR206-TPCT-ND1,B230A_13_F:SMA_DIO,https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8560078861175455744,https://jlcpcb.com/partdetail/DiodesIncorporated-B230A_13F/C12889
+TP1,1,Vout,TestPoint:TestPoint_Pad_D3.0mm,~,
+TP2,1,5V,TestPoint:TestPoint_Pad_D3.0mm,~,
+TP3,1,GND,TestPoint:TestPoint_Pad_D3.0mm,~,
+TP4,1,Fault,TestPoint:TestPoint_Pad_D3.0mm,~,
+TP5,1,coil_out,TestPoint:TestPoint_Pad_D3.0mm,~,
+TP6,1,set_point_trigger,TestPoint:TestPoint_Pad_D3.0mm,~,
+TP7,1,no_magnet_point_trigger,TestPoint:TestPoint_Pad_D3.0mm,~,
+TP8,1,12V,TestPoint:TestPoint_Pad_D3.0mm,~,
+U1,1,LM324,Package_DIP:DIP-14_W7.62mm,http://www.ti.com/lit/ds/symlink/lm2902-n.pdf,https://jlcpcb.com/partdetail/TexasInstruments-LM324NNOPB/C352847
+U2,1,ATtiny13A-P,Package_DIP:DIP-8_W7.62mm,http://ww1.microchip.com/downloads/en/DeviceDoc/doc8126.pdf,
+U3,1,TPS1H200AQDGNRQ1,TPS1H200AQDGNRQ1:SOP65P490X110-9N,https://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&gotoUrl=https%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Ftps1h200a-q1,https://jlcpcb.com/partdetail/TexasInstruments-TPS1H200AQDGNRQ1/C2653785
+U5,1,L7805,Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical,http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf,https://jlcpcb.com/partdetail/STMicroelectronics-L7805CVDG/C3795
+U6,1,SS495A,Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical,https://docs.rs-online.com/dc97/0900766b8009a37c.pdf,https://jlcpcb.com/partdetail/Honeywell-SS495A/C126668
