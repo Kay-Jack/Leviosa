@@ -52,12 +52,37 @@ import magpylib as magpy
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation as R
 
-def findEquilibrium(xi=0, zi=3e-3, initial_angle_deg=1):
+def plotSysB(
+    magnetCollection:magpy.Collection, 
+    ax,
+    fig,
+    norm = False,
+    floatingMagnet:bool or magpy.Collection = False,
+    grid = np.mgrid[-0.05:0.05:29j, 0:0:1j, -0.05:0.05:29j].T[:,0],
+    # 'j' here is imaginary number to enable setting number of steps insetad of step size
+    # note that here the slicing of [:,0] == [:,0,:,:]
+    ) -> None:
+
+    if floatingMagnet: 
+        magnetCollection.add(floatingMagnet, override_parent = True)
+    X, _, Z = np.moveaxis(grid, 2, 0)
+    B = magpy.getB(magnetCollection, grid)
+    Bx, _, Bz = np.moveaxis(B, 2, 0)
+    print(np.max(Bx**2+Bz**2), np.min(Bx**2+Bz**2))
+    if norm:
+        sPlot = ax.streamplot(X, Z, Bx, Bz, color = norm(np.log(Bx**2+Bz**2)), density=1.)
+    else: 
+        sPlot = ax.streamplot(X, Z, Bx, Bz, color = np.log(Bx**2+Bz**2), density=1.)
+        ax.contour(X, Z, np.log(Bx**2+Bz**2), levels=10, cmap='viridis')
+    ax.set_aspect('equal')
+    # fig.colorbar(sPlot.lines, ax = ax) # not sure what this returns tbh...
+
+def findEquilibrium(xi=1e-3, zi=3e-3, initial_angle_deg=-2):
     # --- constants ---
     MAGNET_TO_RING_FACE = 5e-3
     POST_TO_SENSOR = -3e-3 - 0.6e-3
     POST_TO_TOP = 2.1e-3
-    MAG_RING_TO_POST = 2e-3
+    MAG_RING_TO_POST = 2e-3 #2e-3
     MAGNET_RING_GAP = 18.4e-3
     FERRITE_H = 12e-3
     FERRITE_D = 8e-3
@@ -84,7 +109,7 @@ def findEquilibrium(xi=0, zi=3e-3, initial_angle_deg=1):
         magnetization=(0, 0, FERRITE_MAGNETIZATION)
     )
     coil = magpy.Collection()
-    coilPosTop = 0.4e-3
+    coilPosTop = -0.4e-3
     for z in np.arange(coilPosTop - wireD/2 + 1e-6,
                        coilPosTop - coilH + wireD/2 - 1e-6, -wireD):
         for r in np.arange((coilID + wireD)/2,
@@ -111,7 +136,7 @@ def findEquilibrium(xi=0, zi=3e-3, initial_angle_deg=1):
         penMagnet2.position = (posX, 0, posZ + 3*MAGNET_H/2)
 
         # define COM (before rotation, relative to bottom of lower magnet)
-        penCM = np.array([posX, 0, posZ + 28e-3])
+        penCM = np.array([posX, 0, posZ + 12e-3])
 
         # rotate about anchor at (posX,0,posZ)
         anchor = np.array([posX, 0, posZ])
@@ -126,25 +151,59 @@ def findEquilibrium(xi=0, zi=3e-3, initial_angle_deg=1):
         F2, T2 = getFT(c, penMagnet2, anchor=penCM)
         F = F1 + F2
         T = T1 + T2
-        print(T,F)
+        # print(T,F)
 
         # balance conditions
         Fz_err = F[2] - Fg   # vertical balance
         Fx_err = F[0]        # lateral balance
         Ty_err = T[1]        # restoring torque about y
 
-        return Fz_err**2 + Fx_err**2 + (1e4*Ty_err)**2
+        cost = Fz_err**2 + Fx_err**2 + (1e5*Ty_err)**2
+        print('posX', posX, 'posZ', posZ, 'angle_deg', angle_deg, 'cost', cost, 'force', 'F', 'torque', T)
+        print(penCM, penCM-penMagnet1.position, penCM-penMagnet2.position)
+        print('magnet1position:', penMagnet1.position, 'F1', F1, 'T1', T1)
+        F1_, T1_ = getFT(c, penMagnet1, anchor=penMagnet1.position)
+        print('F1', F1_, 'T1', T1_)
+        print('comparing where you calculate moment (CofG of pen vs middle of magnet) confirms this calculation is correct')
+        print('deviation from IRL is likely magnetic field variance across magnets')
+        print('magnet2position:', penMagnet2.position, 'F2', F2, 'T2', T2)
+        return cost
 
     # --- optimize ---
     res = minimize(
         imbalance,
         x0=[xi, zi, initial_angle_deg],
-        bounds=[(-4e-3, 4e-3), (1e-3, 15e-3), (-10, 10)],
+        bounds=[(3e-3, 3e-3), (1e-3, 10e-3), (-20, 20)],
         tol=1e-8
     )
 
     x_eq, z_eq, angle_eq = res.x
     print(f"Equilibrium found: X = {x_eq*1e3:.2f} mm, Z = {z_eq*1e3:.2f} mm, Angle = {angle_eq:.2f} deg")
+
+    penMagnet1 = magpy.magnet.Cylinder(
+        magnetization=(0, 0, MAGNETIZATION/1.175),
+        dimension=(MAGNET_D, MAGNET_H),
+        position=(x_eq, 0, z_eq + MAGNET_H/2)
+    )
+    penMagnet1.meshing = 15
+    penMagnet2 = penMagnet1.copy(deep=True)
+    penMagnet2.position = (x_eq, 0, z_eq + 3*MAGNET_H/2)
+
+    # define COM (before rotation, relative to bottom of lower magnet)
+    penCM = np.array([x_eq, 0, z_eq + 12e-3])
+
+    # rotate about anchor at (posX,0,posZ)
+    anchor = np.array([x_eq, 0, z_eq])
+    penMagnet1.rotate_from_angax(angle=angle_eq, axis='y', anchor=anchor, degrees=True)
+    penMagnet2.rotate_from_angax(angle=angle_eq, axis='y', anchor=anchor, degrees=True)
+
+    c2 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferrite, penMagnet1, penMagnet2, coil, override_parent = True)
+    F, T = getFT(c2, penMagnet1) + getFT(c2, penMagnet2)
+    
+    print(f'with pen & coil: F{F}, T{T}')
+    fig, axs = plt.subplots(1,1)
+    plotSysB(c2, axs, fig)
+    plt.show()
 
     return x_eq, z_eq, angle_eq, res.fun
 
@@ -187,7 +246,7 @@ def systemFT():
         magnetization = (0, 0, FERRITE_MAGNETIZATION)
     )
     coil = magpy.Collection()
-    coilPosTop = 0.4e-3
+    coilPosTop = -0.4e-3
     for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
         for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
             winding = magpy.current.Circle(
@@ -417,7 +476,7 @@ def experiment8(plot = True):
     # this is based on average, so we are calculating steady state (not peak) 
     # this results in net attractive force of 2.1e-1 (compared to OFF state of 2.4e-1)
     
-    coilPosTop = 0.4e-3
+    coilPosTop = -0.4e-3
     for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
         for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
             winding = magpy.current.Circle(
@@ -522,7 +581,7 @@ def experiment9(plot=True):
     # this results in net attractive force of 2.1e-1 (compared to OFF state of 2.4e-1)
     
     numCoils = 0
-    coilPosTop = 0.4e-3
+    coilPosTop = -0.4e-3
     for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH/2 + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
         for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
             winding = magpy.current.Circle(

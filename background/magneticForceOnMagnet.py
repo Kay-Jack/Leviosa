@@ -602,7 +602,7 @@ def experiment8(plot = True):
     # this is based on average, so we are calculating steady state (not peak) 
     # this results in net attractive force of 2.1e-1 (compared to OFF state of 2.4e-1)
     
-    coilPosTop = 0.4e-3
+    coilPosTop = -0.4e-3
     for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
         for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
             winding = magpy.current.Circle(
@@ -772,7 +772,157 @@ def experiment9(plot=True):
         print('note for the force streamplot, I do not account for varying ferrite magnetization')
         plt.show()
 
-def experiment10():
+def experiment10(plot = True):
+    # note: take top of secure EM as datum
+    MAGNET_TO_RING_FACE = 5e-3
+    POST_TO_SENSOR = -3e-3 - 0.6e-3 # post to top face of sensor cutout + sensing position relative to sensor cutout
+    POST_TO_TOP = 2.4e-3
+    HOVER_HEIGHT = 3e-3
+    MAG_RING_TO_POST = 2e-3
+    MAGNET_RING_GAP = 18.5e-3
+    FERRITE_H = 12e-3
+    FERRITE_D = 8e-3
+    TOP_TO_FERRITE = 12.4e-3 + FERRITE_H/2# second value is coilH/2
+
+    MAGNETIZATION = 1.51e6
+    FERRITE_MAGNETIZATION_EM_OFF = 1.51e5 # magnetization of ferrite core from permanent magnets
+
+    magnetRing1ZPos = - POST_TO_TOP - MAG_RING_TO_POST - MAGNET_TO_RING_FACE - MAGNET_H/2
+    magnetRing2ZPos = magnetRing1ZPos - MAGNET_H - MAGNET_RING_GAP
+    sensorZPos = - POST_TO_TOP + POST_TO_SENSOR
+
+    magnetRing1 = magnetRing(0.06, 0, magnetRing1ZPos, 9, MAGNETIZATION)
+    magnetRing2 = magnetRing(0.06, 0, magnetRing2ZPos, 12, MAGNETIZATION)
+    ferriteEMoff = magpy.magnet.Cylinder(
+        dimension = (FERRITE_D, FERRITE_H),
+        position = (0, 0, -TOP_TO_FERRITE),
+        magnetization = (0, 0, -FERRITE_MAGNETIZATION_EM_OFF)
+    )
+    ferriteSysOn = ferriteEMoff.copy(deep = True)
+    ferriteSysOn.magnetization = (0, 0, FERRITE_MAGNETIZATION_EM_OFF * 3.35)
+
+    # add coil
+    coil = magpy.Collection()
+
+    coilH = 24e-3
+    coilOD = 19.6e-3
+    coilID = 8e-3
+    wireD = 0.35e-3 # assume wire diameter from https://www.aliexpress.com/item/1005007539263147.html?spm=a2g0o.detail.pcDetailBottomMoreOtherSeller.4.ad14UWzRUWzR8E&gps-id=pcDetailBottomMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=9bdcbb99-2488-4a53-a188-dcab84615b92&_t=gps-id:pcDetailBottomMoreOtherSeller,scm-url:1007.40050.354490.0,pvid:9bdcbb99-2488-4a53-a188-dcab84615b92,tpp_buckets:668%232846%238116%232002&pdp_ext_f=%7B%22order%22%3A%222%22%2C%22eval%22%3A%221%22%2C%22sceneId%22%3A%2230050%22%7D&pdp_npi=4%40dis%21CAD%216.38%214.60%21%21%214.54%213.27%21%402101c5bf17483994196241774eb97f%2112000041207734322%21rec%21CA%212712658390%21X&utparam-url=scene%3ApcDetailBottomMoreOtherSeller%7Cquery_from%3A
+    coilCurrent = 0.123 # [A] average. (totalPower - arduinoPower)/voltage = (2.08W-0.6W)/12V = 0.12333...
+    coilPosTop = -0.4e-3
+    for z in np.arange(coilPosTop - wireD/2 + 1e-6, coilPosTop - coilH + wireD/2 - 1e-6, -wireD): # add -1e-6 from end given arange excludes max values...
+        for r in np.arange((coilID + wireD)/2, (coilOD - wireD)/2 + 1e-6, wireD):
+            winding = magpy.current.Circle(
+                current=coilCurrent,
+                diameter=2*r,
+                position=(0,0,z),
+            )
+            coil.add(winding) # ~1k coil windings
+    
+    penMagnet1 = magpy.magnet.Cylinder(
+        magnetization=(0,0,MAGNETIZATION/1.175), dimension=(MAGNET_D, MAGNET_H), position = (0, 0.00, HOVER_HEIGHT + MAGNET_H/2)
+        )
+    penMagnet1.meshing = 15
+    penMagnet2 = penMagnet1.copy(deep = True)
+    penMagnet2.position = (0, 0.00, HOVER_HEIGHT + 3*MAGNET_H/2)
+    
+    c = magnetRing1.mCol + magnetRing2.mCol + ferriteSysOn
+
+    # rotate magnet for scanning restoring moment
+    penMagnet1.rotate_from_angax(angle = 5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+    penMagnet2.rotate_from_angax(angle = 5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+
+    # loop thru find optimal placement for extra magnet
+    F, T = getFT(c, penMagnet1) + getFT(c, penMagnet2)
+    print('F', F, 'T', T)
+    for zPos in [-26e-3, -27e-3, -28e-3, -29e-3, -30e-3]:
+        baseMagnet = magpy.magnet.Cylinder(
+        magnetization=(0,0,MAGNETIZATION/5), dimension=(MAGNET_D, MAGNET_H), position = (0, 0, zPos)
+        )
+
+        F2, T2 = getFT(baseMagnet, penMagnet1) + getFT(baseMagnet, penMagnet2)
+        Ft = F + F2
+        Tt = T + T2
+        print('F', Ft, 'T', Tt)
+        # from this see that lower having magnet higher is generallly better. Let magnet be at -27e-3
+    
+    baseMagnet.position = (0,0,-27e-3)
+
+    if plot:
+        fig, axs = plt.subplots(1,4)
+        for lv1 in range(4):
+            axs[lv1].set_xlim(-0.05, 0.05)  # Set x-range for the first subplot
+            axs[lv1].set_ylim(-0.05, 0.05) # Set y-range for the first subplot
+
+    # without pen
+    c2 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteEMoff, baseMagnet, override_parent = True)
+    if plot:
+        plotSysB(c2, axs[0], fig)
+        hovering = mpl.patches.Rectangle((-MAGNET_D/2, HOVER_HEIGHT), MAGNET_D, 2*MAGNET_H, linewidth=1, edgecolor='r', facecolor='green', alpha=0.3)
+        axs[0].add_patch(hovering)
+        axs[0].set_title('permanent magnets +\n ferriteEMoff')
+
+        c2_ = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteSysOn, override_parent = True)
+        plotSysB(c2_, axs[1], fig)
+        hovering = mpl.patches.Rectangle((-MAGNET_D/2, HOVER_HEIGHT), MAGNET_D, 2*MAGNET_H, linewidth=1, edgecolor='r', facecolor='green', alpha=0.3)
+        axs[1].add_patch(hovering)
+        axs[1].set_title('permanent magnets +\n ferriteSysOn')
+
+    B = magpy.getB(c2, (0,0,sensorZPos))
+    print('permanent magnets without pen. Field at sensor: ', B)
+    # with pen
+    c3 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteSysOn, baseMagnet, penMagnet1, penMagnet2, override_parent = True)
+    F3, T3 = getFT(c3, penMagnet1) + getFT(c3, penMagnet2)
+    print(f'with  pen: F{F3}, T{T3}')
+    if plot:
+        plotSysB(c3, axs[2], fig)
+        axs[2].set_title('permanent magnets +\n ferriteSysOn + pen (no EM)')
+    
+    B = magpy.getB(c3, (0,0,sensorZPos))
+    print('permanent magnets with pen (assume ferriteSysOn). Field at sensor: ', B)
+    
+    c4 = magpy.Collection(magnetRing1.mCol, magnetRing2.mCol, ferriteSysOn, baseMagnet, penMagnet1, penMagnet2, coil, override_parent = True)
+    F4, T4 = getFT(c4, penMagnet1) + getFT(c4, penMagnet2)
+    
+    print(f'with pen & coil: F{F4}, T{T4}')
+    if plot:
+        plotSysB(c4, axs[3], fig)
+        axs[3].set_title('permanent magnets + \nferriteSysOn +\n pen + coil')
+        plt.show()
+
+        # search region around the middle & determine force on pen after moving it around
+
+        ## rotate pen magnets back to vertical
+        penMagnet1.rotate_from_angax(angle = -5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+        penMagnet2.rotate_from_angax(angle = -5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
+
+        # grid...
+        xs = np.linspace(-5e-3, 5e-3, 21)
+        zs = np.linspace(1e-3, 6e-3, 11)
+        # zs = np.linspace(-1e-3, 12e-3, 5)
+        Fs = np.zeros(shape = (11, 21, 3))
+        for lv1, x in enumerate(xs):
+            for lv2, z in enumerate(zs): # hoverheight is 3e-3. z replaces hoverHeight
+                penMagnet1.position = (x, 0.00, z + MAGNET_H/2)
+                penMagnet2.postion = (x, 0.00, z + 3*MAGNET_H/2)
+                F, _ = getFT(c4, penMagnet1) + getFT(c4, penMagnet2)
+                Fs[lv2, lv1] = F - np.array([0, 0, 9e-3*9.81])
+        
+        fig, axs = plt.subplots(1,3)
+
+        axs[0].imshow(Fs[:,:,2], extent=[xs.min(), xs.max(), zs.min(), zs.max()], origin='lower', cmap='viridis')
+        axs[0].set_title('permanent magnets + \nferriteSysOn +\n pen + coil\n Z force')
+
+        axs[1].imshow(Fs[:,:,0], extent=[xs.min(), xs.max(), zs.min(), zs.max()], origin='lower', cmap='viridis')
+        axs[1].set_title('permanent magnets + \ferriteSysOn +\n pen + coil\n X force')
+
+        axs[2].streamplot(xs, zs, Fs[:,:,0], Fs[:,:,2], color = np.log(Fs[:,:,0]**2+Fs[:,:,2]**2), density=1.)
+        axs[2].set_aspect('equal')
+        axs[2].set_title('permanent magnets + \nferriteSysOn +\n pen + coil\n Force Streamlines')
+        print('note for the force streamplot, I do not account for varying ferrite magnetization')
+        plt.show()
+
+def experiment11():
     # expand on experiment8 kind of: try and mod exp 8
     # for now keep ferrite magnetization constant. Numbers don't really make sense when considering middle of ferrite 
     # so it's likely that EM is magnetizing ferrite & inductance maintains it and/or magnetization is non-constant through the body
@@ -822,7 +972,10 @@ def main():
     # experiment8()
 
     # what is impact of changing coil shape and size
-    experiment9()
+    # experiment9()
+
+    # repeat of experiment8, except also additional magnet under coil
+    experiment10(True)
 
 
 if __name__ == "__main__":
