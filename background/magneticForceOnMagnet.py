@@ -792,6 +792,7 @@ def experiment10(plot = True):
     sensorZPos = - POST_TO_TOP + POST_TO_SENSOR
 
     magnetRing1 = magnetRing(0.06, 0, magnetRing1ZPos, 9, MAGNETIZATION)
+    # magnetRing1 = magnetRing(0.06, 0, magnetRing1ZPos, 10, MAGNETIZATION)
     magnetRing2 = magnetRing(0.06, 0, magnetRing2ZPos, 12, MAGNETIZATION)
     ferriteEMoff = magpy.magnet.Cylinder(
         dimension = (FERRITE_D, FERRITE_H),
@@ -833,9 +834,13 @@ def experiment10(plot = True):
     penMagnet2.rotate_from_angax(angle = 5, axis = 'y', anchor = (0, 0, HOVER_HEIGHT + MAGNET_H/2), degrees = True)
 
     # loop thru find optimal placement for extra magnet
+    print('loop thru to find optimal placement for extra magnet')
     F, T = getFT(c, penMagnet1) + getFT(c, penMagnet2)
     print('F', F, 'T', T)
     for zPos in [-26e-3, -27e-3, -28e-3, -29e-3, -30e-3]:
+        # baseMagnet = magpy.magnet.Cylinder(
+        # magnetization=(0,0,MAGNETIZATION/3), dimension=(MAGNET_D, MAGNET_H), position = (0, 0, zPos)
+        # )
         baseMagnet = magpy.magnet.Cylinder(
         magnetization=(0,0,MAGNETIZATION/5), dimension=(MAGNET_D, MAGNET_H), position = (0, 0, zPos)
         )
