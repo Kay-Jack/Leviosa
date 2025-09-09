@@ -9,6 +9,10 @@ int IN2 = 10;
 int EN = 11;
 int set_point2 = set_point - 10;
 
+unsigned long tic;
+unsigned long toc;
+unsigned long deltaT;
+
 // hall sensor reads ~560-570 passively with just permanent magnets. smaller magnet ring reads ~10-20 lower
 // reading drops to ~450-460 when electromagnet is ON
 
@@ -22,7 +26,8 @@ void setup() {
 
 void loop()
 {     
-      for (int i = 0; i <= 10000000; i++) {
+      tic = micros();
+      for (int i = 0; i <= 1000; i++) {
         sensorValue = analogRead(sensorPin);
         //Serial.println(sensorValue);
         if(sensorValue >= set_point && sensorValue <= noMagnetPoint){
@@ -37,4 +42,17 @@ void loop()
         //  digitalWrite(EN, LOW);
         //}
       }
+      toc = micros();
+      deltaT = toc - tic;
+      Serial.print("With code");
+      Serial.println(deltaT);
+      
+      
+      tic = micros();
+      for (int i = 0; i <= 1000; i++) {}
+      toc = micros();
+      deltaT = toc - tic;
+      Serial.print("Without code");
+      Serial.println(deltaT);
+
  }
