@@ -12,6 +12,7 @@
 4. adjusted set_point voltage divider from [0.331V, 0.756V] to [0.308V, 1.077V]
 5. swap TIP122 transistors for mosfets
 6. swap LM324N op amp for LM393D comparator. Remove jumpers and redundancies
-7. TODO: swap schottkey
+7. swap Schottkey for basic version (testing for SMD assembly later)
+8. current sense circuit IN PROGRESS
 
 * HAVE NOT UPDATED FOOTPRINTS
