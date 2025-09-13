@@ -2,3 +2,16 @@
 2. Update components to 'basic' JLC if possible
 3. Fix footprints for Linear Regulator (no longer needed since swap to SMD), pin size for hall sensor
 4. current sense circuit for hall with low pass filtering. Need to also remove the hall sensor reading from the microcontroller since that wouldn't do anythings
+
+
+
+
+1. removed 12V input LED indicator. Touch point still exists
+2. remove 5V LED indicator. Touch point still exists
+3. Change C4 (V_out cap) to 22uF for standardization. Also noticed that on placing magnet, often output shuts off, so this should prevent premature current protection triggers.
+4. adjusted set_point voltage divider from [0.331V, 0.756V] to [0.308V, 1.077V]
+5. swap TIP122 transistors for mosfets
+6. swap LM324N op amp for LM393D comparator. Remove jumpers and redundancies
+7. TODO: swap schottkey
+
+* HAVE NOT UPDATED FOOTPRINTS
