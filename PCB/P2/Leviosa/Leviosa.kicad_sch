@@ -16,22 +16,20 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
-				(at 3.81 3.81 0)
+			(property "Reference" "U6"
+				(at 12.7 -4.9532 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
 			(property "Value" "INA199xxDCK"
-				(at 3.81 -2.54 0)
+				(at 12.7 -2.4132 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
 			(property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6"
@@ -97,14 +95,14 @@
 				(pin input line
 					(at -7.62 2.54 0)
 					(length 2.54)
-					(name "+"
+					(name "-"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "4"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -115,14 +113,14 @@
 				(pin input line
 					(at -7.62 -2.54 0)
 					(length 2.54)
-					(name "-"
+					(name "+"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "5"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3758,16 +3756,6 @@
 		)
 		(uuid "68d4e351-1aef-46df-9cee-713d9ec1a12a")
 	)
-	(text "Think the + and - need to swap\n"
-		(exclude_from_sim no)
-		(at 224.79 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "89663873-7bf4-4502-a0c1-631831063df2")
-	)
 	(text "TODO change from voltage divider to a static set point.\nCheck setup to ensure correct voltage set here."
 		(exclude_from_sim no)
 		(at 204.978 127.762 0)
@@ -5735,7 +5723,7 @@
 				)
 			)
 		)
-		(property "Value" "?kΩ"
+		(property "Value" "0R"
 			(at 228.6 63.754 90)
 			(effects
 				(font
@@ -9423,7 +9411,7 @@
 				)
 			)
 		)
-		(property "Value" "?kΩ"
+		(property "Value" "0R"
 			(at 228.6 45.72 90)
 			(effects
 				(font
