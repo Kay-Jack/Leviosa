@@ -2,7 +2,8 @@
 2. Update components to 'basic' JLC if possible
 3. Fix footprints for Linear Regulator (no longer needed since swap to SMD), pin size for hall sensor
 4. current sense circuit for hall with low pass filtering. Need to also remove the hall sensor reading from the microcontroller since that wouldn't do anythings
-
+5. What is R9a nd R10 for? 
+6. Shunt resistor needs to be selected from datasheet specs 
 
 
 
