@@ -3691,9 +3691,9 @@
 		)
 		(uuid "114a9091-d9e9-403f-a7c1-4ec72c7d2a1b")
 	)
-	(text "R_shunt:\n- chat tells me:\n- ~50mΩ\n- min 0.05W power dissapation\n"
+	(text "R_shunt: LR2010-21R050F2\n- chat tells me:\n- ~50mΩ\n- min 0.05W power dissapation\n\nhttps://jlcpcb.com/partdetail/RALEC-LR201021R050F2/C154655\nhttps://www.lcsc.com/product-image/C154655.html\n"
 		(exclude_from_sim no)
-		(at 290.068 54.102 0)
+		(at 270.256 53.594 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3791,6 +3791,12 @@
 		(uuid "b0acc51d-a02a-4412-912d-0b7e299296a1")
 	)
 	(junction
+		(at 233.68 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0b5916d7-a51c-4f2a-a084-79f88dc47d27")
+	)
+	(junction
 		(at 194.31 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3815,7 +3821,7 @@
 		(uuid "4d626f79-ea2d-4d68-afcc-230fabb930b9")
 	)
 	(junction
-		(at 220.98 58.42)
+		(at 217.17 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5a5386ee-6d3f-4db5-b4bd-c1cc83327894")
@@ -3825,6 +3831,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5cb8341e-cf3a-457a-a9a9-01dc9105d43e")
+	)
+	(junction
+		(at 229.87 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5d281717-7406-4805-9db5-e0fe4fa317a8")
 	)
 	(junction
 		(at 227.33 116.84)
@@ -3899,7 +3911,7 @@
 		(uuid "9c620bbd-0d3b-46eb-85ce-05a7c6c004e9")
 	)
 	(junction
-		(at 220.98 48.26)
+		(at 217.17 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a12767e1-06bb-4fec-b844-a657be949013")
@@ -4132,13 +4144,23 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 48.26) (xy 220.98 48.26)
+			(xy 209.55 48.26) (xy 217.17 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "1bbea991-bdcd-4a97-98fa-16f9811863e9")
+	)
+	(wire
+		(pts
+			(xy 233.68 72.39) (xy 229.87 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d1e2a5e-e002-48f3-a7ce-d8508a64a25b")
 	)
 	(wire
 		(pts
@@ -4292,6 +4314,16 @@
 	)
 	(wire
 		(pts
+			(xy 229.87 58.42) (xy 231.14 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40d11ef1-0490-4ae7-a8c0-6d21dbd5a8ad")
+	)
+	(wire
+		(pts
 			(xy 247.65 85.09) (xy 247.65 83.82)
 		)
 		(stroke
@@ -4302,13 +4334,23 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 48.26) (xy 224.79 48.26)
+			(xy 217.17 48.26) (xy 220.98 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "43c6c4e2-84cc-42ae-afc8-cc2f43eb6a09")
+	)
+	(wire
+		(pts
+			(xy 238.76 58.42) (xy 256.54 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4924f61a-af49-4ea9-ba8b-648a930150a4")
 	)
 	(wire
 		(pts
@@ -4462,7 +4504,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 48.26) (xy 256.54 48.26)
+			(xy 228.6 48.26) (xy 256.54 48.26)
 		)
 		(stroke
 			(width 0)
@@ -4582,7 +4624,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 58.42) (xy 220.98 58.42)
+			(xy 209.55 58.42) (xy 217.17 58.42)
 		)
 		(stroke
 			(width 0)
@@ -4709,6 +4751,16 @@
 			(type default)
 		)
 		(uuid "9676afe3-e17d-4222-a951-4023126242e3")
+	)
+	(wire
+		(pts
+			(xy 229.87 58.42) (xy 229.87 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "96e8708d-2aa8-4dd1-bdaf-9d7d3bca7eda")
 	)
 	(wire
 		(pts
@@ -4882,23 +4934,13 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 58.42) (xy 224.79 58.42)
+			(xy 217.17 58.42) (xy 220.98 58.42)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "b89151ff-8cbf-4f5d-829e-88d8d5b4d90e")
-	)
-	(wire
-		(pts
-			(xy 232.41 58.42) (xy 256.54 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b8acfdf4-e874-4ab7-8bd3-a71bceaf3079")
 	)
 	(wire
 		(pts
@@ -5032,7 +5074,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 48.26) (xy 220.98 49.53)
+			(xy 217.17 48.26) (xy 217.17 49.53)
 		)
 		(stroke
 			(width 0)
@@ -5062,7 +5104,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 57.15) (xy 220.98 58.42)
+			(xy 217.17 57.15) (xy 217.17 58.42)
 		)
 		(stroke
 			(width 0)
@@ -5189,6 +5231,16 @@
 			(type default)
 		)
 		(uuid "e5c630d6-e0ed-4336-9533-8b3ae428d456")
+	)
+	(wire
+		(pts
+			(xy 228.6 58.42) (xy 229.87 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e6a3f6d1-282f-45a2-900f-4639f3636b4e")
 	)
 	(wire
 		(pts
@@ -5726,7 +5778,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 228.6 58.42 270)
+		(at 224.79 58.42 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5734,7 +5786,7 @@
 		(dnp no)
 		(uuid "0c620c0c-14bf-4d5d-b599-7ff7a5645fb1")
 		(property "Reference" "R10"
-			(at 228.6 61.214 90)
+			(at 224.79 61.214 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5742,7 +5794,7 @@
 			)
 		)
 		(property "Value" "8Ω"
-			(at 228.6 63.754 90)
+			(at 224.79 63.754 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5750,7 +5802,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 228.346 59.436 90)
+			(at 224.536 59.436 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5759,7 +5811,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 58.42 0)
+			(at 224.79 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5768,7 +5820,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 228.6 58.42 0)
+			(at 224.79 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6098,16 +6150,16 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32b01683-545c-474a-9715-829d4d276e7c")
-		(property "Reference" "R14"
-			(at 268.478 51.816 0)
+		(property "Reference" "R_shunt"
+			(at 262.89 51.816 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "?kΩ (shunt resistor)"
-			(at 268.478 54.356 0)
+		(property "Value" "50mΩ"
+			(at 262.89 54.356 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6149,7 +6201,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R14")
+					(reference "R_shunt")
 					(unit 1)
 				)
 			)
@@ -6727,16 +6779,15 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 220.98 53.34 0)
+		(at 217.17 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4f16c579-fa09-48c0-9977-46a46c456fbe")
 		(property "Reference" "C4"
-			(at 224.79 52.0699 0)
+			(at 220.98 52.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6745,7 +6796,7 @@
 			)
 		)
 		(property "Value" "40μF"
-			(at 224.79 54.6099 0)
+			(at 220.98 54.6099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6754,7 +6805,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 221.9452 57.15 0)
+			(at 218.1352 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6763,7 +6814,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 220.98 53.34 0)
+			(at 217.17 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6772,7 +6823,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 220.98 53.34 0)
+			(at 217.17 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6780,7 +6831,7 @@
 			)
 		)
 		(property "Link" "https://jlcpcb.com/partdetail/1954-0603B203K500NT/C1602"
-			(at 220.98 53.34 0)
+			(at 217.17 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8155,6 +8206,72 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_US")
+		(at 234.95 58.42 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "92ba93a8-a49f-44ec-90bd-a4a41b67c4b5")
+		(property "Reference" "R15"
+			(at 234.95 53.594 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0Ω"
+			(at 234.95 56.134 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 234.696 59.436 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 234.95 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 234.95 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "837a659c-2cb0-4d89-9a20-ea9e42c61e5a")
+		)
+		(pin "2"
+			(uuid "6e60d80f-d566-4895-a6c3-44ff58672d06")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+12V")
 		(at 35.56 156.21 0)
 		(unit 1)
@@ -8379,7 +8496,7 @@
 				)
 			)
 		)
-		(property "Value" "0R"
+		(property "Value" "0Ω"
 			(at 200.66 38.1 90)
 			(effects
 				(font
@@ -8702,6 +8819,72 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 229.87 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(uuid "b3d6a81b-c6c3-4562-84ed-cbfcb1d1d7c2")
+		(property "Reference" "0R"
+			(at 226.06 69.596 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DNP"
+			(at 226.06 67.056 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 230.886 68.834 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 229.87 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 229.87 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d6c62132-7e7f-4236-bfdd-43a651e2d9fc")
+		)
+		(pin "2"
+			(uuid "05034b4f-7227-4913-aada-87f46abec7b4")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "0R")
 					(unit 1)
 				)
 			)
@@ -9413,7 +9596,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
-		(at 228.6 48.26 270)
+		(at 224.79 48.26 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9421,7 +9604,7 @@
 		(dnp no)
 		(uuid "d2b2df7d-73bd-4da3-b792-084db109555c")
 		(property "Reference" "R9"
-			(at 228.6 43.18 90)
+			(at 224.79 43.18 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9429,7 +9612,7 @@
 			)
 		)
 		(property "Value" "8Ω"
-			(at 228.6 45.72 90)
+			(at 224.79 45.72 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9437,7 +9620,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 228.346 49.276 90)
+			(at 224.536 49.276 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9446,7 +9629,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 228.6 48.26 0)
+			(at 224.79 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9455,7 +9638,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 228.6 48.26 0)
+			(at 224.79 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
