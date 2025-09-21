@@ -2733,13 +2733,12 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "40-V, 200-mΩ, 1-ch automotive smart high-side switch with adjustable current limit"
+			(property "Description" ""
 				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify bottom)
 					(hide yes)
 				)
 			)
@@ -2814,6 +2813,16 @@
 				)
 			)
 			(property "AVAILABILITY" "In Stock"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "DESCRIPTION" "40-V, 200-mΩ, 1-ch automotive smart high-side switch with adjustable current limit"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3301,8 +3310,12 @@
 		)
 		(symbol "power:+12V"
 			(power)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
+				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -3402,8 +3415,7 @@
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
-					(hide yes)
-					(name "+12V"
+					(name "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3423,8 +3435,12 @@
 		)
 		(symbol "power:GND"
 			(power)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
+				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -3500,8 +3516,7 @@
 				(pin power_in line
 					(at 0 0 270)
 					(length 0)
-					(hide yes)
-					(name "GND"
+					(name "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5382,16 +5397,6 @@
 		)
 		(uuid "3d456fcf-5dfc-4ffd-baeb-f30a1d347199")
 	)
-	(label "PB2"
-		(at 91.44 165.1 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "41d1f0ec-c99a-479b-aa1c-107545e3a88e")
-	)
 	(label "no_magnet_point_trigger"
 		(at 203.2 134.62 0)
 		(effects
@@ -5710,7 +5715,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0711ae81-b78e-443f-8175-9bfe22042123")
-		(property "Reference" "Q2"
+		(property "Reference" "Q_noMag1"
 			(at 260.35 135.8901 0)
 			(effects
 				(font
@@ -5770,7 +5775,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Q2")
+					(reference "Q_noMag1")
 					(unit 1)
 				)
 			)
@@ -6225,7 +6230,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32e2951f-a6ef-488b-9a1f-c794b49703f4")
-		(property "Reference" "U6"
+		(property "Reference" "current_sense1"
 			(at 185.166 46.228 0)
 			(effects
 				(font
@@ -6289,7 +6294,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U6")
+					(reference "current_sense1")
 					(unit 1)
 				)
 			)
@@ -6434,7 +6439,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "380c0ba7-70cd-45ee-86be-0ce3046fed83")
-		(property "Reference" "U2"
+		(property "Reference" "MCU1"
 			(at 67.31 149.86 0)
 			(effects
 				(font
@@ -6506,7 +6511,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U2")
+					(reference "MCU1")
 					(unit 1)
 				)
 			)
@@ -6522,8 +6527,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3ce8960e-62b8-4b07-bdac-76a1454def51")
-		(property "Reference" "C5"
-			(at 250.19 66.04 0)
+		(property "Reference" "C_coil1"
+			(at 250.19 66.0399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6532,7 +6537,7 @@
 			)
 		)
 		(property "Value" "20nF"
-			(at 250.19 68.58 0)
+			(at 250.19 68.5799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6584,7 +6589,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "C5")
+					(reference "C_coil1")
 					(unit 1)
 				)
 			)
@@ -7015,7 +7020,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "54b284ce-04fc-43b5-bc81-c784a6a493c7")
-		(property "Reference" "J3"
+		(property "Reference" "Servo2"
 			(at 114.3 149.8599 0)
 			(effects
 				(font
@@ -7071,7 +7076,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "J3")
+					(reference "Servo2")
 					(unit 1)
 				)
 			)
@@ -7229,7 +7234,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "56a9a8d3-6e73-4341-b309-639a06a5d153")
-		(property "Reference" "U1"
+		(property "Reference" "current_lim1"
 			(at 43.18 41.91 0)
 			(effects
 				(font
@@ -7281,6 +7286,66 @@
 				(hide yes)
 			)
 		)
+		(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/TPS1H200AQDGNRQ1/Texas+Instruments/view-part/?ref=snap"
+			(at 43.18 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PURCHASE-URL" "https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=3210362&manufacturer=Texas Instruments&part_name=TPS1H200AQDGNRQ1&search_term=tps1h200aqdgnrq1"
+			(at 43.18 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "HVSSOP-8 Texas Instruments"
+			(at 43.18 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 43.18 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Texas Instruments"
+			(at 43.18 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "TPS1H200AQDGNRQ1"
+			(at 43.18 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bd02ea93-88ef-4947-b63e-068e25b5cba6")
 		)
@@ -7311,7 +7376,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U1")
+					(reference "current_lim1")
 					(unit 1)
 				)
 			)
@@ -7665,7 +7730,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6ad52ffe-634d-4768-bce2-9343250f1c33")
-		(property "Reference" "Q1"
+		(property "Reference" "Q_setPt1"
 			(at 260.35 86.3601 0)
 			(effects
 				(font
@@ -7725,7 +7790,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Q1")
+					(reference "Q_setPt1")
 					(unit 1)
 				)
 			)
@@ -7874,7 +7939,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8588d481-c1e0-4df6-a51a-d76260b561b0")
-		(property "Reference" "U3"
+		(property "Reference" "V_regulator1"
 			(at 83.82 31.75 0)
 			(effects
 				(font
@@ -7929,7 +7994,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U3")
+					(reference "V_regulator1")
 					(unit 1)
 				)
 			)
@@ -8073,7 +8138,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8b623019-789c-43dd-a84b-c750f2a2a466")
-		(property "Reference" "U4"
+		(property "Reference" "hall_sensor1"
 			(at 161.29 107.95 0)
 			(effects
 				(font
@@ -8140,7 +8205,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U4")
+					(reference "hall_sensor1")
 					(unit 1)
 				)
 			)
@@ -8286,7 +8351,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9b245ac3-159b-4ff1-9fe9-54f2337f2b12")
-		(property "Reference" "D3"
+		(property "Reference" "D_coil1"
 			(at 236.22 66.04 90)
 			(effects
 				(font
@@ -8349,7 +8414,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "D3")
+					(reference "D_coil1")
 					(unit 1)
 				)
 			)
@@ -9048,7 +9113,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "be562a45-1b90-478f-9d3a-05029bf64665")
-		(property "Reference" "J4"
+		(property "Reference" "Servo1"
 			(at 114.3 163.8299 0)
 			(effects
 				(font
@@ -9104,7 +9169,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "J4")
+					(reference "Servo1")
 					(unit 1)
 				)
 			)
@@ -9119,7 +9184,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be882b7b-9158-4ca8-aa48-c8cfdb45e32e")
-		(property "Reference" "Pot1"
+		(property "Reference" "Pot_setPt1"
 			(at 227.076 94.488 90)
 			(effects
 				(font
@@ -9182,7 +9247,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Pot1")
+					(reference "Pot_setPt1")
 					(unit 1)
 				)
 			)
