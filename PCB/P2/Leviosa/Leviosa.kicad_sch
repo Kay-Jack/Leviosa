@@ -2733,12 +2733,13 @@
 					(hide yes)
 				)
 			)
-			(property "Description" ""
+			(property "Description" "40-V, 200-mΩ, 1-ch automotive smart high-side switch with adjustable current limit"
 				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify bottom)
 					(hide yes)
 				)
 			)
@@ -2813,16 +2814,6 @@
 				)
 			)
 			(property "AVAILABILITY" "In Stock"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "DESCRIPTION" "40-V, 200-mΩ, 1-ch automotive smart high-side switch with adjustable current limit"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3783,9 +3774,9 @@
 		)
 		(uuid "68d4e351-1aef-46df-9cee-713d9ec1a12a")
 	)
-	(text "TODO change from voltage divider to a static set point.\nCheck setup to ensure correct voltage set here."
+	(text "Set to 2.024V\nP1 sets to 1.973V (R11 ~ 64.2kΩ)"
 		(exclude_from_sim no)
-		(at 204.978 127.762 0)
+		(at 213.614 127.762 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6374,7 +6365,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3631d8ff-e93e-4eaa-8c7d-e1486c2293ba")
-		(property "Reference" "TP4"
+		(property "Reference" "TP_5V1"
 			(at 93.98 26.67 0)
 			(effects
 				(font
@@ -6424,7 +6415,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP4")
+					(reference "TP_5V1")
 					(unit 1)
 				)
 			)
@@ -7166,7 +7157,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "64.2kΩ"
+		(property "Value" "68kΩ"
 			(at 236.22 119.38 90)
 			(effects
 				(font
@@ -7175,7 +7166,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 232.156 115.824 90)
 			(effects
 				(font
@@ -7201,7 +7192,7 @@
 				)
 			)
 		)
-		(property "Link" ""
+		(property "Link" "https://jlcpcb.com/partdetail/23958-0603WAF6802T5E/C23231"
 			(at 232.41 116.84 0)
 			(effects
 				(font
@@ -7392,7 +7383,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5bc8959b-474f-45b1-a6ad-bf9699cc4019")
-		(property "Reference" "TP2"
+		(property "Reference" "TP_GND1"
 			(at 40.64 177.7999 90)
 			(effects
 				(font
@@ -7442,7 +7433,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP2")
+					(reference "TP_GND1")
 					(unit 1)
 				)
 			)
@@ -7522,7 +7513,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "621ff51c-c2f5-4488-8ac1-81ffce47e002")
-		(property "Reference" "TP7"
+		(property "Reference" "TP_noMag1"
 			(at 248.158 144.272 0)
 			(effects
 				(font
@@ -7572,7 +7563,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP7")
+					(reference "TP_noMag1")
 					(unit 1)
 				)
 			)
@@ -7939,7 +7930,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8588d481-c1e0-4df6-a51a-d76260b561b0")
-		(property "Reference" "V_regulator1"
+		(property "Reference" "V_reg1"
 			(at 83.82 31.75 0)
 			(effects
 				(font
@@ -7994,7 +7985,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "V_regulator1")
+					(reference "V_reg1")
 					(unit 1)
 				)
 			)
@@ -8073,7 +8064,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8a6a4ce8-be17-46bf-8ae4-03e13e15e149")
-		(property "Reference" "TP6"
+		(property "Reference" "TP_setPt1"
 			(at 245.11 82.042 0)
 			(effects
 				(font
@@ -8123,7 +8114,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP6")
+					(reference "TP_setPt1")
 					(unit 1)
 				)
 			)
@@ -8708,7 +8699,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a98947bf-9d80-419c-a916-265c3a2d2880")
-		(property "Reference" "TP3"
+		(property "Reference" "TP_Fault1"
 			(at 67.31 50.8 90)
 			(effects
 				(font
@@ -8758,7 +8749,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP3")
+					(reference "TP_Fault1")
 					(unit 1)
 				)
 			)
@@ -8905,7 +8896,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b4789603-c1ce-45de-bfcb-24fb1ec55102")
-		(property "Reference" "TP5"
+		(property "Reference" "TP_Vout1"
 			(at 100.584 61.722 0)
 			(effects
 				(font
@@ -8955,7 +8946,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP5")
+					(reference "TP_Vout1")
 					(unit 1)
 				)
 			)
@@ -9401,8 +9392,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c733b263-0394-4b72-a912-7e018335a24e")
-		(property "Reference" "U5"
-			(at 193.802 122.428 90)
+		(property "Reference" "comparator1"
+			(at 186.182 125.222 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9411,7 +9402,7 @@
 			)
 		)
 		(property "Value" "LM393"
-			(at 193.802 124.968 90)
+			(at 193.294 123.19 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9473,7 +9464,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U5")
+					(reference "comparator1")
 					(unit 2)
 				)
 			)
@@ -9628,7 +9619,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cfd07b2a-51c1-44ce-8f33-9e70bc3487f1")
-		(property "Reference" "TP8"
+		(property "Reference" "TP_coilOut1"
 			(at 265.43 77.47 90)
 			(effects
 				(font
@@ -9678,7 +9669,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP8")
+					(reference "TP_coilOut1")
 					(unit 1)
 				)
 			)
@@ -9900,7 +9891,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "de8f2746-86c8-482f-8f44-d68a9f7c6492")
-		(property "Reference" "TP1"
+		(property "Reference" "TP_12V1"
 			(at 40.64 156.2099 90)
 			(effects
 				(font
@@ -9950,7 +9941,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP1")
+					(reference "TP_12V1")
 					(unit 1)
 				)
 			)
@@ -10033,8 +10024,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e012a1f4-dee6-4014-8bb0-3eec4532a602")
-		(property "Reference" "U5"
-			(at 185.674 94.996 0)
+		(property "Reference" "comparator1"
+			(at 178.562 95.758 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10105,7 +10096,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U5")
+					(reference "comparator1")
 					(unit 3)
 				)
 			)
@@ -10570,8 +10561,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f3ae2834-2bf1-4e7c-ab6a-236c47aa5727")
-		(property "Reference" "U5"
-			(at 193.548 92.202 90)
+		(property "Reference" "comparator1"
+			(at 186.436 92.964 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10642,7 +10633,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U5")
+					(reference "comparator1")
 					(unit 1)
 				)
 			)
