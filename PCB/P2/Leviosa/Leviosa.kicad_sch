@@ -7166,7 +7166,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "54.2kΩ"
+		(property "Value" "64.2kΩ"
 			(at 236.22 119.38 90)
 			(effects
 				(font
@@ -7201,7 +7201,7 @@
 				)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/YAGEO-RT0402BRD0754K2L/C852840"
+		(property "Link" ""
 			(at 232.41 116.84 0)
 			(effects
 				(font
@@ -8906,7 +8906,7 @@
 		(dnp no)
 		(uuid "b4789603-c1ce-45de-bfcb-24fb1ec55102")
 		(property "Reference" "TP5"
-			(at 97.79 67.31 0)
+			(at 100.584 61.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8915,7 +8915,7 @@
 			)
 		)
 		(property "Value" "Vout"
-			(at 97.79 64.77 0)
+			(at 100.584 59.182 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9489,7 +9489,7 @@
 		(dnp no)
 		(uuid "c7a00bba-e3aa-40ac-bcdd-50d79b7b8644")
 		(property "Reference" "R12"
-			(at 236.22 97.79 90)
+			(at 235.966 95.758 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9497,7 +9497,7 @@
 			)
 		)
 		(property "Value" "3.9kΩ"
-			(at 236.22 95.25 90)
+			(at 236.22 97.79 90)
 			(effects
 				(font
 					(size 1.27 1.27)
