@@ -1299,46 +1299,72 @@ def coil(CONSTANTS):
             myCoil.add(winding) # ~1k coil windings
     return myCoil
 
-def penMagnets(CONSTANTS, rotate = True):
-    # inaccurate but good enough
-    penMagnet1 = magpy.magnet.Cylinder(
-        magnetization = (0, 0, CONSTANTS['MAGNETIZATION']/1.175), 
-        dimension = (CONSTANTS['MAGNET_D'], CONSTANTS['MAGNET_H']), 
-        position = (0, 0, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H']/2)
-        )
-    penMagnet1.meshing = 30
-    penMagnet2 = penMagnet1.copy(deep = True)
-    penMagnet2.position = (0, 0, CONSTANTS['HOVER_HEIGHT'] + 1.5*CONSTANTS['MAGNET_H'])
-
-    if not rotate: # do not rotate
-        return
-    elif str(rotate) == 'True': # default case of rotating by 5 deg for scanning restoring moment
-        rotate = 5
-        print('default rotation of 5 deg')
+def penMagnets(CONSTANTS, rotate = 5, combineMagnets = True):
     rotateAnchor = (0, 0, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H']/2)
-    penMagnet1.rotate_from_angax(angle = rotate, axis = 'y', anchor = rotateAnchor, degrees = True)
-    penMagnet2.rotate_from_angax(angle = rotate, axis = 'y', anchor = rotateAnchor, degrees = True)
+    if not combineMagnets:
+        penMagnet1 = magpy.magnet.Cylinder(
+            magnetization = (0, 0, CONSTANTS['MAGNETIZATION']), 
+            dimension = (CONSTANTS['MAGNET_D'], CONSTANTS['MAGNET_H']), 
+            position = (0, 0, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H']/2)
+            )
+        penMagnet1.meshing = 30
+        penMagnet2 = penMagnet1.copy(deep = True)
+        penMagnet2.position = (0, 0, CONSTANTS['HOVER_HEIGHT'] + 1.5*CONSTANTS['MAGNET_H'])
+
+        if not rotate: # do not rotate
+            return penMagnet1, penMagnet2
+        penMagnet1.rotate_from_angax(angle = rotate, axis = 'y', anchor = rotateAnchor, degrees = True)
+        penMagnet2.rotate_from_angax(angle = rotate, axis = 'y', anchor = rotateAnchor, degrees = True)
+        return penMagnet1, penMagnet2
+
+    # combineMagnets = True
+    penMagnets = magpy.magnet.Cylinder(
+        magnetization = (0, 0, CONSTANTS['MAGNETIZATION']), 
+        dimension = (CONSTANTS['MAGNET_D'], 2*CONSTANTS['MAGNET_H']), 
+        position = (0, 0, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H'])
+        )
+    penMagnets.meshing = 20
+    if not rotate:
+        return penMagnets
+    penMagnets.rotate_from_angax(angle = 5, axis = 'y', anchor = rotateAnchor, degrees = True)
+    return penMagnets
+
+def baseMagnets(CONSTANTS, combineMagnets = True):
+    if not combineMagnets:
+        baseMagnet1 = magpy.magnet.Cylinder(
+            magnetization=(0, 0, CONSTANTS['MAGNETIZATION']), 
+            dimension=(CONSTANTS['MAGNET_D'], CONSTANTS['MAGNET_H']), 
+            position = (0, 0, CONSTANTS['BASE_MAGNET_TOP'] - CONSTANTS['MAGNET_H']/2),
+        )
+        baseMagnet2 = baseMagnet1.copy(deep = True)
+        baseMagnet2.position = (0, 0, CONSTANTS['BASE_MAGNET_TOP'] - 1.5*CONSTANTS['MAGNET_H'])
+        return baseMagnet1, baseMagnet2
     
-    return penMagnet1, penMagnet2
+    baseMagnet = magpy.magnet.Cylinder(
+        magnetization=(0, 0, CONSTANTS['MAGNETIZATION']), 
+        dimension=(CONSTANTS['MAGNET_D'], 2*CONSTANTS['MAGNET_H']), 
+        position = (0, 0, CONSTANTS['BASE_MAGNET_TOP'] - CONSTANTS['MAGNET_H']),
+    )
+    return baseMagnet
 
 def experiment14():
     # combine exp 12 & 13. Plot.
     # ADD SECTION FOR LOOKING AT TRANSLATIONAL RESTORING FORCE FROM COIL AT DIFFERENT Z HEIGHTS
     # note: take top of secure EM as datum
     CONSTANTS = {
-        'MAGNET_D' : 0.01,
-        'MAGNET_H' : 0.005,
+        'MAGNET_D' : 10e-3, # mm
+        'MAGNET_H' : 5e-3, # mm
         'MAGNET_TO_RING_FACE' : 5e-3, # mm
         'POST_TO_SENSOR' : -3e-3 - 0.6e-3, # mm; post to top face of sensor cutout + sensing position relative to sensor cutout
         'POST_TO_TOP' : 2.4e-3, # mm
         'MAG_RING_TO_POST' : -2e-3, # mm; update from -8e-4
-        'MAGNET_RING_GAP' : 18.4e-3, # mm
+        'MAGNET_RING_GAP' : 17e-3, #18.4e-3, # mm
         'FERRITE_H' : 12e-3, # mm
         'FERRITE_D' : 8e-3, # mm
         'MAGNETIZATION' : 1.51e6,
-        'FERRITE_MAGNETIZATION_EM_OFF' : 1.51e5, # magnetization of ferrite core from permanent magnets
+        'FERRITE_MAGNETIZATION_EM_OFF' : -1.51e5, # magnetization of ferrite core from permanent magnets
         'FERRITE_MAGNETIZATION_EM_ON' : 1.51e5 * 3.35, # calculated magnetization when control system is ON
-        'PEN_MASS' : 1.28e-2, #kg
+        'PEN_MASS' : 1.40e-2, #kg for minimalist pen; # 1.42e-2 # kg for fancy pen
         'HOVER_HEIGHT' : 5e-3, #5e-3
         'COIL_H' : 24e-3,
         'COIL_OD' : 19.6e-3,
@@ -1346,53 +1372,39 @@ def experiment14():
         'WIRE_D' : 0.35e-3, # assume wire diameter from https://www.aliexpress.com/item/1005007539263147.html?spm=a2g0o.detail.pcDetailBottomMoreOtherSeller.4.ad14UWzRUWzR8E&gps-id=pcDetailBottomMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=9bdcbb99-2488-4a53-a188-dcab84615b92&_t=gps-id:pcDetailBottomMoreOtherSeller,scm-url:1007.40050.354490.0,pvid:9bdcbb99-2488-4a53-a188-dcab84615b92,tpp_buckets:668%232846%238116%232002&pdp_ext_f=%7B%22order%22%3A%222%22%2C%22eval%22%3A%221%22%2C%22sceneId%22%3A%2230050%22%7D&pdp_npi=4%40dis%21CAD%216.38%214.60%21%21%214.54%213.27%21%402101c5bf17483994196241774eb97f%2112000041207734322%21rec%21CA%212712658390%21X&utparam-url=scene%3ApcDetailBottomMoreOtherSeller%7Cquery_from%3A
         'CURRENT' : 0.123, # [A] average. (totalPower - arduinoPower)/voltage = (2.08W-0.6W)/12V = 0.12333...
         'COIL_POS_TOP' : -0.4e-3, # mm
+        'BASE_MAGNET_TOP' : -31.5e-3, # mm
     }
     CONSTANTS['TOP_TO_FERRITE'] = -12.4e-3 - CONSTANTS['FERRITE_H']/2 # second value is coilH/2
-
-    sensorZPos =  -CONSTANTS['POST_TO_TOP'] + CONSTANTS['POST_TO_SENSOR']
+    CONSTANTS['SENSOR_POS'] =  -CONSTANTS['POST_TO_TOP'] + CONSTANTS['POST_TO_SENSOR']
     magnetRing1ZPos = -CONSTANTS['POST_TO_TOP'] - CONSTANTS['MAG_RING_TO_POST'] - CONSTANTS['MAGNET_TO_RING_FACE'] - CONSTANTS['MAGNET_H']/2
     magnetRing2ZPos = magnetRing1ZPos - CONSTANTS['MAGNET_H'] - CONSTANTS['MAGNET_RING_GAP']
     
-    magnetRing1 = magnetRing(0.057, 0, magnetRing1ZPos, 9, CONSTANTS['MAGNETIZATION'])
-    magnetRing2 = magnetRing(0.054, 0, magnetRing2ZPos, 12, CONSTANTS['MAGNETIZATION'])
+    magnetRing1 = magnetRing(0.059, 0, magnetRing1ZPos, 9, CONSTANTS['MAGNETIZATION'])
+    magnetRing2 = magnetRing(0.045, 0, magnetRing2ZPos, 12, CONSTANTS['MAGNETIZATION'])
+    baseMagnet = baseMagnets(CONSTANTS)
+    ferriteSysOff = ferriteCore(CONSTANTS, EM_state = False)
     ferriteSysOn = ferriteCore(CONSTANTS)
     myCoil = coil(CONSTANTS)
-    penMagnet1, penMagnet2 = penMagnets(CONSTANTS)
-    
-    c = magnetRing1.mCol + magnetRing2.mCol + ferriteSysOn
-    # loop thru find optimal placement for extra magnet
-    print('loop thru to find optimal placement for extra magnet')
-    F, T = getFT(c, penMagnet1) + getFT(c, penMagnet2)
-    # print('F', F, 'T', T)
-    print('current system as of 2025/09/24. Note 1.1x multiplier on magnetization since had added small magnet under')
-    zPos = -33e-3 # -28e-3 update magnet position given it was found to cause noise
-    baseMagnet = magpy.magnet.Cylinder(
-        magnetization=(0,0,CONSTANTS['MAGNETIZATION']*1.1), dimension=(MAGNET_D, MAGNET_H), position = (0, 0, zPos)
-    )
-    F2, T2 = getFT(baseMagnet, penMagnet1) + getFT(baseMagnet, penMagnet2)
-    Ft = F + F2
-    Tt = T + T2
-    B_sensor = magpy.getB(c, [0, 0, sensorZPos]) + magpy.getB(penMagnet1, [0, 0, sensorZPos]) + magpy.getB(penMagnet2, [0, 0, sensorZPos]) + magpy.getB(baseMagnet, [0, 0, sensorZPos])
-    print('F', Ft, 'T', Tt, 'B_sensor', B_sensor)
-    print('F1', F, 'T1', T)
-    print('F2', F2, 'T2', T2) # THIS IS OK, therefore issue is not with baseMagnet or penMagnets
+    penMagnet = penMagnets(CONSTANTS) # penMagnet1, penMagnet2 = penMagnets(CONSTANTS)
 
-    penMagnet3 = magpy.magnet.Cylinder(
-        magnetization=(0,0,CONSTANTS['MAGNETIZATION']/1.175), dimension=(MAGNET_D, 2*MAGNET_H), position = (0, 0.00, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H'])
-        )
-    penMagnet3.meshing = 30
-    rotateAnchor = (0, 0, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H']/2)
-    penMagnet3.rotate_from_angax(angle = 5, axis = 'y', anchor = rotateAnchor, degrees = True)
-    print(getFT(c,penMagnet1))
-    print(getFT(c,penMagnet2))
-    print(getFT(c,penMagnet3))
-    F_, T_ = getFT(c, penMagnet3)
-    
-    print('F3', F_, 'T3', T_)
-    print('F1', F, 'T1', T)
-    # ONE MAGNET IS SAME AS 2 FOR FLOATING PEN, JUST COMBINE
+    myCol = {
+        'magnets' : magnetRing1.mCol + magnetRing2.mCol + baseMagnet,
+        # 'EMoff' : ferriteSysOff, # likely can ignore this case...
+        'EMon' : ferriteSysOn + myCoil,
+        }
+    Fs = {}
+    Ts = {}
+    B_sensor = magpy.getB(penMagnet, [0, 0, CONSTANTS['SENSOR_POS']])
+    for key, val in myCol.items():
+        Fs[key], Ts[key] = getFT(val, penMagnet)
+        B_sensor += magpy.getB(val, [0, 0, CONSTANTS['SENSOR_POS']])
+    Fg = -9.81*CONSTANTS['PEN_MASS']
+    print(f'F_magnet_z {Fs["magnets"][2]:.3f} | F_EMon_z {Fs["EMon"][2]:.3f} | F_g {Fg:.3f} | sum {Fs["magnets"][2] + Fs["EMon"][2] + Fg:.3f}')
+    print(f'restoring moment (care magnitude) {Ts["magnets"][1] + Ts["EMon"][1]:.5f}')
+    print(f'F_destabilize_x {Fs["magnets"][0]:.4f} | F_stabilize_x {Fs["EMon"][0]:.4f} | ratio (small better) {Fs["magnets"][0]/Fs["EMon"][0]:.3f}')
+    print(f'Sensor field Z (closer to 0 best): {B_sensor[2]:.3f}')
 
-
+    # generally smaller ringD for ring2 is better. As ringD reduces, bring slightly higher up.
 
 
 def experiment15():
@@ -1451,7 +1463,7 @@ def main():
     # experiment11(True)
 
     # repeat experiment11, updated based on IRL experiments & focused on further optimization
-    experiment12()
+    # experiment12()
 
     # experiment13()
 
