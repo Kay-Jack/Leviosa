@@ -1,0 +1,22 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+V = 5  # Volts
+L = 10e-3  # 10 mH in Henrys
+R_values = [1, 5, 10]  # Ohms
+t = np.linspace(0, 0.01, 1000)  # 0 to 10 ms
+
+plt.figure(figsize=(8,5))
+
+for R in R_values:
+    tau = L / R
+    I = (V / R) * (1 - np.exp(-t / tau))
+    plt.plot(t*1000, I, label=f'R = {R} Ω, τ={tau*1000:.2f} ms')
+
+plt.title("Current through RL series circuit for different R")
+plt.xlabel("Time (ms)")
+plt.ylabel("Current (A)")
+plt.grid(True)
+plt.legend()
+plt.show()

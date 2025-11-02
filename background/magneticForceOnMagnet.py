@@ -8,6 +8,7 @@ from scipy.spatial.transform import Rotation as R
 import time
 from magpylib_force import getFT
 import copy
+import csv
 
 np.set_printoptions(precision = 4)
 MAGNET_D = 0.01
@@ -16,7 +17,7 @@ MAGNET_H = 0.005
 class magnetRing:
     def __init__(self, diameter, angle, zPos, numMagnets, magnetization = 1.6e6, theta_i = 0): # for default use the old silver magnets
         # diameter = diameter of 
-        # angle = angle of magnets in ring. Positive means outwards (assuming vector going 'up'). In radians
+        # angle = angle of magnets in ring. Positive means outwards (assuming vector going 'up'). In degrees
         # zPos = z displacement of the ring
         # numMagnets = number of magnets in the ring
         self.diameter = diameter
@@ -1298,8 +1299,8 @@ def coil(CONSTANTS):
             myCoil.add(winding) # ~1k coil windings
     return myCoil
 
-def penMagnets(CONSTANTS, rotate = 5, combineMagnets = True):
-    rotateAnchor = (0, 0, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H']/2)
+def penMagnets(CONSTANTS, rotate = 15, combineMagnets = True):
+    rotateAnchor = (0, 0, CONSTANTS['HOVER_HEIGHT'] + CONSTANTS['MAGNET_H'])
     if not combineMagnets:
         penMagnet1 = magpy.magnet.Cylinder(
             magnetization = (0, 0, CONSTANTS['MAGNETIZATION']), 
@@ -1350,12 +1351,13 @@ def calcSys(CONSTANTS):
     # re-generate constants with dependencies
     CONSTANTS['TOP_TO_FERRITE'] = -12.4e-3 - CONSTANTS['FERRITE_H']/2 # second value is coilH/2
     CONSTANTS['SENSOR_POS'] =  -CONSTANTS['POST_TO_TOP'] + CONSTANTS['POST_TO_SENSOR']
-    magnetRing1ZPos = -CONSTANTS['POST_TO_TOP'] - CONSTANTS['MAG_RING_TO_POST'] - CONSTANTS['MAGNET_TO_RING_FACE'] - CONSTANTS['MAGNET_H']/2
-    magnetRing2ZPos = magnetRing1ZPos - CONSTANTS['MAGNET_H'] - CONSTANTS['MAGNET_RING_GAP']
+    CONSTANTS['RING1_Z'] = -CONSTANTS['POST_TO_TOP'] - CONSTANTS['MAG_RING_TO_POST'] - CONSTANTS['MAGNET_TO_RING_FACE'] - CONSTANTS['MAGNET_H']/2
+    CONSTANTS['RING2_Z'] = CONSTANTS['RING1_Z'] - CONSTANTS['MAGNET_H'] - CONSTANTS['MAGNET_RING_GAP']
+    
 
     # create system objects
-    magnetRing1 = magnetRing(CONSTANTS['RING1_D'], 0, magnetRing1ZPos, CONSTANTS['RING1_NUM'], CONSTANTS['MAGNETIZATION'])
-    magnetRing2 = magnetRing(CONSTANTS['RING2_D'], 0, magnetRing2ZPos, CONSTANTS['RING2_NUM'], CONSTANTS['MAGNETIZATION'])
+    magnetRing1 = magnetRing(CONSTANTS['RING1_D'], CONSTANTS['RING1_THETA'], CONSTANTS['RING1_Z'], CONSTANTS['RING1_NUM'], CONSTANTS['MAGNETIZATION'])
+    magnetRing2 = magnetRing(CONSTANTS['RING2_D'], CONSTANTS['RING2_THETA'], CONSTANTS['RING2_Z'], CONSTANTS['RING2_NUM'], CONSTANTS['MAGNETIZATION'])
     baseMagnet = baseMagnets(CONSTANTS)
     ferriteSysOff = ferriteCore(CONSTANTS, EM_state = False)
     ferriteSysOn = ferriteCore(CONSTANTS)
@@ -1372,6 +1374,10 @@ def calcSys(CONSTANTS):
     for key, val in myCol.items():
         Fs[key], Ts[key] = getFT(val, penMagnet)
         B_sensor += magpy.getB(val, [0, 0, CONSTANTS['SENSOR_POS']])
+
+    
+    # pl = magpy.show(magnetRing1.mCol, backend='pyvista', return_fig=True)
+    # pl.show()
 
     return Fs, Ts, B_sensor
 
@@ -1541,23 +1547,35 @@ def experiment14():
     # print(f'F_destabilize_x {Fs["magnets"][0]:.4f} | F_stabilize_x {Fs["EMon"][0]:.4f} | ratio (small better) {Fs["magnets"][0]/Fs["EMon"][0]:.3f}')
     # print(f'Sensor field Z (closer to 0 best): {B_sensor[2]:.3f}')
 
+    # # scan
+    # for variable in ['MAG_RING_TO_POST', 'MAGNET_RING_GAP', 'BASE_MAGNET_TOP', 'RING1_D', 'RING2_D']:
+    #     CONSTANTS_ = copy.deepcopy(CONSTANTS)
+    #     variableExplore = dict()
+    #     for delta in [-4e-3, -2e-3, 0e-3, 2e-3, 4e-3]:
+    #         newValue = CONSTANTS[variable] + delta
+    #         CONSTANTS_[variable] = newValue
+    #         variableExplore[newValue] = scanHoverCalc(CONSTANTS_)
+
+    #     # ADD PLOTTING FUNCTION HERE:
+    #     # x-axis is variable being explored, y-axis is variable
+    #     # subplot 1: y-axis = Fs["magnets"][2] + Fs["EMon"][2] + Fg. Color code by hover height
+    #     # subplot 2: y-axis = Ts["magnets"][1] + Ts["EMon"][1]:.5f. Color code by hover hieght
+    #     # subplot 3: y-axis is force. Plot 2 lines: line 1 is Fs["magnets"][0], line 2 is Fs["EMon"][0] (one dashed, one solid). Also color code by hover height
+    #     # subplot 4: y-axis is B_sensor[2]
+    #     # title each plot with variable being explored
+    #     # save plot under name of plot
+    #     plotScanResults(variable, variableExplore, CONSTANTS)
+
     # scan
-    for variable in ['MAG_RING_TO_POST', 'MAGNET_RING_GAP', 'BASE_MAGNET_TOP', 'RING1_D', 'RING2_D']:
+    CONSTANTS['RING2_D'] = 0.03 # REDUCE FOR EXPERIMENT
+    for variable in ['RING1_THETA', 'RING2_THETA', 'RING1_NUM', 'RING2_NUM']:
         CONSTANTS_ = copy.deepcopy(CONSTANTS)
         variableExplore = dict()
-        for delta in [-4e-3, -2e-3, 0e-3, 2e-3, 4e-3]:
+        for delta in [-5, -2, -1, 0, 1, 2, 5]:
             newValue = CONSTANTS[variable] + delta
             CONSTANTS_[variable] = newValue
             variableExplore[newValue] = scanHoverCalc(CONSTANTS_)
 
-        # ADD PLOTTING FUNCTION HERE:
-        # x-axis is variable being explored, y-axis is variable
-        # subplot 1: y-axis = Fs["magnets"][2] + Fs["EMon"][2] + Fg. Color code by hover height
-        # subplot 2: y-axis = Ts["magnets"][1] + Ts["EMon"][1]:.5f. Color code by hover hieght
-        # subplot 3: y-axis is force. Plot 2 lines: line 1 is Fs["magnets"][0], line 2 is Fs["EMon"][0] (one dashed, one solid). Also color code by hover height
-        # subplot 4: y-axis is B_sensor[2]
-        # title each plot with variable being explored
-        # save plot under name of plot
         plotScanResults(variable, variableExplore, CONSTANTS)
             
             
@@ -1568,6 +1586,99 @@ def experiment14():
 
 
 def experiment15():
+    # combine exp 12 & 13. Plot.
+    # ADD SECTION FOR LOOKING AT TRANSLATIONAL RESTORING FORCE FROM COIL AT DIFFERENT Z HEIGHTS
+    # note: take top of secure EM as datum
+    CONSTANTS = {
+        'MAGNET_D' : 10e-3, # m
+        'MAGNET_H' : 5e-3, # m
+        'MAGNET_TO_RING_FACE' : 5e-3, # m
+        'POST_TO_SENSOR' : -3e-3 - 0.6e-3, # m; post to top face of sensor cutout + sensing position relative to sensor cutout
+        'POST_TO_TOP' : 2.4e-3, # m
+        'MAG_RING_TO_POST' : -3.4e-3, # m; update from -8e-4
+        'MAGNET_RING_GAP' : 15e-3,#17e-3, #18.4e-3, # m
+        'FERRITE_H' : 12e-3, # m
+        'FERRITE_D' : 8e-3, # m
+        'MAGNETIZATION' : 1.51e6,
+        'FERRITE_MAGNETIZATION_EM_OFF' : -1.51e5, # magnetization of ferrite core from permanent magnets
+        'FERRITE_MAGNETIZATION_EM_ON' : 1.51e5 * 3.35, # calculated magnetization when control system is ON
+        'PEN_MASS' : 1.40e-2, #kg for minimalist pen; # 1.42e-2 # kg for fancy pen
+        'HOVER_HEIGHT' : 5e-3, #5e-3 # m
+        'COIL_H' : 24e-3, # m
+        'COIL_OD' : 19.6e-3, # m
+        'COIL_ID' : 8e-3, # m
+        'WIRE_D' : 0.35e-3, # m; assume wire diameter from https://www.aliexpress.com/item/1005007539263147.html?spm=a2g0o.detail.pcDetailBottomMoreOtherSeller.4.ad14UWzRUWzR8E&gps-id=pcDetailBottomMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=9bdcbb99-2488-4a53-a188-dcab84615b92&_t=gps-id:pcDetailBottomMoreOtherSeller,scm-url:1007.40050.354490.0,pvid:9bdcbb99-2488-4a53-a188-dcab84615b92,tpp_buckets:668%232846%238116%232002&pdp_ext_f=%7B%22order%22%3A%222%22%2C%22eval%22%3A%221%22%2C%22sceneId%22%3A%2230050%22%7D&pdp_npi=4%40dis%21CAD%216.38%214.60%21%21%214.54%213.27%21%402101c5bf17483994196241774eb97f%2112000041207734322%21rec%21CA%212712658390%21X&utparam-url=scene%3ApcDetailBottomMoreOtherSeller%7Cquery_from%3A
+        'CURRENT' : 0.123, # [A] average. (totalPower - arduinoPower)/voltage = (2.08W-0.6W)/12V = 0.12333...
+        'COIL_POS_TOP' : -0.4e-3, # m
+        'BASE_MAGNET_TOP' : -31.5e-3, # m
+        'RING1_D' : 0.058,#0.06, # m
+        'RING2_D' : 0.045,#0.045, # m
+        'RING1_NUM' : 8, # number of magnets in ring 1
+        'RING2_NUM' : 10,#12, # number of magnets in ring 2
+        'RING1_THETA' : 0, # deg
+        'RING2_THETA' : 0,
+    }
+    Fg = -9.81*CONSTANTS['PEN_MASS']
+
+    # # manual iteration
+    # print('Base Case')
+    # print(CONSTANTS)
+    Fs, Ts, B_sensor = calcSys(CONSTANTS)
+    # print(f'F_magnet_z {Fs["magnets"][2]:.3f} | F_EMon_z {Fs["EMon"][2]:.3f} | F_g {Fg:.3f} | sum {Fs["magnets"][2] + Fs["EMon"][2] + Fg:.3f}')
+    # print(f'restoring moment (care magnitude) {Ts["magnets"][1] + Ts["EMon"][1]:.5f}')
+    # print(f'F_destabilize_x {Fs["magnets"][0]:.4f} | F_stabilize_x {Fs["EMon"][0]:.4f} | ratio (small better) {Fs["magnets"][0]/Fs["EMon"][0]:.3f}')
+    # print(f'Sensor field Z (closer to 0 best): {B_sensor[2]:.3f}')
+
+    # new_row_data = list(CONSTANTS.keys()) + [
+    #     'F_magnet_z [N]', 
+    #     'F_EMon_z [N]', 
+    #     'F_g_z [N]', 
+    #     'F_t_z [N]', 
+    #     '-Restoring Moment [Nm]', 
+    #     'F_destabilize_x [N]', 
+    #     'F_stabilize_x [N]', 
+    #     'F_stabilize_x + F_destabilize_x [N]'
+    #     ] # for file creation
+
+    new_row_data = list(CONSTANTS.values()) + [
+        Fs["magnets"][2], 
+        Fs["EMon"][2], 
+        Fg, 
+        Fs["magnets"][2] + Fs["EMon"][2] + Fg, 
+        -(Ts["magnets"][1] + Ts["EMon"][1]),
+        Fs["magnets"][0],
+        Fs["EMon"][0],
+        Fs["EMon"][0] + Fs["magnets"][0],
+        ]
+    with open('experimentParams.csv', 'a', newline = '') as myFile:
+        writer = csv.writer(myFile)
+        writer.writerow(new_row_data)
+
+    # # scan for experiment
+    # CONSTANTS['RING2_NUM'] = 6
+    # for ring2D in [0.03, 0.0325, 0.035]:
+    #     CONSTANTS['RING2_D'] = ring2D
+    #     variableExplore = dict()
+    #     for magnetRingGap in [10e-3, 12e-3, 15e-3, 17.5e-3, 20e-3]: # default is 17e-3
+    #         CONSTANTS['MAGNET_RING_GAP'] = magnetRingGap
+    #         Fs, Ts, B_sensor = calcSys(CONSTANTS)
+    #         variableExplore[magnetRingGap] = scanHoverCalc(CONSTANTS)
+    #     plotScanResults(f'Ring2D {ring2D}', variableExplore, CONSTANTS) 
+    
+    
+    # for variable in ['RING1_THETA', 'RING2_THETA', 'RING1_NUM', 'RING2_NUM']:
+    #     CONSTANTS_ = copy.deepcopy(CONSTANTS)
+    #     variableExplore = dict()
+    #     for delta in [-5, -2, -1, 0, 1, 2, 5]:
+    #         newValue = CONSTANTS[variable] + delta
+    #         CONSTANTS_[variable] = newValue
+    #         variableExplore[newValue] = scanHoverCalc(CONSTANTS_)
+            
+    #     plotScanResults(variable, variableExplore, CONSTANTS)
+    return
+
+
+def experiment16():
     # expand on experiment8 kind of: try and mod exp 8
     # for now keep ferrite magnetization constant. Numbers don't really make sense when considering middle of ferrite 
     # so it's likely that EM is magnetizing ferrite & inductance maintains it and/or magnetization is non-constant through the body
@@ -1627,7 +1738,8 @@ def main():
 
     # experiment13()
 
-    experiment14()
+    # experiment14()
+    experiment15()
 
 
 if __name__ == "__main__":
