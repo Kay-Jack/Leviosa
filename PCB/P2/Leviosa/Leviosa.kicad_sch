@@ -3889,6 +3889,12 @@
 		(uuid "1de9d486-af05-4899-a226-d6ba255719be")
 	)
 	(junction
+		(at 190.5 85.09)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2095c770-9a42-44a3-8620-350e97180dd0")
+	)
+	(junction
 		(at 30.48 173.99)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4031,6 +4037,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b8f541a2-62b1-4c51-b585-e560bb17acef")
+	)
+	(junction
+		(at 190.5 134.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bbf566ab-f94d-4fc0-9b13-f0262c949fd6")
 	)
 	(junction
 		(at 91.44 38.1)
@@ -5478,6 +5490,16 @@
 		)
 		(uuid "fe9d2fde-7a11-4805-9b66-d32b22020835")
 	)
+	(label "5V"
+		(at 182.88 134.62 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1c66bff4-88d5-4799-a67d-c22b6c813c6e")
+	)
 	(label "set_point_trigger"
 		(at 191.77 85.09 0)
 		(effects
@@ -5707,6 +5729,16 @@
 			(justify left bottom)
 		)
 		(uuid "f4d5cc19-df89-43ce-8531-2441ef43d787")
+	)
+	(label "5V"
+		(at 182.88 85.09 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f52a570e-760c-4455-ade6-42a0c4d3b42f")
 	)
 	(label "V_out"
 		(at 245.11 38.1 0)
@@ -6907,6 +6939,81 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_US")
+		(at 186.69 134.62 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3c926a21-0ac2-4f2b-92c7-3629607d59f0")
+		(property "Reference" "R16"
+			(at 186.436 130.048 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "3.9kΩ"
+			(at 186.69 132.08 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 186.436 135.636 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 186.69 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/23745-0603WAF3901T5E/C23018"
+			(at 186.69 134.62 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "903f6e46-87a6-4e3b-84b7-ca313f329e95")
+		)
+		(pin "2"
+			(uuid "b745facd-e787-4bb2-a1fc-8dc9c21b8aec")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 234.95 67.31 0)
 		(unit 1)
@@ -7065,7 +7172,7 @@
 				)
 			)
 		)
-		(property "Value" "1kΩ"
+		(property "Value" "330Ω"
 			(at 214.63 82.55 90)
 			(effects
 				(font
@@ -8202,7 +8309,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "3.7mH"
+		(property "Value" "7.4mH"
 			(at 246.38 68.58 0)
 			(effects
 				(font
@@ -8335,7 +8442,7 @@
 				)
 			)
 		)
-		(property "Value" "AMS1117-5.0"
+		(property "Value" "LM7805"
 			(at 83.82 34.29 0)
 			(effects
 				(font
@@ -10229,7 +10336,7 @@
 				)
 			)
 		)
-		(property "Value" "1kΩ"
+		(property "Value" "330Ω"
 			(at 231.14 132.08 90)
 			(effects
 				(font
@@ -11225,6 +11332,81 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "H2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 186.69 85.09 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f7040ff0-ad0b-4440-9717-01c3e8d41e94")
+		(property "Reference" "R14"
+			(at 186.436 80.518 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "3.9kΩ"
+			(at 186.69 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 186.436 86.106 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 186.69 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 186.69 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Link" "https://jlcpcb.com/partdetail/23745-0603WAF3901T5E/C23018"
+			(at 186.69 85.09 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a35038ee-ab0d-4bd1-907a-7086f25ff75c")
+		)
+		(pin "2"
+			(uuid "e57c3e10-a240-4f95-9fe2-5ca058c15122")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "R14")
 					(unit 1)
 				)
 			)
