@@ -4172,16 +4172,16 @@
 		(uuid "a12767e1-06bb-4fec-b844-a657be949013")
 	)
 	(junction
-		(at 207.01 66.04)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a8b11ed0-11dd-47db-9da3-caf3da08af46")
-	)
-	(junction
 		(at 60.96 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "aa0db4a1-762d-4452-9838-0af496bfea16")
+	)
+	(junction
+		(at 207.01 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4b2e794-d61d-4ab4-a2bd-6a08bdcdffac")
 	)
 	(junction
 		(at 76.2 38.1)
@@ -4282,16 +4282,6 @@
 			(type default)
 		)
 		(uuid "08cac35c-74fb-4493-b771-224dd297517a")
-	)
-	(wire
-		(pts
-			(xy 210.82 66.04) (xy 207.01 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0bba8579-0336-49dd-9e78-45ab3e2f0aa3")
 	)
 	(wire
 		(pts
@@ -4585,7 +4575,7 @@
 	)
 	(wire
 		(pts
-			(xy 236.22 83.82) (xy 240.03 83.82)
+			(xy 254 83.82) (xy 240.03 83.82)
 		)
 		(stroke
 			(width 0)
@@ -4632,16 +4622,6 @@
 			(type default)
 		)
 		(uuid "4777a208-ba1c-4f8e-a96d-90553fcb01a0")
-	)
-	(wire
-		(pts
-			(xy 207.01 55.88) (xy 207.01 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4a1993c5-d5f9-4307-bf73-891febe05edf")
 	)
 	(wire
 		(pts
@@ -4815,6 +4795,16 @@
 	)
 	(wire
 		(pts
+			(xy 207.01 73.66) (xy 207.01 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "641fff37-5364-4037-a7da-a0bcfb094e9e")
+	)
+	(wire
+		(pts
 			(xy 62.23 81.28) (xy 62.23 77.47)
 		)
 		(stroke
@@ -4855,7 +4845,7 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 66.04) (xy 207.01 73.66)
+			(xy 207.01 55.88) (xy 207.01 73.66)
 		)
 		(stroke
 			(width 0)
@@ -5834,7 +5824,7 @@
 		(uuid "d4d567fa-3cdf-45ff-a18b-d435d0412e9f")
 	)
 	(label "coil_output"
-		(at 207.01 63.5 180)
+		(at 207.01 73.66 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8712,7 +8702,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 236.22 83.82 0)
+		(at 254 83.82 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8720,7 +8710,7 @@
 		(dnp no)
 		(uuid "8a6a4ce8-be17-46bf-8ae4-03e13e15e149")
 		(property "Reference" "TP_setPt1"
-			(at 233.68 80.772 0)
+			(at 271.272 84.074 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8729,7 +8719,7 @@
 			)
 		)
 		(property "Value" "set_point_trigger"
-			(at 234.696 78.486 0)
+			(at 272.288 81.788 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8738,7 +8728,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 241.3 83.82 0)
+			(at 254 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8747,7 +8737,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 241.3 83.82 0)
+			(at 254 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8756,7 +8746,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 236.22 83.82 0)
+			(at 254 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10290,7 +10280,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 210.82 66.04 270)
+		(at 207.01 74.93 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10298,25 +10288,25 @@
 		(dnp no)
 		(uuid "cfd07b2a-51c1-44ce-8f33-9e70bc3487f1")
 		(property "Reference" "TP_coilOut1"
-			(at 215.9 64.77 90)
+			(at 208.788 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "coil_out"
-			(at 215.9 67.31 90)
+			(at 208.788 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
-			(at 210.82 71.12 0)
+			(at 201.93 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10325,7 +10315,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 210.82 71.12 0)
+			(at 201.93 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10334,7 +10324,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 210.82 66.04 0)
+			(at 207.01 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
