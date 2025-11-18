@@ -3,5 +3,4 @@
   (lib (name "TPS1H200AQDGNRQ1")(type "KiCad")(uri "${KIPRJMOD}/Libraries/TPS1H200AQDGNRQ1.kicad_sym")(options "")(descr ""))
   (lib (name "MP-2016-1100-50-70")(type "KiCad")(uri "${KIPRJMOD}/Libraries/MP-2016-1100-50-70.kicad_sym")(options "")(descr ""))
   (lib (name "B230A_13_F")(type "KiCad")(uri "${KIPRJMOD}/Libraries/B230A_13_F.kicad_sym")(options "")(descr ""))
-  (lib (name "New_Library")(type "KiCad")(uri "${KIPRJMOD}/Libraries/New_Library.kicad_sym")(options "")(descr ""))
 )

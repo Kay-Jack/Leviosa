@@ -1,0 +1,16 @@
+1. update linear regulator
+   - C_in = 0.33uF to match typical use case
+   - Co = not needed for stability but improves transient response. Recommended >0.1uF. Choose 0.33uF to match input
+
+2. cap added to comparator. 0.1 uF chosen per typical use case
+   --> can I use 0.33uF instead?
+
+3. remove current sense offset voltage provision
+
+4. shift current sense to low side of coil
+
+5. add gate driver
+
+6. combine comparator outputs given they are pulled low
+
+7. add current limiting resistors on comparator output & gate drive output. Resistance values TBD
