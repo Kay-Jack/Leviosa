@@ -6302,7 +6302,7 @@
 				)
 			)
 		)
-		(property "Value" "8.2Ω"
+		(property "Value" "10Ω"
 			(at 159.004 110.236 90)
 			(effects
 				(font
@@ -9042,7 +9042,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "MX27524S"
+		(property "Value" "MX27517"
 			(at 228.092 104.394 0)
 			(effects
 				(font
@@ -9069,7 +9069,16 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "9A (peak) Gate driver, 12V, 3ns delay, SOT-23-6"
+		(property "Description" "-40℃~+125℃ 1 10ns 15ns 4V~18V 6ns 6ns 80uA Low Side MOSFET SOT-23-6L Gate Drivers ROHS"
+			(at 226.06 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Link" ""
 			(at 226.06 93.98 0)
 			(effects
 				(font
@@ -10744,7 +10753,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "20nF"
+		(property "Value" "2.2nF"
 			(at 155.956 132.842 90)
 			(effects
 				(font
