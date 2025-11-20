@@ -4213,6 +4213,17 @@
 		)
 		(uuid "68d4e351-1aef-46df-9cee-713d9ec1a12a")
 	)
+	(text "can leave floating. Auto pulled high"
+		(exclude_from_sim no)
+		(at 275.59 105.664 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "7d5cb9d0-74ce-4448-90d6-5b1745ffe9e0")
+	)
 	(text "voltage divider:\n~[0.3V, 1.071V]\n~[61, 219] analogRead"
 		(exclude_from_sim no)
 		(at 139.954 34.29 0)
@@ -5654,16 +5665,6 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 109.22) (xy 238.76 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d2166195-1cdb-47eb-8928-f1f4a73c1a16")
-	)
-	(wire
-		(pts
 			(xy 83.82 176.53) (xy 83.82 185.42)
 		)
 		(stroke
@@ -5972,6 +5973,16 @@
 		)
 		(uuid "1213368f-9b32-470d-a027-54bba1ca22ec")
 	)
+	(label "instrumental_out"
+		(at 151.13 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "13cddd04-c8fa-44d8-9d4f-c38ecd967b8d")
+	)
 	(label "5V"
 		(at 96.52 152.4 0)
 		(effects
@@ -6112,15 +6123,15 @@
 		)
 		(uuid "a9c5bc71-b736-4fd6-8d40-89867e49c4b2")
 	)
-	(label "float_high"
-		(at 238.76 109.22 0)
+	(label "gate_driver_out"
+		(at 240.03 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "afdd78ec-ed97-438a-b630-190577f244f6")
+		(uuid "ac5cc317-8d68-457e-a565-49d6cb3d1be1")
 	)
 	(label "PB5"
 		(at 81.28 176.53 0)
@@ -6151,6 +6162,16 @@
 			(justify left bottom)
 		)
 		(uuid "bebf4f82-55cf-44fb-b91e-9a49233f3622")
+	)
+	(label "hall_out"
+		(at 133.35 121.92 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c124b13d-e6f9-4860-b25c-b75976562a99")
 	)
 	(label "servo1_control"
 		(at 81.28 166.37 0)
@@ -6260,7 +6281,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "00dce23d-937f-4144-b1cd-6f219e117a1c")
 		(property "Reference" "#PWR019"
 			(at 245.11 92.71 0)
@@ -6272,7 +6292,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 245.11 91.44 0)
+			(at 249.682 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9642,7 +9662,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "94704e95-cf90-4b47-875d-21b02034dcdc")
-		(property "Reference" "R_brake"
+		(property "Reference" "R_brake1"
 			(at 190.246 60.452 0)
 			(effects
 				(font
@@ -9702,7 +9722,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R_brake")
+					(reference "R_brake1")
 					(unit 1)
 				)
 			)
