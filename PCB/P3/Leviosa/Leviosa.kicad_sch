@@ -6816,7 +6816,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1e2c8ee2-0031-4c67-88c3-4e827a758339")
-		(property "Reference" "Cbypass1"
+		(property "Reference" "C_sense1"
 			(at 254.508 46.736 90)
 			(effects
 				(font
@@ -6878,7 +6878,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Cbypass1")
+					(reference "C_sense1")
 					(unit 1)
 				)
 			)
@@ -7187,7 +7187,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32e2951f-a6ef-488b-9a1f-c794b49703f4")
-		(property "Reference" "current_sense1"
+		(property "Reference" "U_sense1"
 			(at 256.286 65.278 0)
 			(effects
 				(font
@@ -7251,7 +7251,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "current_sense1")
+					(reference "U_sense1")
 					(unit 1)
 				)
 			)
@@ -7267,7 +7267,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "349d6d7c-67a1-4fb2-a02c-a9b92b332df9")
-		(property "Reference" "Cbypass2"
+		(property "Reference" "C_MCU1"
 			(at 73.66 144.7799 0)
 			(effects
 				(font
@@ -7329,7 +7329,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Cbypass2")
+					(reference "C_MCU1")
 					(unit 1)
 				)
 			)
@@ -7409,7 +7409,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3631d8ff-e93e-4eaa-8c7d-e1486c2293ba")
-		(property "Reference" "TP_5V1"
+		(property "Reference" "5V1"
 			(at 93.98 26.67 0)
 			(effects
 				(font
@@ -7459,7 +7459,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP_5V1")
+					(reference "5V1")
 					(unit 1)
 				)
 			)
@@ -8125,7 +8125,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "54b284ce-04fc-43b5-bc81-c784a6a493c7")
-		(property "Reference" "Servo2"
+		(property "Reference" "Srvo2"
 			(at 97.028 140.208 90)
 			(effects
 				(font
@@ -8182,7 +8182,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Servo2")
+					(reference "Srvo2")
 					(unit 1)
 				)
 			)
@@ -8340,7 +8340,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "56a9a8d3-6e73-4341-b309-639a06a5d153")
-		(property "Reference" "current_lim1"
+		(property "Reference" "U_Ilim1"
 			(at 43.18 41.91 0)
 			(effects
 				(font
@@ -8482,7 +8482,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "current_lim1")
+					(reference "U_Ilim1")
 					(unit 1)
 				)
 			)
@@ -8498,7 +8498,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5bc8959b-474f-45b1-a6ad-bf9699cc4019")
-		(property "Reference" "TP_GND1"
+		(property "Reference" "GND1"
 			(at 35.56 177.7999 90)
 			(effects
 				(font
@@ -8548,7 +8548,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP_GND1")
+					(reference "GND1")
 					(unit 1)
 				)
 			)
@@ -8856,7 +8856,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6ad52ffe-634d-4768-bce2-9343250f1c33")
-		(property "Reference" "Q_setPt1"
+		(property "Reference" "Q1"
 			(at 236.474 75.946 90)
 			(effects
 				(font
@@ -8916,7 +8916,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Q_setPt1")
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -9172,6 +9172,15 @@
 				(hide yes)
 			)
 		)
+		(property "Link" "https://jlcpcb.com/partdetail/onsemi-MC7805BD2TR4G/C15833"
+			(at 83.82 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a6bc9913-a4f9-4f2f-9025-7972ee36d83c")
 		)
@@ -9263,7 +9272,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8a6a4ce8-be17-46bf-8ae4-03e13e15e149")
-		(property "Reference" "TP_setPt1"
+		(property "Reference" "gtOut1"
 			(at 271.272 92.964 90)
 			(effects
 				(font
@@ -9313,7 +9322,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP_setPt1")
+					(reference "gtOut1")
 					(unit 1)
 				)
 			)
@@ -9410,7 +9419,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8ed2075e-ca47-4f30-99ad-987214862773")
-		(property "Reference" "gate_driver1"
+		(property "Reference" "gtDrvr1"
 			(at 228.092 110.744 0)
 			(effects
 				(font
@@ -9485,7 +9494,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "gate_driver1")
+					(reference "gtDrvr1")
 					(unit 1)
 				)
 			)
@@ -10061,7 +10070,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a98947bf-9d80-419c-a916-265c3a2d2880")
-		(property "Reference" "TP_Fault1"
+		(property "Reference" "fault1"
 			(at 67.31 50.8 90)
 			(effects
 				(font
@@ -10111,7 +10120,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP_Fault1")
+					(reference "fault1")
 					(unit 1)
 				)
 			)
@@ -10126,8 +10135,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b4789603-c1ce-45de-bfcb-24fb1ec55102")
-		(property "Reference" "TP_Vout1"
-			(at 98.044 64.262 0)
+		(property "Reference" "Vout1"
+			(at 95.758 64.516 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10176,7 +10185,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP_Vout1")
+					(reference "Vout1")
 					(unit 1)
 				)
 			)
@@ -10333,7 +10342,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be562a45-1b90-478f-9d3a-05029bf64665")
-		(property "Reference" "Servo1"
+		(property "Reference" "Srvo1"
 			(at 105.156 161.544 90)
 			(effects
 				(font
@@ -10390,7 +10399,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Servo1")
+					(reference "Srvo1")
 					(unit 1)
 				)
 			)
@@ -10406,7 +10415,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be882b7b-9158-4ca8-aa48-c8cfdb45e32e")
-		(property "Reference" "Pot_setPt1"
+		(property "Reference" "pot1"
 			(at 141.732 48.26 0)
 			(effects
 				(font
@@ -10469,71 +10478,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Pot_setPt1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 152.4 186.69 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c64b31ba-1ab6-40d8-9c87-69a52e7867ef")
-		(property "Reference" "H3"
-			(at 154.94 185.4199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole"
-			(at 154.94 187.9599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO7380"
-			(at 152.4 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 152.4 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 152.4 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Leviosa"
-				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "H3")
+					(reference "pot1")
 					(unit 1)
 				)
 			)
@@ -10623,7 +10568,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c733b263-0394-4b72-a912-7e018335a24e")
-		(property "Reference" "comparator1"
+		(property "Reference" "cmprtr1"
 			(at 188.722 138.938 90)
 			(effects
 				(font
@@ -10704,7 +10649,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "comparator1")
+					(reference "cmprtr1")
 					(unit 2)
 				)
 			)
@@ -10858,7 +10803,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cfd07b2a-51c1-44ce-8f33-9e70bc3487f1")
-		(property "Reference" "TP_coilOut1"
+		(property "Reference" "coilOut1"
 			(at 208.788 86.36 0)
 			(effects
 				(font
@@ -10908,7 +10853,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP_coilOut1")
+					(reference "coilOut1")
 					(unit 1)
 				)
 			)
@@ -11209,7 +11154,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "de8f2746-86c8-482f-8f44-d68a9f7c6492")
-		(property "Reference" "TP_12V1"
+		(property "Reference" "12V1"
 			(at 35.56 156.2099 90)
 			(effects
 				(font
@@ -11259,7 +11204,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "TP_12V1")
+					(reference "12V1")
 					(unit 1)
 				)
 			)
@@ -11342,7 +11287,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e012a1f4-dee6-4014-8bb0-3eec4532a602")
-		(property "Reference" "comparator1"
+		(property "Reference" "cmprtr1"
 			(at 168.148 110.744 0)
 			(effects
 				(font
@@ -11423,7 +11368,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "comparator1")
+					(reference "cmprtr1")
 					(unit 3)
 				)
 			)
@@ -12028,7 +11973,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f3ae2834-2bf1-4e7c-ab6a-236c47aa5727")
-		(property "Reference" "comparator1"
+		(property "Reference" "cmprtr1"
 			(at 189.23 111.252 90)
 			(effects
 				(font
@@ -12109,7 +12054,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "comparator1")
+					(reference "cmprtr1")
 					(unit 1)
 				)
 			)
