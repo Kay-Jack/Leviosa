@@ -1330,6 +1330,17 @@ def penMagnets(CONSTANTS, rotate = 15, combineMagnets = True):
     return penMagnets
 
 def baseMagnets(CONSTANTS, combineMagnets = True):
+    try:
+        if (CONSTANTS['BASE_MAGNET_NUM'] == 1):
+            baseMagnet = magpy.magnet.Cylinder(
+                magnetization=(0, 0, CONSTANTS['MAGNETIZATION']), 
+                dimension=(CONSTANTS['MAGNET_D'], CONSTANTS['MAGNET_H']), 
+                position = (0, 0, CONSTANTS['BASE_MAGNET_TOP'] - CONSTANTS['MAGNET_H']/2),
+            )
+            return baseMagnet
+
+    except:
+        pass
     if not combineMagnets:
         baseMagnet1 = magpy.magnet.Cylinder(
             magnetization=(0, 0, CONSTANTS['MAGNETIZATION']), 
@@ -1610,11 +1621,12 @@ def experiment15():
         'WIRE_D' : 0.35e-3, # m; assume wire diameter from https://www.aliexpress.com/item/1005007539263147.html?spm=a2g0o.detail.pcDetailBottomMoreOtherSeller.4.ad14UWzRUWzR8E&gps-id=pcDetailBottomMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=9bdcbb99-2488-4a53-a188-dcab84615b92&_t=gps-id:pcDetailBottomMoreOtherSeller,scm-url:1007.40050.354490.0,pvid:9bdcbb99-2488-4a53-a188-dcab84615b92,tpp_buckets:668%232846%238116%232002&pdp_ext_f=%7B%22order%22%3A%222%22%2C%22eval%22%3A%221%22%2C%22sceneId%22%3A%2230050%22%7D&pdp_npi=4%40dis%21CAD%216.38%214.60%21%21%214.54%213.27%21%402101c5bf17483994196241774eb97f%2112000041207734322%21rec%21CA%212712658390%21X&utparam-url=scene%3ApcDetailBottomMoreOtherSeller%7Cquery_from%3A
         'CURRENT' : 0.123, # [A] average. (totalPower - arduinoPower)/voltage = (2.08W-0.6W)/12V = 0.12333...
         'COIL_POS_TOP' : -0.4e-3, # m
-        'BASE_MAGNET_TOP' : -31.5e-3, # m
-        'RING1_D' : 0.058,#0.06, # m
-        'RING2_D' : 0.045,#0.045, # m
+        'BASE_MAGNET_TOP' : -24e-3, # -31.5e-3, # m
+        'BASE_MAGNET_NUM' : 2,
+        'RING1_D' : 0.057,#0.06, # m
+        'RING2_D' : 0.047,#0.045, # m
         'RING1_NUM' : 8, # number of magnets in ring 1
-        'RING2_NUM' : 10,#12, # number of magnets in ring 2
+        'RING2_NUM' : 8,#12, # number of magnets in ring 2
         'RING1_THETA' : 0, # deg
         'RING2_THETA' : 0,
     }
