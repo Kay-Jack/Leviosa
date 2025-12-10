@@ -1623,10 +1623,10 @@ def experiment15():
         'COIL_POS_TOP' : -0.4e-3, # m
         'BASE_MAGNET_TOP' : -24e-3, # -31.5e-3, # m
         'BASE_MAGNET_NUM' : 2,
-        'RING1_D' : 0.057,#0.06, # m
-        'RING2_D' : 0.047,#0.045, # m
-        'RING1_NUM' : 8, # number of magnets in ring 1
-        'RING2_NUM' : 8,#12, # number of magnets in ring 2
+        'RING1_D' : 0.055,#0.06, # m
+        'RING2_D' : 0.042,#0.045, # m
+        'RING1_NUM' : 9, # number of magnets in ring 1
+        'RING2_NUM' : 11,#12, # number of magnets in ring 2
         'RING1_THETA' : 0, # deg
         'RING2_THETA' : 0,
     }
