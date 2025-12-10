@@ -6758,7 +6758,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0c620c0c-14bf-4d5d-b599-7ff7a5645fb1")
-		(property "Reference" "R12"
+		(property "Reference" "R13"
 			(at 216.154 60.198 90)
 			(effects
 				(font
@@ -6818,7 +6818,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R12")
+					(reference "R13")
 					(unit 1)
 				)
 			)
@@ -7250,7 +7250,7 @@
 		(dnp no)
 		(uuid "1e2c8ee2-0031-4c67-88c3-4e827a758339")
 		(property "Reference" "C11"
-			(at 247.65 49.53 90)
+			(at 248.92 49.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7259,7 +7259,7 @@
 			)
 		)
 		(property "Value" "0.1µF"
-			(at 247.65 46.99 90)
+			(at 248.92 46.99 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7799,7 +7799,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32b01683-545c-474a-9715-829d4d276e7c")
-		(property "Reference" "R_shunt1"
+		(property "Reference" "R11"
 			(at 201.676 60.706 0)
 			(effects
 				(font
@@ -7869,7 +7869,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R_shunt1")
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -7884,7 +7884,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "32e2951f-a6ef-488b-9a1f-c794b49703f4")
-		(property "Reference" "U5"
+		(property "Reference" "U7"
 			(at 256.286 65.278 0)
 			(effects
 				(font
@@ -7948,7 +7948,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U5")
+					(reference "U7")
 					(unit 1)
 				)
 			)
@@ -8462,7 +8462,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4b5a8295-37c5-4d4c-8d11-bd05579b1652")
-		(property "Reference" "R11"
+		(property "Reference" "R12"
 			(at 209.55 105.41 90)
 			(effects
 				(font
@@ -8522,7 +8522,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R11")
+					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -9102,7 +9102,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "56a9a8d3-6e73-4341-b309-639a06a5d153")
-		(property "Reference" "U_Ilim1"
+		(property "Reference" "U1"
 			(at 43.18 41.91 0)
 			(effects
 				(font
@@ -9185,7 +9185,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U_Ilim1")
+					(reference "U1")
 					(unit 1)
 				)
 			)
@@ -9476,7 +9476,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "68f5b523-180b-431f-ab7f-b7079c446d5b")
-		(property "Reference" "U2"
+		(property "Reference" "U4"
 			(at 150.114 115.062 0)
 			(effects
 				(font
@@ -9546,7 +9546,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U2")
+					(reference "U4")
 					(unit 1)
 				)
 			)
@@ -9965,7 +9965,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8588d481-c1e0-4df6-a51a-d76260b561b0")
-		(property "Reference" "V_reg1"
+		(property "Reference" "U2"
 			(at 80.01 31.75 0)
 			(effects
 				(font
@@ -10029,7 +10029,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "V_reg1")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -10240,7 +10240,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8b623019-789c-43dd-a84b-c750f2a2a466")
-		(property "Reference" "U1"
+		(property "Reference" "U3"
 			(at 128.27 130.81 0)
 			(effects
 				(font
@@ -10307,7 +10307,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U1")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -10322,7 +10322,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8ed2075e-ca47-4f30-99ad-987214862773")
-		(property "Reference" "U4"
+		(property "Reference" "U6"
 			(at 228.092 110.744 0)
 			(effects
 				(font
@@ -10397,7 +10397,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U4")
+					(reference "U6")
 					(unit 1)
 				)
 			)
@@ -10636,7 +10636,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMA"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 191.135 50.8 0)
 			(effects
 				(font
@@ -10974,7 +10974,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a98947bf-9d80-419c-a916-265c3a2d2880")
-		(property "Reference" "Fault1"
+		(property "Reference" "TP_F"
 			(at 66.04 50.8 0)
 			(effects
 				(font
@@ -11024,7 +11024,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "Fault1")
+					(reference "TP_F")
 					(unit 1)
 				)
 			)
@@ -11472,7 +11472,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c733b263-0394-4b72-a912-7e018335a24e")
-		(property "Reference" "U3"
+		(property "Reference" "U5"
 			(at 193.04 135.89 90)
 			(effects
 				(font
@@ -11553,7 +11553,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U3")
+					(reference "U5")
 					(unit 2)
 				)
 			)
@@ -11840,7 +11840,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d2b2df7d-73bd-4da3-b792-084db109555c")
-		(property "Reference" "R13"
+		(property "Reference" "R14"
 			(at 215.9 69.85 90)
 			(effects
 				(font
@@ -11900,7 +11900,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R13")
+					(reference "R14")
 					(unit 1)
 				)
 			)
@@ -12257,7 +12257,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e012a1f4-dee6-4014-8bb0-3eec4532a602")
-		(property "Reference" "U3"
+		(property "Reference" "U5"
 			(at 177.8 123.19 0)
 			(effects
 				(font
@@ -12338,7 +12338,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U3")
+					(reference "U5")
 					(unit 3)
 				)
 			)
@@ -12546,7 +12546,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e8ae78c1-a7dc-4903-b34a-d44fc820076b")
-		(property "Reference" "R14"
+		(property "Reference" "R15"
 			(at 243.84 93.98 0)
 			(effects
 				(font
@@ -12606,7 +12606,7 @@
 		(instances
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "R14")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -12941,7 +12941,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f3ae2834-2bf1-4e7c-ab6a-236c47aa5727")
-		(property "Reference" "U3"
+		(property "Reference" "U5"
 			(at 193.04 111.252 90)
 			(effects
 				(font
@@ -13022,7 +13022,7 @@
 		(instances
 			(project ""
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U3")
+					(reference "U5")
 					(unit 1)
 				)
 			)
