@@ -4487,6 +4487,12 @@
 		(uuid "593e5da9-3a77-4179-85f6-91db2947a804")
 	)
 	(junction
+		(at 226.06 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5a244977-58ee-4be7-8aa1-9f77d5b6a38c")
+	)
+	(junction
 		(at 223.52 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4699,6 +4705,16 @@
 			(type default)
 		)
 		(uuid "0bc6ce3f-e387-42ae-95bb-20d694106ae6")
+	)
+	(wire
+		(pts
+			(xy 234.95 90.17) (xy 233.68 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0bdf8912-331f-47ed-85a6-98ff49893b88")
 	)
 	(wire
 		(pts
@@ -5572,6 +5588,16 @@
 	)
 	(wire
 		(pts
+			(xy 234.95 91.44) (xy 234.95 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "876f7365-3249-45bb-8bda-dc804c620721")
+	)
+	(wire
+		(pts
 			(xy 173.99 53.34) (xy 173.99 54.61)
 		)
 		(stroke
@@ -6092,7 +6118,7 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 93.98) (xy 226.06 95.25)
+			(xy 226.06 88.9) (xy 226.06 90.17)
 		)
 		(stroke
 			(width 0)
@@ -6139,6 +6165,16 @@
 			(type default)
 		)
 		(uuid "d8579329-672a-4370-b6cf-6a8b138924a0")
+	)
+	(wire
+		(pts
+			(xy 226.06 90.17) (xy 226.06 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d869386b-c42a-4a27-b580-bbffa2c6e982")
 	)
 	(wire
 		(pts
@@ -7682,6 +7718,73 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "#PWR023")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 229.87 90.17 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "24ec94ee-38b8-41c0-909e-2795aa0b1f1e")
+		(property "Reference" "C13"
+			(at 233.68 85.09 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 233.68 87.63 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 233.68 89.2048 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 229.87 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 229.87 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "61c285f0-ab03-4141-bfb6-1c6a900b830d")
+		)
+		(pin "1"
+			(uuid "a4388948-1b29-46c6-9bb9-91f8be0f18cc")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -10049,6 +10152,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 234.95 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6cf0af25-f1c5-4cee-beb2-0ad7d78ddb43")
+		(property "Reference" "#PWR039"
+			(at 234.95 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 234.95 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 234.95 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 234.95 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 234.95 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "eed99dfe-9961-44dd-ba63-953c9a5347fc")
+		)
+		(instances
+			(project "Leviosa"
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "#PWR039")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:L")
 		(at 207.01 49.53 0)
 		(unit 1)
@@ -10465,7 +10633,7 @@
 		(dnp no)
 		(uuid "8a6a4ce8-be17-46bf-8ae4-03e13e15e149")
 		(property "Reference" "G1"
-			(at 251.46 91.44 90)
+			(at 251.968 91.44 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12472,16 +12640,15 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 226.06 93.98 0)
+		(at 226.06 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "dd32de85-4c22-4063-ac81-1c550596f789")
 		(property "Reference" "#PWR032"
-			(at 226.06 97.79 0)
+			(at 226.06 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12490,7 +12657,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 226.06 88.9 0)
+			(at 225.806 84.582 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12498,7 +12665,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 226.06 93.98 0)
+			(at 226.06 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12507,7 +12674,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 226.06 93.98 0)
+			(at 226.06 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12516,7 +12683,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 226.06 93.98 0)
+			(at 226.06 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
