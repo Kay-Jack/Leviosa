@@ -1,12 +1,12 @@
 G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,9.0.3*
-G04 #@! TF.CreationDate,2025-12-10T22:24:42-05:00*
+G04 #@! TF.CreationDate,2025-12-10T22:25:09-05:00*
 G04 #@! TF.ProjectId,Leviosa,4c657669-6f73-4612-9e6b-696361645f70,0*
 G04 #@! TF.SameCoordinates,Original*
-G04 #@! TF.FileFunction,Soldermask,Bot*
-G04 #@! TF.FilePolarity,Negative*
+G04 #@! TF.FileFunction,Legend,Bot*
+G04 #@! TF.FilePolarity,Positive*
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 9.0.3) date 2025-12-10 22:24:42*
+G04 Created by KiCad (PCBNEW 9.0.3) date 2025-12-10 22:25:09*
 %MOMM*%
 %LPD*%
 G01*
@@ -57,6 +57,7 @@ G04 Aperture macros list end*
 %ADD17RoundRect,0.250000X-0.550000X-0.550000X0.550000X-0.550000X0.550000X0.550000X-0.550000X0.550000X0*%
 %ADD18C,1.600000*%
 G04 APERTURE END LIST*
+%LPC*%
 D10*
 X98420000Y-76200000D03*
 D11*
@@ -105,4 +106,5 @@ X133279192Y-104902000D03*
 X133279192Y-102362000D03*
 D16*
 X75000000Y-115000000D03*
+%LPD*%
 M02*
