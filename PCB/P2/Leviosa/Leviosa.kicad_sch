@@ -3979,6 +3979,12 @@
 		(uuid "92b176be-e0d3-4e34-9f50-a39ed63434a4")
 	)
 	(junction
+		(at 187.96 60.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "96b65f91-4282-469d-9b36-d10a9aac9414")
+	)
+	(junction
 		(at 234.95 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4572,7 +4578,7 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 60.96) (xy 193.04 60.96)
+			(xy 184.15 60.96) (xy 187.96 60.96)
 		)
 		(stroke
 			(width 0)
@@ -4919,6 +4925,16 @@
 			(type default)
 		)
 		(uuid "9dda58db-69bf-478b-b960-8499f2726408")
+	)
+	(wire
+		(pts
+			(xy 187.96 60.96) (xy 193.04 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0f068e6-4deb-4665-9663-6f8a8a20383a")
 	)
 	(wire
 		(pts
@@ -6502,7 +6518,7 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Current:INA199xxDCK")
-		(at 190.5 53.34 180)
+		(at 190.5 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6510,7 +6526,7 @@
 		(dnp no)
 		(uuid "32e2951f-a6ef-488b-9a1f-c794b49703f4")
 		(property "Reference" "current_sense1"
-			(at 173.736 46.228 0)
+			(at 207.264 60.452 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6518,7 +6534,7 @@
 			)
 		)
 		(property "Value" "INA199xxDCK (50V/V)"
-			(at 173.736 48.768 0)
+			(at 207.264 57.912 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6526,7 +6542,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6"
-			(at 189.23 54.61 0)
+			(at 191.77 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6535,7 +6551,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ina199.pdf"
-			(at 186.69 57.15 0)
+			(at 194.31 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
