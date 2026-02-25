@@ -230,8 +230,8 @@
           "drill": 0.0
         },
         {
-          "diameter": 0.7,
-          "drill": 0.3
+          "diameter": 0.8,
+          "drill": 0.4
         }
       ],
       "zones_allow_external_fillets": false
@@ -513,7 +513,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "Order/V4/",
+      "plot": "Order/",
       "pos_files": "Order/",
       "specctra_dsn": "",
       "step": "",
