@@ -1,0 +1,13 @@
+1. ground loop design - separation of different components to better isolate analog
+
+2. moving current sense ahead of current limiter to limit voltage changes
+
+3. change filtering into current sense to prevent LC resonance (must reduce C)
+
+4. add filtering after current sense
+
+5. add filtering to gate of mosfet to reduce noise during switching
+
+6. 12V -> 5V buck -> 3V3 LDO
+- 3V3 for analog control circuit & MCU
+- 5V for servo

@@ -1,0 +1,39 @@
+parts list ("old" bag):
+pin header M, lots
+pin header F, lots
+AMS1117-5.0, 2
+3362S-1-103LF
+10uF 0805, lots
+7.8kOhm 0603, 14
+330Ohm 0805, lots
+TIP122 THRU, lots
+330nF 0805, 3
+
+parts list ("new" bag)
+INA199A2DCKR, 1
+MCP6001RDBVRG, 1
+1kOhm 0805, lots
+22uF 0805, 6
+DC-005 2.0 (Barrel jack), 5
+3.9kOhm 0603, lots
+50mOhm 2010, 3
+50mOhm 1206, 14
+MX27517, 3
+51kOhm 0603, lots
+B230A-13-F (schottkey), 3
+68kOhm 0603, lots
+180pF 1206, lots
+4.7nF 0805, lots
+100nF 0805, lots
+CUS10S30 (diode), 7
+8.2Ohm 0603, lots
+8.2Ohm 1206, lots
+right angle pin header, lots
+330nF 0805, lots
+NCE0110K, 6
+8kOhm 0603, 14
+MC7805BD2TR4G, 2
+SS34 (diode), 5
+20nF 0805, lots
+BZT52C7V2 WD (zener diode), lots
+100kOhm 0805, lots
