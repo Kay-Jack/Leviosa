@@ -1,13 +1,24 @@
 1. ground loop design - separation of different components to better isolate analog
 
 2. moving current sense ahead of current limiter to limit voltage changes
+DONE
 
 3. change filtering into current sense to prevent LC resonance (must reduce C)
+DONE
+- also changing to have caps go to ground instead of each other per 7.4.5 recommendation (improving transient robustness)
+- changing cap from 47uF to 0.1uF
 
 4. add filtering after current sense
+DONE
+- 3.9k w/ 0.1uF --> ~408Hz cutoff freq
 
 5. add filtering to gate of mosfet to reduce noise during switching
+DONE
+- trying 10Ohm resistor (R15) with 180pF cap (C17) --> f_cutoff ~18MHz
+- note that in testing, 20nF worked better to elim. noise but it had issues with adding lower frequency oscillations (resulted in sound)
 
-6. 12V -> 5V buck -> 3V3 LDO
-- 3V3 for analog control circuit & MCU
-- 5V for servo
+6. 12V -> 5V buck && 12V -> 5V buck
+5V buck for analog control circuit & MCU
+- 5V required for hall sensor (SS495A)
+- changed voltage divider to 
+5V for servo
