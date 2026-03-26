@@ -204,7 +204,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Amplifier_Operational:MCP6001R"
+		(symbol "Amplifier_Operational:LM321"
 			(pin_names
 				(offset 0.127)
 			)
@@ -212,7 +212,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U"
-				(at 0 5.08 0)
+				(at 0 7.62 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -220,8 +220,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "MCP6001R"
-				(at 0 -5.08 0)
+			(property "Value" "LM321"
+				(at 0 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -238,8 +238,8 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/MCP6001-1R-1U-2-4-1-MHz-Low-Power-Op-Amp-DS20001733L.pdf"
-				(at 0 5.08 0)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm321.pdf"
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -247,7 +247,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "1MHz, Low-Power Op Amp, SOT-23-5"
+			(property "Description" "Low Power Single Operational Amplifier, SOT-23-5"
 				(at 0 0 0)
 				(effects
 					(font
@@ -274,7 +274,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "MCP6001R_0_1"
+			(symbol "LM321_0_1"
 				(polyline
 					(pts
 						(xy -5.08 5.08) (xy 5.08 0) (xy -5.08 -5.08) (xy -5.08 5.08)
@@ -288,7 +288,7 @@
 					)
 				)
 			)
-			(symbol "MCP6001R_1_1"
+			(symbol "LM321_1_1"
 				(pin input line
 					(at -7.62 2.54 0)
 					(length 2.54)
@@ -299,7 +299,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -317,7 +317,7 @@
 							)
 						)
 					)
-					(number "4"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -335,7 +335,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -353,7 +353,7 @@
 							)
 						)
 					)
-					(number "5"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -371,7 +371,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -12260,91 +12260,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Amplifier_Operational:MCP6001R")
-		(at 222.25 232.41 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "68f5b523-180b-431f-ab7f-b7079c446d5b")
-		(property "Reference" "U7"
-			(at 223.52 226.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MCP6001R"
-			(at 227.33 228.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
-			(at 222.25 232.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/MCP6001-1R-1U-2-4-1-MHz-Low-Power-Op-Amp-DS20001733L.pdf"
-			(at 222.25 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "1MHz, Low-Power Op Amp, SOT-23-5"
-			(at 222.25 232.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Link" "https://jlcpcb.com/partdetail/5767612-MCP6001AIDBVRG/C5145245"
-			(at 222.25 232.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "5"
-			(uuid "4f4fe996-e3b6-4d0f-802f-6bc68e2faf25")
-		)
-		(pin "2"
-			(uuid "feac0ece-8c3e-4974-92d7-394799e43cab")
-		)
-		(pin "1"
-			(uuid "6aaa7e28-533a-4e79-89fe-c9f9fda697b2")
-		)
-		(pin "4"
-			(uuid "1268baaf-3c91-471a-9ea7-baf83e999a10")
-		)
-		(pin "3"
-			(uuid "66f7bdaf-2d2e-41bf-87c1-ffa666e8f508")
-		)
-		(instances
-			(project ""
-				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
-					(reference "U7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 254 182.88 0)
 		(unit 1)
@@ -15388,6 +15303,91 @@
 			(project "Leviosa"
 				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
 					(reference "R12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Operational:LM321")
+		(at 222.25 232.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c84d36cb-6685-4586-94ac-0d46d1e482be")
+		(property "Reference" "U10"
+			(at 225.044 225.044 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LM321"
+			(at 225.044 227.584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+			(at 222.25 232.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm321.pdf"
+			(at 222.25 232.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Low Power Single Operational Amplifier, SOT-23-5"
+			(at 222.25 232.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Source1" "https://www.lcsc.com/product-detail/C9405.html?spm=wm.fly.bg.14.stp&lcsc_vid=FFkIV1BTRQcNBl1TFFkLUFMETlUKUVIARFYLA1wDFAUxVlNRQ1VdXlZXQFZZUzsOAxUeFF5JWBYZEEoKFBINSQcJGk4dAgUUFAk%3D"
+			(at 222.25 232.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "b57b56b2-d1dd-4e01-9303-0c47783abb18")
+		)
+		(pin "5"
+			(uuid "896bae08-ae95-4c6b-8f8a-35fff3f299bc")
+		)
+		(pin "2"
+			(uuid "f64b7a17-88c1-46d7-9d79-208e1c86dba7")
+		)
+		(pin "1"
+			(uuid "e600a5a8-53f3-4db6-9a26-8674c730d97b")
+		)
+		(pin "4"
+			(uuid "084ec84b-bd70-45cc-81b8-d8e7584726c7")
+		)
+		(instances
+			(project ""
+				(path "/fe766911-203b-467c-b704-d4bd488f6c98"
+					(reference "U10")
 					(unit 1)
 				)
 			)
