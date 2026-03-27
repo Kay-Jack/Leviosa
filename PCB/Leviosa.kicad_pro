@@ -647,6 +647,42 @@
           "label": "Vf",
           "name": "Vf",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Voltage",
+          "name": "Voltage",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Votlage",
+          "name": "Votlage",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Colour",
+          "name": "Colour",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Link2",
+          "name": "Link2",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Source1",
+          "name": "Source1",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Supplier",
+          "name": "Supplier",
+          "show": false
         }
       ],
       "filter_string": "",
