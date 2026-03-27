@@ -10657,7 +10657,7 @@
 				)
 			)
 		)
-		(property "Value" "INA199A1DCKR"
+		(property "Value" "INA199A3DCKR"
 			(at 100.33 49.53 0)
 			(effects
 				(font
@@ -10665,7 +10665,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6_Handsoldering"
 			(at 90.17 43.18 0)
 			(effects
 				(font
@@ -10692,7 +10692,7 @@
 				(hide yes)
 			)
 		)
-		(property "Supplier" "https://www.lcsc.com/product-detail/C59135.html?s_z=n_INA199"
+		(property "Supplier" "https://www.lcsc.com/product-detail/C132098.html?s_z=n_INA199&spm=wm.ssy.bg.3.xh&lcsc_vid=FgBdVFcAFQddBlFSEgVbXlBXRVlWBlZWRABaUgJXFgAxVlNRQ1RWVVVRQ1leVzsOAxUeFF5JWBYZEEoKFBINSQcJGk4dAgUUFAk%3D"
 			(at 88.9 44.45 0)
 			(effects
 				(font
