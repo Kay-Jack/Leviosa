@@ -768,7 +768,7 @@
         "uuid": "fe766911-203b-467c-b704-d4bd488f6c98"
       }
     ],
-    "used_designators": "U11",
+    "used_designators": "U5,U9,U11-13,C21-28,L1,#PWR53-54,#PWR57-70,Y1,R22-25,J4",
     "variants": []
   },
   "sheets": [
