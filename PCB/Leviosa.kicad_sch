@@ -8013,6 +8013,16 @@
 		)
 		(uuid "1351d47f-7bf7-49c2-854c-093f2591302a")
 	)
+	(text "https://jlcpcb.com/parts/2nd/Power_Management_(PMIC)/DC-DC_Converters_3005"
+		(exclude_from_sim no)
+		(at 187.96 -3.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "5946b2b5-65e2-45a8-904c-15cc59ec80bf")
+	)
 	(text "Sense Output RC filter:\n\nR9 == R10 < 10Ω\nFc = 1/ (2pi * R * C)\nlet R = 3.9kΩ and C = 0.1μF\nFc = 408Hz"
 		(exclude_from_sim no)
 		(at 259.08 153.67 0)
@@ -8036,6 +8046,16 @@
 			(justify left bottom)
 		)
 		(uuid "5fed8945-e6ae-4bf1-ba8e-54fbbfbe9093")
+	)
+	(text "https://jlcpcb.com/partdetail/TexasInstruments-LMR62421XMFXNOPB/C544413"
+		(exclude_from_sim no)
+		(at 201.93 -41.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "6016b84c-b7b6-463f-8cec-19039694e14e")
 	)
 	(text "(12V - 9.6V)/5ma\n= 460 Ohm"
 		(exclude_from_sim no)
