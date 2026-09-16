@@ -15,7 +15,10 @@ MAGNET_D = 0.01
 MAGNET_H = 0.005
 
 class magnetRing:
-    def __init__(self, diameter, angle, zPos, numMagnets, magnetization = 1.6e6, theta_i = 0): # for default use the old silver magnets
+    def __init__(
+        self, diameter, angle, zPos, numMagnets, magnetization = 1.6e6, theta_i = 0,
+        mag_str_std_percent = 0, angular_std_deg = 0,
+    ): # for default use the old silver magnets
         # diameter = diameter of 
         # angle = angle of magnets in ring. Positive means outwards (assuming vector going 'up'). In degrees
         # zPos = z displacement of the ring
@@ -29,13 +32,32 @@ class magnetRing:
         for lv1 in range(numMagnets):
             theta = lv1*2*math.pi/numMagnets + theta_i
             
+            # variance for monte carlo
+            magnetization = np.random.normal(
+                loc=magnetization,
+                scale=magnetization * mag_str_std_percent / 100,
+            )
+
+            pole_tilt = np.random.normal(0, angular_std_deg)   # Total tilt magnitude (deg)
+            pole_theta = np.random.uniform(0, 2*np.pi)         # Random direction
+            pole_tiltX = pole_tilt * np.cos(pole_theta)    # X component
+            pole_tiltY = pole_tilt * np.sin(pole_theta)    # Y component
+            
             self.mCol.add(
                 magpy.magnet.Cylinder(
                     magnetization = (0,0,magnetization),
                     dimension = (MAGNET_D, MAGNET_H),
                     position = (self.diameter/2, 0, self.zPos),
-                    orientation = R.from_rotvec((0, self.angle, 0), degrees = True)
-                ).rotate_from_angax(angle = theta, axis = 'z', anchor = (0, 0, 0), degrees = False)
+                    orientation = R.from_rotvec(
+                        (
+                            pole_tiltX, 
+                            self.angle + pole_tiltY, 
+                            0,
+                        ), degrees = True
+                    )
+                ).rotate_from_angax(
+                    angle = theta, axis = 'z', anchor = (0, 0, 0), degrees = False
+                )
             )
 
 def plotSysB(
