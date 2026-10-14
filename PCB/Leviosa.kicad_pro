@@ -768,7 +768,7 @@
         "uuid": "fe766911-203b-467c-b704-d4bd488f6c98"
       }
     ],
-    "used_designators": "R30",
+    "used_designators": "#FLG1-3,R1-21,R30,TP1-3,TP7-8,D1-6,#PWR1-34,COIL1,C1-11,FID1-3,H1-2,J1,L1,Q1,pot1,U1-6",
     "variants": []
   },
   "sheets": [
