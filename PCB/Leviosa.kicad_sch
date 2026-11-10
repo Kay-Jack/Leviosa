@@ -4598,7 +4598,7 @@
 		)
 		(uuid "bc482d55-a42e-4c7d-901f-dfc958f415b7")
 	)
-	(text "I think we should make this around 500K"
+	(text "I think we should make this around 500K\nNope, I tried different filters. It has a bad impact on the hovering stability. There's something on some GH ticket I'd made."
 		(exclude_from_sim no)
 		(at 186.69 259.08 0)
 		(effects
